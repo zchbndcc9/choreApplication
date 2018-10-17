@@ -2,6 +2,10 @@ nav {
   background-color: #f6f7f8;
 }
 
+.navbar-brand {
+  font-size: 1.6em;
+}
+
 * {
   font-family: 'Kollektif';
 }
