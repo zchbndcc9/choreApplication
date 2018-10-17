@@ -41,9 +41,9 @@
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status">
               <td>{{ task.name }}</td>
               <td>{{ task.member }}</td>
-              <td *ngSwitchCase="'In Progress'"><span class="badge badge-primary">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'Completed'"><span class="badge badge-success">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'Pending Verification'"><span class="badge badge-warning">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'In Progress'" align="center"><span class="badge badge-primary">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'Completed'" align="center"><span class="badge badge-success">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'Pending Verification'" align="center"><span class="badge badge-warning">{{ task.status }}</span></td>
               <td *ngSwitchDefault></td>
             </tr>
           </tbody>
