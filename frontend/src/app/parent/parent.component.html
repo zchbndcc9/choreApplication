@@ -9,8 +9,8 @@
           <i>Fam since October 2018</i>
         </div>
         <ul class="offset-md-5">
-          <li>Tasks Completed</li>
-          <li>Fam Members</li>
+          <li>Tasks Completed: </li>
+          <li>Fam Members: {{ members.length }}</li>
         </ul>
       </div>
     </div>
@@ -38,10 +38,13 @@
         </div>
         <table class="table table-striped rounded">
           <tbody>
-            <tr *ngFor="let task of tasks">
+            <tr *ngFor="let task of tasks" [ngSwitch]="task.status">
               <td>{{ task.name }}</td>
               <td>{{ task.member }}</td>
-              <td>{{ task.status }}</td>
+              <td *ngSwitchCase="'In Progress'"><span class="badge badge-primary">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'Completed'"><span class="badge badge-success">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'Pending Verification'"><span class="badge badge-warning">{{ task.status }}</span></td>
+              <td *ngSwitchDefault></td>
             </tr>
           </tbody>
         </table>
