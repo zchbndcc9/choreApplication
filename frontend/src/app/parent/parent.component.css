@@ -1,8 +1,7 @@
 body {
-  height: stretch;
+  min-height: 100vh;
   background-color: #f6f7f8;
 }
-
 .btn-success {
   color: #fdfdfd;
   background-color: #2ec4b6;
@@ -20,12 +19,29 @@ body {
   padding: 1em;
 }
 
+.table {
+  background-color: #ffffff;
+}
+
 .table, button, #header {
   box-shadow: -1px 1px 5px #52525265;
 }
 
 .table td {
   border: none;
+}
+
+.badge-success {
+  background-color: #22c9b8;
+}
+
+.badge-primary {
+  background-color: #3985ff;
+}
+
+.badge-warning {
+  color: #f6f7f8;
+  background-color: #eb3764;
 }
 
 #header {
