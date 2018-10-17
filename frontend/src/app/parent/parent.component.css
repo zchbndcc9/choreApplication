@@ -1,0 +1,71 @@
+body {
+  border: 3px red solid;
+  height: stretch;
+  background-color: #f6f7f8;
+}
+
+.btn-success {
+  color: #fdfdfd;
+  background-color: #2ec4b6;
+  border-color: #2ec4b6;
+}
+
+.btn-primary {
+  background-color: #3985ff;
+  border-color: #3985ff;
+}
+
+.table-section {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.table, button, #header {
+  box-shadow: -1px 1px 5px #52525265;
+}
+
+.table td {
+  border: none;
+}
+
+#header {
+  border-radius: 0em;
+  color: #f6f7f8;
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
+}
+
+/* View Task Button  */
+
+#view-tasks-btn {
+  margin: 1em 0 0 0;
+  width: 11em;
+}
+#view-tasks-btn span{
+  position: relative;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+}
+
+#view-tasks-btn span:after {
+  content: '\25b6';
+  position: absolute;
+  opacity: 0;
+  right: -2em;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+}
+
+#view-tasks-btn:hover span {
+  padding-right: 2em;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+#view-tasks-btn:hover span:after {
+  opacity: 1;
+  right: 0em;
+}
+
