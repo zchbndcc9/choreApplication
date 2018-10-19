@@ -1,0 +1,21 @@
+body {
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
+  min-height: 100vh;
+}
+
+#title {
+    color: white;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+.card-text {
+    color: #31393c;
+}
+
+#newAccountCard, #loginCard {
+    margin-bottom: 1em;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
