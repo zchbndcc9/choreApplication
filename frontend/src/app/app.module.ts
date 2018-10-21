@@ -11,12 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { NewaccountComponent } from './newaccount/newaccount.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ParentComponent,
-    NavbarComponent
+    NavbarComponent,
+    NewaccountComponent
   ],
   imports: [
     BrowserModule,
