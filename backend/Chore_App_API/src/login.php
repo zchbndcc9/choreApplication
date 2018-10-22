@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $host="localhost"; // Host name
-$username="userhere"; // Mysql username
-$password="passwordhere"; // Mysql password
-$db_name="userInfo"; // Database name
-$tbl_name="members"; // Table name
+$username="root"; // Mysql username
+$password="root"; // Mysql password
+$db_name="Family"; // Database name
+$tbl_name="Users"; // Table name
 
 // Connect to server and select databse.
 
@@ -16,13 +16,13 @@ $link = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
 
 
 // Define $myusername and $mypassword
-$myusername=$link->real_escape_string($_POST['myusername']);
-$mypassword=$link->real_escape_string($_POST['mypassword']);
+$myusername=$link->real_escape_string($_POST['username']);
+$mypassword=$link->real_escape_string($_POST['password']);
 
-$sql = $link->prepare("SELECT * FROM $tbl_name WHERE UserName = :UserName AND Password = :Password ");
+$sql = $link->prepare("SELECT * FROM $tbl_name WHERE username = :username AND password = :password ");
 
-$sql->bindParam(":UserName",$username);
-$sql->bindParam(":Password",$password);
+$sql->bindParam(":username",$username);
+$sql->bindParam(":password",$password);
 
 if($sql->execute()) {
 

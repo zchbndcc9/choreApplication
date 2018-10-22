@@ -1,34 +1,41 @@
 # Create new database
-CREATE DATABASE userInfo;
-USE userInfo;
+CREATE DATABASE Family;
+USE Family;
 
 # Create table to hold key user info
 CREATE TABLE Users(
-	UserID int NOT NULL AUTO_INCREMENT UNIQUE,
-	FamilyID int NOT NULL UNIQUE,
-	LastName varchar(25),
-	FirstName varchar(25),
-	PRIMARY KEY (FamilyID),
-    KEY(UserID)
+	userID int NOT NULL AUTO_INCREMENT UNIQUE,
+	familyID int NOT NULL UNIQUE,
+	lastName varchar(25),
+	firstName varchar(25),
+	PRIMARY KEY (familyID),
+    KEY(userID)
 );
 
 # Holds private user account info
-# Note: UserType = true indicates a parent user
+# Note: userType = true indicates a parent user
 CREATE TABLE UserDetails(
-	FamilyID int NOT NULL AUTO_INCREMENT UNIQUE,
-	UserName varchar(25),
-	Password varchar(50),
-    UserType bool,
-    FOREIGN KEY (FamilyID) REFERENCES Users(FamilyID)
+	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
+	username varchar(25),
+	password varchar(50),
+    userType bool,
+    FOREIGN KEY (familyID) REFERENCES Users(familyID)
 );
 
 # Contact info should be consistent for entire family
 CREATE TABLE FamilyInfo(
-	FamilyID int NOT NULL AUTO_INCREMENT UNIQUE,
+	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
 	email varchar(25),
 	address varchar(100),
     phone int,
-    FOREIGN KEY (FamilyID) REFERENCES Users(FamilyID)
+    FOREIGN KEY (familyID) REFERENCES Users(familyID)
+);
+
+# Note: notified = true indicates user has been notified of task
+CREATE TABLE Tasks(
+	userID int NOT NULL AUTO_INCREMENT UNIQUE,
+	taskDescription varchar(255),
+	notified bool
 );
 
     
