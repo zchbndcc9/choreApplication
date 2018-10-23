@@ -13,6 +13,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
+import { TaskDropdownComponent } from './tasks/task-dropdown/task-dropdown.component';
+import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
+import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { ChildComponent } from './child/child.component';
     ParentComponent,
     NavbarComponent,
     NewaccountComponent,
-    ChildComponent
+    ChildComponent,
+    TaskDropdownComponent,
+    TaskNotificationComponent,
+    TasksDisplayComponent
   ],
   imports: [
     BrowserModule,
