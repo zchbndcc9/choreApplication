@@ -35,6 +35,7 @@ CREATE TABLE FamilyInfo(
 CREATE TABLE Tasks(
 	userID int NOT NULL AUTO_INCREMENT UNIQUE,
 	taskDescription varchar(255),
+	deadline DATE,
 	notified bool
 );
 
