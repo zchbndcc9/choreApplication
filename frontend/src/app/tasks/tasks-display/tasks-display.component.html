@@ -1,6 +1,38 @@
-<div id="accordion">
+<div class="container" id="accordion">
 
-  <div *ngFor="let task of tasks; let i = index;" class="card">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Filter Tasks
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">All</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Rejected</a>
+          <a class="dropdown-item" href="#">Pending Approval</a>
+          <a class="dropdown-item" href="#">Incomplete</a>
+        </div>
+      </div> -->
+
+      <form class="form-group row">
+          <label for="filterBy" class="col-sm-2 col-form-label">Filter Tasks</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="filterBy" name="filterBy" [(ngModel)]="filterBy" (ngModelChange)="filterTasks()">
+              <option value="all" selected="selected">All</option>
+              <option value="rejected">Rejected</option>
+              <option value="pending">Pending Approval</option>
+              <option value="incomplete">Incomplete</option>
+            </select>
+          </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngFor="let task of filteredTasks; let i = index;" class="card">
     <div class="card-header" id="heading">
       <h5 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="true"
@@ -10,7 +42,8 @@
         <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
         <button *ngIf="task.status == 'incomplete'" class="btn btn-dark btn-sm float-right">Add Note</button>
         <button *ngIf="task.status == 'rejected'" class="btn btn-primary btn-sm float-right">Resubmit</button>
-        <button *ngIf="task.status == 'pending'" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
+        <button *ngIf="task.status == 'pending'" class="btn btn-light btn-sm float-right" [disabled]="true">Pending
+          Approval</button>
       </h5>
     </div>
 
@@ -44,3 +77,5 @@
       </ul>
     </nav>
   </div>
+
+</div>
