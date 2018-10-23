@@ -1,3 +1,46 @@
-<p>
-  tasks-display works!
-</p>
+<div id="accordion">
+
+  <div *ngFor="let task of tasks; let i = index;" class="card">
+    <div class="card-header" id="heading">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="true"
+          attr.aria-controls="collapse{{i}}">
+          {{task.title}}
+        </button>
+        <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
+        <button *ngIf="task.status == 'incomplete'" class="btn btn-dark btn-sm float-right">Add Note</button>
+        <button *ngIf="task.status == 'rejected'" class="btn btn-primary btn-sm float-right">Resubmit</button>
+        <button *ngIf="task.status == 'pending'" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
+      </h5>
+    </div>
+
+    <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordion">
+      <div class="card-body">
+        <b>{{task.description}}</b>
+        <hr />
+        <i>Assigned by: {{task.assignedBy}}</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>

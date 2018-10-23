@@ -1,3 +1,18 @@
-<p>
-  task-dropdown works!
-</p>
+<div class="card">
+  <div class="card-header" id="headingOne">
+    <h5 class="mb-0">
+      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        CLEAN THE KITCHEN
+      </button>
+      <button class="btn btn-success btn-sm float-right">Submit for Approval</button>
+      <button class="btn btn-dark btn-sm float-right">Add Note</button>
+    </h5>
+  </div>
+
+  <div id="collapse" class="collapse" aria-labelledby="heading">
+    <div class="card-body">
+      <b>{{task.description}}</b>
+      <i>Assigned by: Rebecca Oh</i>
+    </div>
+  </div>
+</div>
