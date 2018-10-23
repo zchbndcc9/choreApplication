@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
+import { ChildComponent } from './child/child.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
     LoginComponent,
     ParentComponent,
     NavbarComponent,
-    NewaccountComponent
+    NewaccountComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
