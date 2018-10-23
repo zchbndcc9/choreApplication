@@ -1,0 +1,26 @@
+<form [formGroup]="memberForm" (ngSubmit)="createMember()" >
+  <label>
+    First Name: <input type="text" formControlName="firstName">
+  </label>
+  <label>
+    Last Name: <input type="text" formControlName="lastName">
+  </label>
+  <label class="switch">
+    <input type="checkbox" formControlName="memberType">
+    <span class="slider round"></span>
+  </label>
+  <label>
+    Username: <input type="text" formControlName="username">
+  </label>
+  <div formGroupName="passwordForm">
+    <label>
+      Password: <input type="password" formControlName="password">
+    </label>
+    <label>
+      Please Re-Enter Password: <input type="password" formControlName="confirmPassword">
+    </label>
+    <div *ngIf="memberForm.controls['passwordForm'].errors?.passwordsMustMatch">Passwords must match</div>
+  </div>
+  <button [disabled]="!memberForm.valid" type="submit">Create Fam Member</button>
+
+</form>
