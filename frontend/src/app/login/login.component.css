@@ -7,7 +7,7 @@ body {
 #title {
     color: white;
     text-align: center;
-    margin-top: 1.5em;
+    margin-top: 1em;
     margin-bottom: 1em;
     font-family: Kollektif;
     font-size: 3.5em;
@@ -27,4 +27,14 @@ body {
   margin: 0.5em auto 1em auto;
   width: 70%;
   border-top: 1px solid #e3e3e4;
+}
+
+.btn {
+  border-radius: 1.5em;
+}
+
+.btn-success {
+  color: #fdfdfd;
+  background-color: #2ec4b6;
+  border-color: #2ec4b6;
 }
