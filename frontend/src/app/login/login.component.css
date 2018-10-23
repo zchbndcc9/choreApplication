@@ -9,6 +9,8 @@ body {
     text-align: center;
     margin-top: 1.5em;
     margin-bottom: 1em;
+    font-family: Kollektif;
+    font-size: 3.5em;
 }
 
 .card-text {
@@ -18,4 +20,11 @@ body {
 #newAccountCard, #loginCard {
     margin-bottom: 1em;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+}
+
+#lineBreak {
+  box-sizing: border-box;
+  margin: 0.5em auto 1em auto;
+  width: 70%;
+  border-top: 1px solid #e3e3e4;
 }
