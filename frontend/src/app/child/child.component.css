@@ -9,39 +9,11 @@
   color: white;
 }
 
-.fa {
+fa-icon {
   color: gold;
 }
 
-.card {
-  background-color: #f6f7f8;
-}
-
-.jumbotron, .dropdown-toggle, .card, .pagination {
+.jumbotron {
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
-}
-
-.btn {
-  margin-right: 0.1rem;
-}
-
-.btn-primary {
-  background-color: #2176ff;
-  border-color: #2176ff;
-}
-
-.btn-success {
-  background-color: #2ec4b6;
-  border-color: #2ec4b6;
-}
-
-.btn-light {
-  background-color: #f6f7f8;
-  border-color: #f6f7f8;
-}
-
-.btn-dark {
-  background-color: #ff3366;
-  border-color: #ff3366;
 }
 
