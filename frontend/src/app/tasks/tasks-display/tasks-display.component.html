@@ -18,7 +18,23 @@
         </div>
       </div> -->
 
-      <form class="form-group row">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup id="filterBy" name="filterBy" [(ngModel)]="filterBy" (ngModelChange)="filterTasks()">
+        <label ngbButtonLabel class="filterBtn">
+          <input ngbButton type="radio" value="all"> All
+        </label>
+        <label ngbButtonLabel class="filterBtn">
+          <input ngbButton type="radio" value="rejected"> Rejected
+        </label>
+        <label ngbButtonLabel class="filterBtn">
+          <input ngbButton type="radio" value="pending"> Pending Approval
+        </label>
+        <label ngbButtonLabel class="filterBtn">
+          <input ngbButton type="radio" value="incomplete"> Incomplete
+        </label>
+      </div>
+      <hr>
+
+      <!-- <form class="form-group row">
           <label for="filterBy" class="col-sm-2 col-form-label">Filter Tasks</label>
           <div class="col-sm-4">
             <select class="form-control" id="filterBy" name="filterBy" [(ngModel)]="filterBy" (ngModelChange)="filterTasks()">
@@ -28,7 +44,7 @@
               <option value="incomplete">Incomplete</option>
             </select>
           </div>
-      </form>
+      </form> -->
     </div>
   </div>
 
