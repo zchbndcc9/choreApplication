@@ -13,13 +13,17 @@ import { MemberFormComponent } from './member-form/member-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParentComponent } from './parent/parent.component';
 
+import { NewaccountComponent } from './newaccount/newaccount.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ParentComponent,
     NavbarComponent,
-    MemberFormComponent
+    MemberFormComponent,
+    NewaccountComponent
   ],
   imports: [
     AppRoutingModule,
