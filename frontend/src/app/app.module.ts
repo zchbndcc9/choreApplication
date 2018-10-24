@@ -1,18 +1,17 @@
-import { MemberFormComponent } from './member-form/member-form.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ParentComponent } from './parent/parent.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { MemberFormComponent } from './member-form/member-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ParentComponent } from './parent/parent.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +26,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     FontAwesomeModule,
     NgbModule,
+    MemberFormComponent,
     ReactiveFormsModule,
-    MemberFormComponent
+    NgbModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MemberFormComponent],
 })
 export class AppModule { }
