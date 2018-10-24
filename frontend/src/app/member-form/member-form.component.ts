@@ -16,7 +16,7 @@ export class MemberFormComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     username: ['', Validators.required],
-    memberType: [false],
+    isParent: [false],
     passwordForm: this.fb.group({
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
