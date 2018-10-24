@@ -2,6 +2,8 @@ import { PasswordValidator } from './../validators/password.validator';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { Member } from 'src/domain/models/member';
+
 @Component({
   selector: 'app-member-form',
   templateUrl: './member-form.component.html',
@@ -24,7 +26,7 @@ export class MemberFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   createMember() {
-    JSON.stringify(this.memberForm.value);
+    const member: Member = Object.assign({}, this.memberForm.value);
     // Some API call
     // Send data to members table
     this.memberForm.reset();
