@@ -1,9 +1,9 @@
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordValidator } from './../validators/password.validator';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Member } from 'src/domain/models/member';
-import { bind } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-member-form',
@@ -12,14 +12,15 @@ import { bind } from '@angular/core/src/render3/instructions';
 })
 export class MemberFormComponent implements OnInit {
   // Allows for a member and form type to be passed to the component
-  @Input() member: Member ;
+  @Input() member: Member;
   @Input() alreadyMember: boolean;
 
+  // Allows for a member and form type to be passed to the component
   memberForm: FormGroup;
   passwordForm: FormGroup;
 
   // Input dependencies for the component
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
     this.createForm();
@@ -33,6 +34,7 @@ export class MemberFormComponent implements OnInit {
       isParent: [this.member.isParent || false]
     });
 
+    // Conditional initialization of password form
     if (!this.alreadyMember) {
       this.passwordForm = this.fb.group(
         {
@@ -48,10 +50,13 @@ export class MemberFormComponent implements OnInit {
     this.member = Object.assign({}, this.memberForm.value);
     // Some API call
     // Send data to members table
+  }
+
+  handleEvent() {
     this.memberForm.reset();
     if (!this.alreadyMember) {
       this.passwordForm.reset();
     }
+    this.activeModal.close();
   }
-
 }
