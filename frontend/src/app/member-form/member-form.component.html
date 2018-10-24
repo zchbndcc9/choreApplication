@@ -6,8 +6,7 @@
     Last Name: <input type="text" formControlName="lastName">
   </label>
   <label class="switch">
-    <input type="checkbox" formControlName="memberType">
-    <span class="slider round"></span>
+      Child<input type="checkbox" formControlName="memberType"><span class="slider round"></span>Parent
   </label>
   <label>
     Username: <input type="text" formControlName="username">
@@ -19,7 +18,7 @@
     <label>
       Please Re-Enter Password: <input type="password" formControlName="confirmPassword">
     </label>
-    <div *ngIf="memberForm.controls['passwordForm'].errors?.passwordsMustMatch">Passwords must match</div>
+    <div [hidden]="memberForm.controls['passwordForm'].valid || memberForm.controls['passwordForm'].controls['confirmPassword'].untouched">Passwords must match</div>
   </div>
   <button [disabled]="!memberForm.valid" type="submit">Create Fam Member</button>
 
