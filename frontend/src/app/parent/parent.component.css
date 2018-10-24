@@ -152,3 +152,9 @@ h1, h2 {
   color: #f6f7f8;
   background-color: #eb3764;
 }
+
+.modal-header {
+  color: #f6f7f8;
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
+}
