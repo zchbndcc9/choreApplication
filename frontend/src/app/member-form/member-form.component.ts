@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Member } from 'src/domain/models/member';
+import { bind } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-member-form',
@@ -11,7 +12,7 @@ import { Member } from 'src/domain/models/member';
 })
 export class MemberFormComponent implements OnInit {
   // Allows for a member and form type to be passed to the component
-  @Input() member: Member;
+  @Input() member: Member ;
   @Input() alreadyMember: boolean;
 
   memberForm: FormGroup;
@@ -31,6 +32,7 @@ export class MemberFormComponent implements OnInit {
       username: [this.member.username || '', Validators.required],
       isParent: [this.member.isParent || false]
     });
+
     if (!this.alreadyMember) {
       this.passwordForm = this.fb.group(
         {
