@@ -1,3 +1,5 @@
+import { MemberFormComponent } from './member-form/member-form.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,19 +12,23 @@ import { ParentComponent } from './parent/parent.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ParentComponent,
-    NavbarComponent
+    NavbarComponent,
+    MemberFormComponent
   ],
   imports: [
-    BrowserModule,
-    NgbModule,
     AppRoutingModule,
-    FontAwesomeModule
+    BrowserModule,
+    FontAwesomeModule,
+    NgbModule,
+    ReactiveFormsModule,
+    MemberFormComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
