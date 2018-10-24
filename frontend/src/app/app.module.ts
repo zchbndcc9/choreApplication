@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
+import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.component';
 
 
 @NgModule({
@@ -22,13 +23,17 @@ import { ChildComponent } from './child/child.component';
     ParentComponent,
     NavbarComponent,
     NewaccountComponent,
-    ChildComponent
+    ChildComponent,
+    GroundingAppealComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     FontAwesomeModule
+  ],
+  entryComponents: [
+    GroundingAppealComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

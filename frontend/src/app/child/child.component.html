@@ -23,10 +23,10 @@
           <div id="child-status">
             <h4 class="display-6">
               Status
-              <span class="badge badge-success">Not Grounded</span>
-              <span class="badge badge-danger">Grounded</span>
+              <span *ngIf="!isGrounded"class="badge badge-success">Not Grounded</span>
+              <span *ngIf="isGrounded" class="badge badge-danger">Grounded</span>
             </h4>
-            <button class="btn btn-light">Appeal Grounding</button>
+            <button *ngIf="isGrounded" class="btn btn-light" (click)="openGroundingAppealModal()">Appeal Grounding</button>
           </div>
         </div>
       </div>
