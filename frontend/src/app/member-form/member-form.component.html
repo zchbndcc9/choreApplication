@@ -1,8 +1,8 @@
-<div class="switch">
-  <input type="checkbox" class="switch" class="toggle-switch" id="parent-switch">
-  <label for="parent-switch"></label>
-</div>
 <form [formGroup]="memberForm" (ngSubmit)="createMember()" class="container text-center">
+  <div class="switch">
+    <input type="checkbox" formControlName="isParent" class="toggle-switch" id="parent-switch" checked={{this.member.isParent}}>
+    <label for="parent-switch"></label>
+  </div>
   <div class="form-group row">
     <div class="col">
       <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
@@ -14,17 +14,18 @@
       <input type="text" formControlName="username" class="form-control" placeholder="Username">
     </div>
   </div>
-  <div formGroupName="passwordForm" class="form-group row">
-    <div class="col">
-      <input type="password" formControlName="password" class="form-control" placeholder="Password">
+  <div *ngIf="!this.alreadyMember" >
+    <div [formGroup]="passwordForm" class="form-group row">
+      <div class="col">
+        <input type="password" formControlName="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="col">
+        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+      </div>
     </div>
-    <div class="col">
-      <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+    <div [hidden]="passwordForm.valid || passwordForm.controls['confirmPassword'].untouched">
+      Passwords must match
     </div>
   </div>
-  <div [hidden]="memberForm.controls['passwordForm'].valid || memberForm.controls['passwordForm'].controls['confirmPassword'].untouched">
-    Passwords must match
-  </div>
-  <button class="btn btn-primary" [disabled]="!memberForm.valid" type="submit">Create Fam Member</button>
-
+  <button class="btn btn-primary" [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)" type="submit">{{alreadyMember ? "Edit" : "Create"}} Fam Member</button>
 </form>
