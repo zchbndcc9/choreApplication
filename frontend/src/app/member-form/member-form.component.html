@@ -27,5 +27,5 @@
       Passwords must match
     </div>
   </div>
-  <button class="btn btn-primary" [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)" type="submit">{{alreadyMember ? "Edit" : "Create"}} Fam Member</button>
+  <button class="btn btn-primary" [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)" type="submit">{{this.alreadyMember ? "Edit" : "Create"}} Fam Member</button>
 </form>
