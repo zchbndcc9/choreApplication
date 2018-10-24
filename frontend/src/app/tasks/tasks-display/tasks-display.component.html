@@ -18,21 +18,24 @@
         </div>
       </div> -->
 
-      <div class="btn-group btn-group-toggle" ngbRadioGroup id="filterBy" name="filterBy" [(ngModel)]="filterBy" (ngModelChange)="filterTasks()">
-        <label ngbButtonLabel class="filterBtn">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup id="filterBy" name="filterBy" [(ngModel)]="filterBy"
+        (ngModelChange)="filterTasks()">
+        <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="all"> All
         </label>
-        <label ngbButtonLabel class="filterBtn">
+        <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="rejected"> Rejected
         </label>
-        <label ngbButtonLabel class="filterBtn">
+        <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="pending"> Pending Approval
         </label>
-        <label ngbButtonLabel class="filterBtn">
+        <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="incomplete"> Incomplete
         </label>
+        <label ngbButtonLabel class="btn filterBtn">
+          <input ngbButton type="radio" value="overdue"> Overdue
+        </label>
       </div>
-      <hr>
 
       <!-- <form class="form-group row">
           <label for="filterBy" class="col-sm-2 col-form-label">Filter Tasks</label>
@@ -48,6 +51,8 @@
     </div>
   </div>
 
+  <hr>
+
   <div *ngFor="let task of filteredTasks; let i = index;" class="card">
     <div class="card-header" id="heading">
       <h5 class="mb-0">
@@ -55,6 +60,7 @@
           attr.aria-controls="collapse{{i}}">
           {{task.title}}
         </button>
+        <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
         <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
         <button *ngIf="task.status == 'incomplete'" class="btn btn-dark btn-sm float-right">Add Note</button>
         <button *ngIf="task.status == 'rejected'" class="btn btn-primary btn-sm float-right">Resubmit</button>
@@ -68,9 +74,13 @@
         <b>{{task.description}}</b>
         <hr />
         <i>Assigned by: {{task.assignedBy}}</i>
+        <div></div>
+        <i>Due by: {{task.deadline | date}}</i>
       </div>
     </div>
   </div>
+
+  <hr>
 
   <div class="row justify-content-center">
     <nav aria-label="Page navigation example">

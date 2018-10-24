@@ -21,55 +21,64 @@ export class ChildComponent implements OnInit {
         title: 'CLEAN THE KITCHEN',
         description: 'Wash the dishes, clean the oven, and empty the dishwasher',
         status: 'incomplete',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-10-17')
       },
       {
         title: 'MOW THE LAWN',
         description: 'Cut the grass, clean up the clippings',
         status: 'rejected',
-        assignedBy: 'Josh Oh'
+        assignedBy: 'Josh Oh',
+        deadline: new Date('2018-10-05')
       },
       {
         title: 'HELP SISTER WITH HOMEWORK',
         description: 'Help with math, reading, and writing',
         status: 'pending',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-12-02')
       },
       {
-        title: 'CLEAN THE KITCHEN',
+        title: 'COMPLETE HOMEWORK',
         description: 'Wash the dishes, clean the oven, and empty the dishwasher',
         status: 'incomplete',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-12-17')
       },
       {
-        title: 'MOW THE LAWN',
+        title: 'DO THE LAUNDRY',
         description: 'Cut the grass, clean up the clippings',
         status: 'rejected',
-        assignedBy: 'Josh Oh'
+        assignedBy: 'Josh Oh',
+        deadline: new Date('2018-09-10')
       },
       {
-        title: 'HELP SISTER WITH HOMEWORK',
+        title: 'RANDOM CHORE',
         description: 'Help with math, reading, and writing',
         status: 'pending',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-12-01')
       },
       {
-        title: 'CLEAN THE KITCHEN',
+        title: 'RANDOM CHORE',
         description: 'Wash the dishes, clean the oven, and empty the dishwasher',
         status: 'incomplete',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-12-11')
       },
       {
-        title: 'MOW THE LAWN',
+        title: 'WALK THE DOGS',
         description: 'Cut the grass, clean up the clippings',
         status: 'rejected',
-        assignedBy: 'Josh Oh'
+        assignedBy: 'Josh Oh',
+        deadline: new Date('2018-11-17')
       },
       {
-        title: 'HELP SISTER WITH HOMEWORK',
+        title: 'SWEEP THE GARAGE',
         description: 'Help with math, reading, and writing',
         status: 'pending',
-        assignedBy: 'Rebecca Oh'
+        assignedBy: 'Rebecca Oh',
+        deadline: new Date('2018-08-22')
       }
     ];
   }

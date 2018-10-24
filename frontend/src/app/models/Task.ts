@@ -3,4 +3,5 @@ export class Task {
   description?: string;
   status?: string;
   assignedBy?: string;
+  deadline?: Date;
 }
