@@ -1,3 +1,4 @@
+import { Member } from './../domain/models/member';
 import { MemberFormComponent } from './member-form/member-form.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,10 +17,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    NgModule,
-    NgbModule
+    NgbModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MemberFormComponent],
 })
 export class AppModule { }
