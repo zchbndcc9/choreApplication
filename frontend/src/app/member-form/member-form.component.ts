@@ -14,6 +14,7 @@ export class MemberFormComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     username: ['', Validators.required],
+    memberType: [false],
     passwordForm: this.fb.group({
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
@@ -23,7 +24,10 @@ export class MemberFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   createMember() {
-    console.log(this.memberForm.value);
+    JSON.stringify(this.memberForm.value);
+    // Some API call
+    // Send data to members table
+    this.memberForm.reset();
   }
   ngOnInit() {
   }
