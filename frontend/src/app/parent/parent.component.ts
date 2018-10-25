@@ -1,3 +1,5 @@
+import { MemberFormComponent } from './../member-form/member-form.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { faUsers, faPlus, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +15,7 @@ export class ParentComponent implements OnInit {
 
   tasks: any;
   members: any[];
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.tasks = [
@@ -29,6 +31,16 @@ export class ParentComponent implements OnInit {
       {id: 3, name: 'Jimbo', type: 'Child'},
       {id: 4, name: 'Janette', type: 'Child'}
     ];
+  }
+
+  openMemberModal(event: string = 'create') {
+    const modalRef = this.modalService.open(MemberFormComponent);
+    modalRef.componentInstance.member = {};
+    modalRef.componentInstance.alreadyMember = false;
+
+    modalRef.result.catch(error => {
+      console.error(error);
+    });
   }
 
 }
