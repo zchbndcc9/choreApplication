@@ -30,7 +30,6 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
     BrowserModule,
     FontAwesomeModule,
     NgbModule,
-    MemberFormComponent,
     ReactiveFormsModule,
     NgbModule.forRoot()
   ],
