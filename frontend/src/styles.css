@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  min-height: 100vh;
+}
+
+body,
+nav {
+  background-color: #f6f7f8;
+}
+
+h1, h2, nav {
+  font-family: 'Kollektif';
+}
+
+.btn {
+  border-radius: 1.5em;
+}
+
+.btn-success {
+  color: #fdfdfd;
+  background-color: #2ec4b6;
+  border-color: #2ec4b6;
+}
+
+.btn-primary {
+  color: #fdfdfd;
+  background-color: #3985ff;
+  border-color: #3985ff;
+}
+
+.badge-success {
+  background-color: #22c9b8;
+}
+
+.badge-primary {
+  background-color: #3985ff;
+}
+
+.badge-warning {
+  color: #f6f7f8;
+  background-color: #eb3764;
+}
+
