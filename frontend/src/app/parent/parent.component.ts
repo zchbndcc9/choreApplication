@@ -1,4 +1,4 @@
-import { faUsers, faPlus, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faPlus, faClipboardCheck, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +10,7 @@ export class ParentComponent implements OnInit {
   faUsers = faUsers;
   faClipboardCheck = faClipboardCheck;
   faPlus = faPlus;
+  faWindowClose = faWindowClose;
 
   tasks: any;
   members: any[];
