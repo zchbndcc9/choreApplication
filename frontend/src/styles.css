@@ -12,31 +12,37 @@ h1, h2, nav {
   font-family: 'Kollektif';
 }
 
-.btn {
+.btn,
+.btn.btn {
   border-radius: 1.5em;
 }
 
-.btn-success {
+.btn-success,
+.btn.btn-success {
   color: #fdfdfd;
   background-color: #2ec4b6;
   border-color: #2ec4b6;
 }
 
-.btn-primary {
+.btn-primary,
+.btn.btn-primary {
   color: #fdfdfd;
   background-color: #3985ff;
   border-color: #3985ff;
 }
 
-.badge-success {
+.badge-success,
+.badge.badge-success {
   background-color: #22c9b8;
 }
 
-.badge-primary {
+.badge-primary,
+.badge.badge-primary {
   background-color: #3985ff;
 }
 
-.badge-warning {
+.badge-warning,
+.badge.badge-warning {
   color: #f6f7f8;
   background-color: #eb3764;
 }
