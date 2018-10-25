@@ -70,4 +70,64 @@ $app->post('/tasks/add/[{userID}]', function ($request, $response, $args) {
     return $this->response->withJson($input);
 });
 
+$app->delete('/users/delete/[{userID}]', function ($request, $response, $args) {
+    // $input = $request->getParsedBody();
+    // $sql = "SELECT familyID FROM Users WHERE userID = :userID";
+    // $sth = $this->db->prepare($sql);
+    // $sth->bindParam("userID",$input['userID']);
+    // $family = $sth->execute();
+
+    $result = $conn->query($sql);
+    $sql = "DELETE FROM Users WHERE userID = :userID";
+    $sth = $this->db->prepare($sql);
+    $sth->bindParam("userID",$input['userID']);
+    $sth->execute();
+
+    // $sql = "DELETE FROM UserDetails WHERE familyID = :familyID";
+    // $sth = $this->db->prepare($sql);
+    // $sth->bindParam("familyID",$family);
+    // $sth->execute();
+
+    // $result = $conn->query($sql);
+    // $sql = "DELETE FROM Tasks WHERE userID = :userID";
+    // $sth = $this->db->prepare($sql);
+    // $sth->bindParam("userID",$input['userID']);
+    // $sth->execute();
+
+
+    return $this->response->withJson($input);
+});
+$app->delete('/userDetails/delete/[{familyID}]', function ($request, $response, $args) {
+ 
+    $sql = "DELETE FROM UserDetails WHERE familyID = :familyID";
+    $sth = $this->db->prepare($sql);
+    $sth->bindParam("familyID",$$input['familyID']);
+    $sth->execute();
+
+
+
+    return $this->response->withJson($input);
+});
+$app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $args) {
+ 
+    $sql = "DELETE FROM FamilyInfo WHERE familyID = :familyID";
+    $sth = $this->db->prepare($sql);
+    $sth->bindParam("familyID",$$input['familyID']);
+    $sth->execute();
+
+
+
+    return $this->response->withJson($input);
+});
+$app->delete('/tasks/delete/[{userID}]', function ($request, $response, $args) {
+ 
+    $sql = "DELETE FROM Tasks WHERE userID = :userID";
+    $sth = $this->db->prepare($sql);
+    $sth->bindParam("familyID",$$input['userID']);
+    $sth->execute();
+
+
+
+    return $this->response->withJson($input);
+});
 ?>
