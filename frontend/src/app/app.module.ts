@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
+import { FamilyMembersComponent } from './family-members/family-members.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ChildComponent } from './child/child.component';
     ParentComponent,
     NavbarComponent,
     NewaccountComponent,
-    ChildComponent
+    ChildComponent,
+    FamilyMembersComponent
   ],
   imports: [
     BrowserModule,
