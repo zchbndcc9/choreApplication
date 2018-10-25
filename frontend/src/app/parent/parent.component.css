@@ -19,6 +19,11 @@ h1, h2 {
   border-color: #2ec4b6;
 }
 
+.btn.btn-success:active,
+.btn.btn-success.active {
+  background-color: #29afa2;
+  border-color: #29afa2;
+}
 .btn-primary {
   color: #fdfdfd;
   background-color: #3985ff;
