@@ -131,4 +131,41 @@ $app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
 
     return $this->response->withJson($input);
 });
+$app->put('/users/edit/[{}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE users set edit='' where edit='unwanted'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+
+  return $this->response->withJson($input);
+});
+
+$app->put('/userDetails/edit/[{}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE userDetails set edit='' where edit='unwanted'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+
+  return $this->response->withJson($input);
+});
+
+$app->put('/familyInfo/edit/[{}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE familyInfo set edit='' where edit='unwanted'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+
+$app->put('/tasks/edit/[{}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set edit='' where edit='unwanted'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
 ?>
