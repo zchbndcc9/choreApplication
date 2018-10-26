@@ -6,8 +6,8 @@ USE Family;
 CREATE TABLE Users(
 	userID int NOT NULL AUTO_INCREMENT UNIQUE,
 	familyID int NOT NULL UNIQUE,
-	lastName varchar(25),
-	firstName varchar(25),
+	lastName varchar(255),
+	firstName varchar(255),
 	PRIMARY KEY (familyID),
     KEY(userID)
 );
@@ -16,8 +16,8 @@ CREATE TABLE Users(
 # Note: userType = true indicates a parent user
 CREATE TABLE UserDetails(
 	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
-	username varchar(25),
-	password varchar(50),
+	username varchar(255),
+	password varchar(255),
     userType bool,
     FOREIGN KEY (familyID) REFERENCES Users(familyID)
 );
@@ -25,8 +25,8 @@ CREATE TABLE UserDetails(
 # Contact info should be consistent for entire family
 CREATE TABLE FamilyInfo(
 	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
-	email varchar(25),
-	address varchar(100),
+	email varchar(255),
+	address varchar(255),
     phone int,
 	registrationDate DATE,
     FOREIGN KEY (familyID) REFERENCES Users(familyID)
@@ -35,9 +35,9 @@ CREATE TABLE FamilyInfo(
 # Note: notified = true indicates user has been notified of task
 CREATE TABLE Tasks(
 	userID int,
-	asigneeID int,
+	assigneeID int,
 	taskID int AUTO_INCREMENT UNIQUE,
-	taskTitle varchar(75),
+	taskTitle varchar(255),
 	taskDescription varchar(255),
 	deadline DATE,
 	status varchar(255),

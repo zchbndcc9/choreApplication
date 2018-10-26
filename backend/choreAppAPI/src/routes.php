@@ -60,11 +60,11 @@ $app->post('/familyInfo/add', function ($request, $response, $args) {
 $app->post('/tasks/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
-    $sql = "INSERT INTO UserDetails (userID, asigneeID, taskID, taskTitle, taskDescription, deadline, status, notified) 
-            VALUES (:userID, :asigneeID, :taskID, :taskTitle, :taskDescription, :deadline, :status, :notified)";
+    $sql = "INSERT INTO UserDetails (userID, assigneeID, taskID, taskTitle, taskDescription, deadline, status, notified) 
+            VALUES (:userID, :assigneeID, :taskID, :taskTitle, :taskDescription, :deadline, :status, :notified)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
-    $sth->bindParam("asigneeID",$input['asigneeID']);
+    $sth->bindParam("assigneeID",$input['assigneeID']);
     $sth->bindParam("taskID",$input['taskID']);
     $sth->bindParam("taskTitle",$input['taskTitle']);
     $sth->bindParam("taskDescription",$input['taskDescription']);
