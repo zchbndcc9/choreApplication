@@ -8,10 +8,8 @@ nav {
   background-color: #f6f7f8;
 }
 
-h1,
-h2,
-nav {
-  font-family: "Kollektif";
+h1, h2, nav {
+  font-family: 'Kollektif';
 }
 
 .btn,
@@ -33,19 +31,6 @@ nav {
   border-color: #3985ff;
 }
 
-.btn-warning,
-.btn.btn-warning {
-  color: #f6f7f8;
-  background-color: #eb3764;
-  border-color: #eb3764;
-}
-
-.btn-warning:active,
-.btn.btn-warning:active {
-  background-color: #bb2e51;
-  border-color: #bb2e51;
-}
-
 .badge-success,
 .badge.badge-success {
   background-color: #22c9b8;
@@ -62,9 +47,3 @@ nav {
   background-color: #eb3764;
 }
 
-#header {
-  border-radius: 0em;
-  color: #f6f7f8;
-  background: rgb(37,112,233);
-  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
-}
