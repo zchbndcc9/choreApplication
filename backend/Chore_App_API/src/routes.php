@@ -60,13 +60,17 @@ $app->post('/familyInfo/add', function ($request, $response, $args) {
 $app->post('/tasks/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
-    $sql = "INSERT INTO UserDetails (userID, taskDescription, deadline, notified) 
-            VALUES (:userID, :taskDescription, :deadline, :notified)";
+    $sql = "INSERT INTO UserDetails (userID, asigneeID, taskID, taskTitle, taskDescription, deadline, status, notified) 
+            VALUES (:userID, :asigneeID, :taskID, :taskTitle, :taskDescription, :deadline, :status, :notified)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
+    $sth->bindParam("asigneeID",$input['asigneeID']);
+    $sth->bindParam("taskID",$input['taskID']);
+    $sth->bindParam("taskTitle",$input['taskTitle']);
     $sth->bindParam("taskDescription",$input['taskDescription']);
     $sth->bindParam("deadline",$input['deadline']);
-    $sth->bindParam("notiifed",$input['notified']);
+    $sth->bindParam("status",$input['status']);
+    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
     return $this->response->withJson($input);
 });

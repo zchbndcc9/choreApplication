@@ -35,11 +35,16 @@ CREATE TABLE FamilyInfo(
 # Note: notified = true indicates user has been notified of task
 CREATE TABLE Tasks(
 	userID int,
+	asigneeID int,
 	taskID int AUTO_INCREMENT UNIQUE,
+	taskTitle varchar(75),
 	taskDescription varchar(255),
 	deadline DATE,
+	status varchar(255),
 	notified bool
 );
+
+
 
     
 -- # See what is in tables
