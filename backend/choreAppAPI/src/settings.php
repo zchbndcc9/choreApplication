@@ -18,9 +18,9 @@ return [
 
         'db' => [
             'host' => '127.0.0.1:8889',
-            'dbname' => 'userInfo',
-            'user' => 'root',
-            'pass' => 'root'
+            'dbname' => 'Family',
+            'user' => 'db',
+            'pass' => 'db'
         ],
     ],
 ];
