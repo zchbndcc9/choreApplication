@@ -119,9 +119,9 @@ $app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $
 
     return $this->response->withJson($input);
 });
-$app->delete('/tasks/delete/[{userID}]', function ($request, $response, $args) {
+$app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
  
-    $sql = "DELETE FROM Tasks WHERE userID = :userID";
+    $sql = "DELETE FROM Tasks WHERE taskID = :taskId";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("familyID",$$input['userID']);
     $sth->execute();
