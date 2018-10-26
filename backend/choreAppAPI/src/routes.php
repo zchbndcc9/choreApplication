@@ -135,6 +135,7 @@ $app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
 
     return $this->response->withJson($input);
 });
+
 $app->put('/users/edit/[{}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE users set edit='' where edit='unwanted'";
