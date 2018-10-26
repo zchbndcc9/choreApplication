@@ -12,7 +12,13 @@ use Slim\Http\Response;
 // $db_name="Family"; // Database name
 // $tbl_name="Users"; // Table name
 // $db = new PDO('mysql:host=127.0.0.1:8889;dbname=Family;charset=utf8mb4', 'root', 'root'); 
-
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
 // Routes for Fam.ly
 $app->post('/user/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
