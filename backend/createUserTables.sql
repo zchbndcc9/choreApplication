@@ -28,6 +28,7 @@ CREATE TABLE FamilyInfo(
 	email varchar(25),
 	address varchar(100),
     phone int,
+	registrationDate DATE,
     FOREIGN KEY (familyID) REFERENCES Users(familyID)
 );
 

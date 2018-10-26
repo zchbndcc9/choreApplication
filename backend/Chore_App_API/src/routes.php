@@ -14,7 +14,7 @@ use Slim\Http\Response;
 // $db = new PDO('mysql:host=127.0.0.1:8889;dbname=Family;charset=utf8mb4', 'root', 'root'); 
 
 // Routes for Fam.ly
-$app->post('/user/add/[{userID}]', function ($request, $response, $args) {
+$app->post('/user/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
     $sql = "INSERT INTO Users (userID, familyID, lastName, firstName) 
@@ -28,7 +28,7 @@ $app->post('/user/add/[{userID}]', function ($request, $response, $args) {
     return $this->response->withJson($input);
 });
 
-$app->post('/userDetails/add/[{userID}]', function ($request, $response, $args) {
+$app->post('/userDetails/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
     $sql = "INSERT INTO UserDetails (familyID, username, password, userType) 
@@ -42,21 +42,22 @@ $app->post('/userDetails/add/[{userID}]', function ($request, $response, $args) 
     return $this->response->withJson($input);
 });
 
-$app->post('/familyInfo/add/[{userID}]', function ($request, $response, $args) {
+$app->post('/familyInfo/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
-    $sql = "INSERT INTO UserDetails (familyID, email, address, phone) 
-            VALUES (:familyID, :email, :address, :phone)";
+    $sql = "INSERT INTO UserDetails (familyID, email, address, phone, registrationDate) 
+            VALUES (:familyID, :email, :address, :phone, :registrationDate)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("familyID",$input['familyID']);
     $sth->bindParam("email",$input['email']);
     $sth->bindParam("address",$input['address']);
     $sth->bindParam("phone",$input['phone']);
+    $sth->bindParam("registrationDate",$input['registrationDate']);
     $sth->execute();
     return $this->response->withJson($input);
 });
     
-$app->post('/tasks/add/[{userID}]', function ($request, $response, $args) {
+$app->post('/tasks/add', function ($request, $response, $args) {
     $input = $request->getParsedBody();
     // :param
     $sql = "INSERT INTO UserDetails (userID, taskDescription, deadline, notified) 
