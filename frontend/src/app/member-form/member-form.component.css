@@ -1,9 +1,22 @@
+.modal-header {
+  border-radius: .2em .2em 0 0;
+  color: #f6f7f8;
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
+}
+
 .toggle-switch {
-  visibility: hidden;
+  display: none;
+}
+
+.switch {
+  display: flex;
+  justify-content: center;
+  height: inherit;
 }
 
 .toggle-switch + label {
-  display: block;
+  display: inline-flex;
   position: relative;
   cursor: pointer;
   outline: none;
@@ -11,8 +24,8 @@
 }
 
 input.toggle-switch + label {
-  width: 4em;
-  height: 2em;
+  width: inherit;
+  height: inherit;
   background-color: #dddddd;
   border-radius: 2em;
 }
@@ -27,25 +40,21 @@ input.toggle-switch + label:after {
   content: "";
 }
 
-.modal-header {
-  border-radius: .2em .2em 0 0;
-  color: #f6f7f8;
-  background: rgb(37,112,233);
-  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
-}
 
 input.toggle-switch + label:before {
-  right: 1px;
   background-color: #f1f1f1;
   border-radius: 2em;
   transition: background 0.4s;
 }
 
 input.toggle-switch + label:after {
-  width: 2em;
+  content: "Parent";
+  align-content: center;
+  align-self: center;
+  padding: 0 1em;
   background-color: #fff;
   border-radius: 2em;
-  transition: margin 0.4s;
+  transition: 0.4s;
 }
 
 input.toggle-switch:checked + label:before {
@@ -53,5 +62,6 @@ input.toggle-switch:checked + label:before {
 }
 
 input.toggle-switch:checked + label:after {
-  margin-left: 1.9em;
+  content: "Child";
+  margin-left: 4.2em;
 }
