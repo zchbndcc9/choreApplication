@@ -6,22 +6,32 @@
       <div class="card text-center" id="loginCard">
         <div class="card-body">
           <h5 class="card-title" class="card-text">Login</h5>
-            <!-- <form> -->
-              <div class="form-group">
-                <label for="exampleInputEmail1" class="card-text">Email Address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="something@example.com" [(ngModel)]="currentUser.username">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1" class="card-text">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
-              </div>
-            <!-- </form> -->
-          <div *ngIf="!this.loginSuccess">THIS IS A TEST</div>
-          <a class="btn btn-success btn-block" (click)="submit()">Sign In</a>
+          <!-- <form> -->
+          <div *ngIf="!this.loginSuccess" class="alert alert-danger" role="alert">
+            Oops! That email and password don't match.
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="card-text">Email Address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="something@example.com"
+              [(ngModel)]="currentUser.username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="card-text">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
+          </div>
+          <div class="form-group">
+              <label for="user_loginSuccess">
+                <input type="checkbox"
+                id="account_isEmployee"
+                [(ngModel)]="loginSuccess" /> Success
+              </label>
+            </div>
+          <!-- </form> -->
+          <a href ="" class="btn btn-success btn-block" (click)="submit()">Sign In</a>
           <div id="lineBreak"></div>
-        <h6>New to Fam.ly?</h6>
-        <p>Create a new account here.</p>
-        <a href="#" class="btn btn-light btn-block">Create Account</a>
+          <h6>New to Fam.ly?</h6>
+          <p>Create a new account here.</p>
+          <a href="#" class="btn btn-light btn-block">Create Account</a>
         </div>
       </div>
     </div>

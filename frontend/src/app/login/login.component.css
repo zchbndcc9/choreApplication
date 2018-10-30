@@ -38,3 +38,9 @@ body {
   background-color: #2ec4b6;
   border-color: #2ec4b6;
 }
+
+.alert-danger {
+  border-radius: 1.5em;
+  background: #fdfdfd;
+  font-size: .9em;
+}
