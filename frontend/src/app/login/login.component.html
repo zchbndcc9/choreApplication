@@ -9,14 +9,15 @@
             <!-- <form> -->
               <div class="form-group">
                 <label for="exampleInputEmail1" class="card-text">Email Address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="something@example.com" [(ngModel)]="username">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="something@example.com" [(ngModel)]="currentUser.username">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1" class="card-text">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
               </div>
             <!-- </form> -->
-          <a href="#" class="btn btn-success btn-block" (click)="submit()">Sign In</a>
+          <div *ngIf="!this.loginSuccess">THIS IS A TEST</div>
+          <a class="btn btn-success btn-block" (click)="submit()">Sign In</a>
           <div id="lineBreak"></div>
         <h6>New to Fam.ly?</h6>
         <p>Create a new account here.</p>
@@ -25,8 +26,8 @@
       </div>
     </div>
     <div class="col-4">
-      {{username}}
-      {{password}}
+      {{currentUser.username}}
+      {{currentUser.password}}
       {{loginSuccess}}
     </div>
   </div>

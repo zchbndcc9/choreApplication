@@ -1,5 +1,7 @@
+import { PasswordValidator } from './../validators/password.validator';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../domain/models/user';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
-  loginSuccess: boolean;
+  currentUser: User = {};
+  loginSuccess: boolean = true;
 
-  users: any[];
+  users: User[];
 
   constructor() { }
 
@@ -24,19 +25,20 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    for (let index = 0; index < this.users.length; index++) {
-      const user = this.users[index];
-      if (this.username === user.username) {
-        if (this.password === user.password) {
-          this.loginSuccess = true;
-          break;
-        } else {
-          this.loginSuccess = false;
-        }
+    console.log(this.currentUser);
+    let tempUsername = this.currentUser.username;
+    let tempPassword = this.currentUser.password;
+    if (this.users.forEach(function (user) {
+      if (user.username === tempUsername && user.password === tempPassword) {
+        return true;
       }
+    })) {
+      this.loginSuccess = true;
+    } else {
+      this.loginSuccess = false;
     }
-    this.username = '';
-    this.password = '';
+    this.currentUser.username = '';
+    this.currentUser.password = '';
   }
 
 }
