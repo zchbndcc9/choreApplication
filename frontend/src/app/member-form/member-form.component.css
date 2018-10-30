@@ -65,3 +65,23 @@ input.toggle-switch:checked + label:after {
   content: "Child";
   margin-left: 4.2em;
 }
+
+.form-label-placeholder:hover {
+  cursor: text;
+}
+
+.form-label-placeholder {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control.ng-valid.ng-dirty + .form-label-placeholder,
+.form-control.ng-valid + .form-label-placeholder {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
