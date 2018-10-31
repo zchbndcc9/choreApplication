@@ -12,6 +12,15 @@
   display: none;
 }
 
+.form-control.ng-valid {
+  border-color: #00cb0e;
+}
+
+.form-control.ng-valid:focus {
+  box-shadow: 0 0 0 .2rem #aef1b3;
+  outline: 0 none;
+}
+
 /* Switch */
 
 label {
@@ -47,6 +56,7 @@ input.toggle-switch + label:after {
   content: "";
 }
 
+
 input.toggle-switch + label {
   transition: background 0.4s;
 }
@@ -56,10 +66,6 @@ input.toggle-switch + label:after {
   align-self: center;
   background-color: #fff;
   transition: 0.4s;
-}
-
-input.toggle-switch:checked + label:before {
-  background-color: #8ce196;
 }
 
 input.toggle-switch:checked + label {
