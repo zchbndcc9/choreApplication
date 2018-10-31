@@ -12,15 +12,6 @@
   display: none;
 }
 
-.form-control.ng-valid {
-  border-color: #00cb0e;
-}
-
-.form-control.ng-valid:focus {
-  box-shadow: 0 0 0 .2rem #aef1b3;
-  outline: 0 none;
-}
-
 /* Switch */
 
 label {
