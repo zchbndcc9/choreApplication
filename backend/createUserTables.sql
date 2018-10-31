@@ -1,8 +1,8 @@
-# Create new database
+-- Create new database
 CREATE DATABASE Family;
 USE Family;
 
-# Create table to hold key user info
+-- Create table to hold key user info
 CREATE TABLE Users(
 	userID int NOT NULL AUTO_INCREMENT UNIQUE,
 	familyID int NOT NULL UNIQUE,
@@ -12,8 +12,8 @@ CREATE TABLE Users(
     KEY(userID)
 );
 
-# Holds private user account info
-# Note: userType = true indicates a parent user
+-- Holds private user account info
+-- Note: userType = true indicates a parent user
 CREATE TABLE UserDetails(
 	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
 	username varchar(255),
@@ -22,7 +22,17 @@ CREATE TABLE UserDetails(
     FOREIGN KEY (familyID) REFERENCES Users(familyID)
 );
 
-# Contact info should be consistent for entire family
+-- 1 = gold, 2 = silver, 3 = bronze
+CREATE TABLE ChildDetails(
+    userID int NOT NULL,
+	familyID int NOT NULL,
+    rating double,
+    awards varchar(255),
+    groundedStatus bool,
+    FOREIGN KEY (familyID) REFERENCES Users(familyID)
+);
+
+-- Contact info should be consistent for entire family
 CREATE TABLE FamilyInfo(
 	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
 	email varchar(255),
@@ -32,27 +42,39 @@ CREATE TABLE FamilyInfo(
     FOREIGN KEY (familyID) REFERENCES Users(familyID)
 );
 
-# Note: notified = true indicates user has been notified of task
+-- Note: notified = true indicates user has been notified of task
 CREATE TABLE Tasks(
 	userID int,
 	assigneeID int,
 	taskID int AUTO_INCREMENT UNIQUE,
-	taskTitle varchar(255),
-	taskDescription varchar(255),
-	deadline DATE,
 	status varchar(255),
 	notified bool
 );
 
+-- Rating: 1 = gold, 2 = silver, 3 = bronze
+CREATE TABLE TaskDetails(
+	taskID int AUTO_INCREMENT UNIQUE,
+    taskRating int,
+	taskTitle varchar(255),
+	taskDescript varchar(255),
+	deadline DATE
+);
+
+CREATE TABLE Infractions(
+    userID int NOT NULL,
+    infracID int NOT NULL AUTO_INCREMENT UNIQUE,
+    infracDescript varchar(255),
+    notified bool
+);
 
 
     
--- # See what is in tables
+-- -- See what is in tables
 -- SELECT * FROM Users;
 -- SELECT * FROM UserDetails;
 -- SELECT * FROM FamilyInfo;
--- 
--- # Delete tables
+
+-- -- Delete tables
 -- DROP TABLE Users;
 -- DROP TABLE UserDetails;
 -- DROP TABLE FamilyInfo;
