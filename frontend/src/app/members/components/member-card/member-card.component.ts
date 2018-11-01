@@ -1,5 +1,5 @@
 import { Member } from 'src/domain/models/member';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-member-card',
@@ -13,19 +13,27 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
       <div class="card-body">
       </div>
       <div class="card-footer d-flex justify-content-around">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-warning">Ground</button>
+        <button class="btn btn-primary" (click)="editMember()">Edit</button>
+        <button class="btn btn-warning" (click)="groundMember()">Ground</button>
       </div>
     </div>`,
 })
-export class MemberCardComponent implements OnInit {
+export class MemberCardComponent {
 
   @Input()
   member: Member;
 
-  constructor() { }
+  @Output()
+  edit = new EventEmitter<Member>();
 
-  ngOnInit() {
+  @Output()
+  ground = new EventEmitter<number>();
+
+  editMember() {
+    this.edit.emit(this.member);
   }
 
+  groundMember() {
+    this.ground.emit(this.member.id);
+  }
 }

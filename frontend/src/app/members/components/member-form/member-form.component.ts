@@ -1,9 +1,10 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordValidator } from '../../password.validator';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Member } from 'src/domain/models/member';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-member-form',
@@ -13,8 +14,14 @@ import { Member } from 'src/domain/models/member';
 
 export class MemberFormComponent implements OnInit {
   // Allows for a member and form type to be passed to the component
-  @Input() member: Member;
-  @Input() alreadyMember: boolean;
+  @Input()
+  member: Member;
+
+  @Input()
+  alreadyMember: boolean;
+
+  @Output()
+  processMember = new EventEmitter<FormGroup>();
 
   // Allows for a member and form type to be passed to the component
   memberForm: FormGroup;
@@ -47,13 +54,12 @@ export class MemberFormComponent implements OnInit {
     }
   }
 
-  createMember() {
-    this.member = Object.assign({}, this.memberForm.value);
-    // Some API call
-    // Send data to members table
+  processMemberInfo() {
+    this.activeModal.close(this.memberForm.value);
+    this.resetForm();
   }
 
-  handleEvent() {
+  resetForm() {
     this.memberForm.reset();
     if (!this.alreadyMember) {
       this.passwordForm.reset();

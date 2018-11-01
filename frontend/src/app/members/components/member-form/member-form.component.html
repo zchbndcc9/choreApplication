@@ -3,7 +3,7 @@
   <button type="button" class="close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="memberForm" (ngSubmit)="createMember()" class="container">
+  <form [formGroup]="memberForm" class="container">
     <div class="form-row">
       <div class="col form-group">
         <input type="text" formControlName="firstName" class="form-control">
@@ -52,6 +52,6 @@
 <div class="modal-footer">
   <button class="btn btn-primary"
     [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)"
-    (click)="returnMemberInfo()"
+    (click)="processMemberInfo()"
     type="submit">Submit</button>
 </div>
