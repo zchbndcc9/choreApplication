@@ -3,7 +3,10 @@
     <div class="container" id="jumbotron-container">
       <div class="row justify-content-center align-items-center">
         <h1 id="jumbo-title">Members</h1>
-        <button class="fast-animated scale plus btn btn-success add-btn"><span>Add Fam</span></button>
+        <button
+          class="fast-animated scale plus btn btn-success add-btn"
+          (click)="addMember()"
+        ><span>Add Fam</span></button>
       </div>
     </div>
   </div>
@@ -11,7 +14,11 @@
     <div class="row">
       <div class="col-9" id="children-section">
         <h1>Children</h1>
-        <app-member-cardlist [members]="children$ | async"></app-member-cardlist>
+        <app-member-cardlist
+          [members]="children$ | async"
+          (edit)="editMember($event)"
+          (ground)="groundMember($event)"
+        ></app-member-cardlist>
       </div>
       <div clas="vl"></div>
       <div class="col-3" id="parent-section">
@@ -21,7 +28,9 @@
             <ng-container *ngFor="let parent of parents$ | async">
               <tr>
                 <td>{{ parent.firstName + " " + parent.lastName }}</td>
-                <td><button class="btn btn-primary">Edit</button></td>
+                <td><button
+                  class="btn btn-primary"
+                  (edit)="editMember($event)">Edit</button></td>
               </tr>
             </ng-container>
           </tbody>

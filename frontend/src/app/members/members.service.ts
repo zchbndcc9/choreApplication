@@ -25,7 +25,22 @@ export class MembersService {
   store = this.subject.asObservable();
 
   constructor() {}
+
+  retrieveMember(memberId: number) {
+
+  }
+
   addMember(member: Member) {
+    const type = member.isParent ? 'parents' : 'children';
+    const prevState = this.subject.value;
+    this.subject.next({...prevState, [type]: [...prevState[type], member]});
+  }
+
+  editMember(member: Member) {
+
+  }
+
+  groundMember(memberId: number) {
 
   }
 
