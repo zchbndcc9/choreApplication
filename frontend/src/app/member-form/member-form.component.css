@@ -53,7 +53,7 @@ input.toggle-switch + label {
 }
 
 input.toggle-switch + label:after {
-  content: "Parent";
+  content: "Child";
   align-self: center;
   background-color: #fff;
   transition: 0.4s;
@@ -63,7 +63,7 @@ input.toggle-switch:checked + label {
   background-color: #8ce196;
 }
 input.toggle-switch:checked + label:after {
-  content: "Child";
+  content: "Parent";
   margin-left: 4.2em;
 }
 
