@@ -34,6 +34,11 @@ export class NewaccountComponent implements OnInit {
     }
     this.account.email = this.email;
     this.account.password = this.password2;
+    console.log(this.account.firstName);
+    console.log(this.account.lastName);
+    console.log(this.account.address);
+    console.log(this.account.email);
+    console.log(this.account.password);
   }
 
 }
