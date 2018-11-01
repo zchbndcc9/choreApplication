@@ -232,4 +232,25 @@ $app->put('/tasks/edit/[{}]', function($request, $response, $args){
 //         GET          //
 //////////////////////////
 
+$app->get('/users/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  foreach($db->query('select * from users')as $row){
+    $strToReturn .='<br/>'.$row['userID'];
+  }
+  return $response->write(''.$strToReturn);
+});
+$app->get('/userDetails/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  foreach($db->query('select * from userDetails')as $row){
+    $strToReturn .='<br/>'.$row['userID'];
+  }
+  return $response->write(''.$strToReturn);
+});
+$app->get('/childDetails/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  foreach($db->query('select * from childDetails')as $row){
+    $strToReturn .='<br/>'.$row['userID'];
+  }
+  return $response->write(''.$strToReturn);
+});
 ?>
