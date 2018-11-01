@@ -25,6 +25,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     MembersComponent
+  ],
+  entryComponents: [
+    MemberFormComponent
   ]
 })
 export class MembersModule { }
