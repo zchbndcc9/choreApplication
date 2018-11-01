@@ -18,10 +18,12 @@
       </div>
     </div>
     <div class="form-row form-group">
-      <div class="switch col">
-        <input type="checkbox" formControlName="isParent" class="toggle-switch" id="parent-switch" checked="true">
-        <label for="parent-switch"></label>
-      </div>
+      <ng-container *ngIf="!alreadyMember">
+        <div class="switch col">
+          <input type="checkbox" formControlName="isParent" class="toggle-switch" id="parent-switch" checked="true">
+          <label for="parent-switch"></label>
+        </div>
+      </ng-container>
       <div class="input-group col-8 form-label-group">
         <div class="input-group-prepend">
           <div class="input-group-text">@</div>
@@ -48,6 +50,6 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)" (click)="handleEvent()"
+  <button class="btn btn-primary" [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)" (click)="returnMemberInfo()"
     type="submit">Submit</button>
 </div>
