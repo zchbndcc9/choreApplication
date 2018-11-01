@@ -1,11 +1,11 @@
-import { FamilyMembersComponent } from './family-members/family-members.component';
+import { MembersComponent } from './members/containers/members.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ParentComponent } from './parent/parent.component';
 
 const routes: Routes = [
   { path: 'family', component: ParentComponent },
-  { path: 'family/members', component: FamilyMembersComponent }
+  { path: 'family/members', component: MembersComponent }
 ];
 
 @NgModule({
