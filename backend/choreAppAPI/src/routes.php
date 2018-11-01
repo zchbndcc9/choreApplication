@@ -253,4 +253,18 @@ $app->get('/childDetails/[{userID}]', function($request, $response, $args){
   }
   return $response->write(''.$strToReturn);
 });
+$app->get('/taskDetails/[{taskID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  foreach($db->query('select * from taskDetails')as $row){
+    $strToReturn .='<br/>'.$row['taskID'];
+  }
+  return $response->write(''.$strToReturn);
+});
+$app->get('/infractions/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  foreach($db->query('select * from infractions')as $row){
+    $strToReturn .='<br/>'.$row['userID'];
+  }
+  return $response->write(''.$strToReturn);
+});
 ?>
