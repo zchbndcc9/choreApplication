@@ -1,4 +1,4 @@
-import { MemberFormComponent } from './../member-form/member-form.component';
+import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { faUsers, faPlus, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
