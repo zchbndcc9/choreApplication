@@ -1,3 +1,4 @@
+import { MemberGroundModalComponent } from './components/member-ground-modal/member-ground-modal.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
 import { MemberCardlistComponent } from './components/member-cardlist/member-cardlist.component';
 import { MemberCardComponent } from './components/member-card/member-card.component';
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MemberCardComponent,
     MemberCardlistComponent,
     MemberListComponent,
-    MemberFormComponent
+    MemberFormComponent,
+    MemberGroundModalComponent
   ],
   providers: [
     MembersService
@@ -27,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MembersComponent
   ],
   entryComponents: [
-    MemberFormComponent
+    MemberFormComponent,
+    MemberGroundModalComponent
   ]
 })
 export class MembersModule { }

@@ -1,9 +1,11 @@
+import { MemberGroundModalComponent } from './../components/member-ground-modal/member-ground-modal.component';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { pluck } from 'rxjs/operators';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-members',
@@ -43,13 +45,15 @@ export class MembersComponent implements OnInit {
   }
 
   groundMember(memberId: number) {
+    const modal = this.openGroundModal();
 
+    modal.result.then(result => {
+      this.membersService.groundMember(memberId);
+    });
   }
 
-  openGroundModal(content, child: Member) {
-    this.modalService.open(content, {ariaLabelledBy: 'groundModal'}).result.catch( error => {
-      console.error(error);
-    });
+  openGroundModal() {
+   return this.modalService.open(MemberGroundModalComponent);
   }
 
   openMemberModal(member: Member, alreadyMember: boolean) {
