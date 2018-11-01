@@ -35,13 +35,21 @@ nav {
 
 .btn-warning,
 .btn.btn-warning {
-  color: #f6f7f8;
+  color: #fdfdfd;
   background-color: #eb3764;
   border-color: #eb3764;
 }
 
-.btn-warning:active,
-.btn.btn-warning:active {
+.btn-success:not(:disabled):not(.disabled).active,
+.btn-success:not(:disabled):not(.disabled):active {
+  color: #faf0f0;
+  background-color: #27a195;
+  border-color: #27a195;
+}
+
+.btn-warning:not(:disabled):not(.disabled).active,
+.btn-warning:not(:disabled):not(.disabled):active {
+  color: #faf0f0;
   background-color: #bb2e51;
   border-color: #bb2e51;
 }
