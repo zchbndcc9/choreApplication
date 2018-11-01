@@ -1,0 +1,42 @@
+<body>
+  <div class="jumbotron" id="header">
+    <div class="container" id="jumbotron-container">
+      <div class="row justify-content-center align-items-center">
+        <h1 id="jumbo-title">Members</h1>
+        <button class="fast-animated scale plus btn btn-success add-btn"><span>Add Fam</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-9" id="children-section">
+        <h1>Children</h1>
+        <app-member-cardlist [members]="children$ | async"></app-member-cardlist>
+      </div>
+      <div clas="vl"></div>
+      <div class="col-3" id="parent-section">
+        <h1>Parents</h1>
+        <table class="table table-striped rounded">
+          <tbody>
+            <ng-container *ngFor="let parent of parents$ | async">
+              <tr>
+                <td>{{ parent.firstName + " " + parent.lastName }}</td>
+                <td><button class="btn btn-primary">Edit</button></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+<ng-template #groundModal let-modal>
+  <div class="modal-body">
+    <h4>Are you sure you want to ground your child?</h4>
+  </div>
+  <div class="modal-footer justify-content-center">
+    <button class="btn" (click)="modal.close()">No</button>
+    <button class="btn btn-warning" (click)="modal.close()">Ground em'</button>
+  </div>
+</ng-template>
