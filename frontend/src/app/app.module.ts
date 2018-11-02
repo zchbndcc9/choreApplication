@@ -34,6 +34,7 @@ import { MembersComponent } from './members/containers/members.component';
     BrowserModule,
     MembersModule,
     ParentsModule,
+    FontAwesomeModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,

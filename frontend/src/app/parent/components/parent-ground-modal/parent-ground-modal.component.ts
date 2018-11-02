@@ -1,8 +1,8 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-member-ground-modal',
+  selector: 'app-parent-ground-modal',
   template: `
     <div>
       <div class="modal-body">
@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-ground-modal.component.css']
 })
 
-export class MemberGroundModalComponent {
+export class ParentGroundModalComponent {
   constructor(
     private activeModal: NgbActiveModal
   ) {}
