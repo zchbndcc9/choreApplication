@@ -1,4 +1,3 @@
-
 -- Create new database
 CREATE DATABASE Family;
 USE Family;
@@ -6,11 +5,20 @@ USE Family;
 -- Create table to hold key user info
 CREATE TABLE Users(
 	userID int NOT NULL AUTO_INCREMENT UNIQUE,
-	familyID int NOT NULL UNIQUE,
+	familyID int NOT NULL,
 	lastName varchar(255),
 	firstName varchar(255),
-	PRIMARY KEY (familyID),
-    KEY(userID)
+	PRIMARY KEY (userID)
+);
+
+-- Contact info should be consistent for entire family
+CREATE TABLE FamilyInfo(
+	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
+	email varchar(255),
+	address varchar(255),
+    phone int,
+	registrationDate DATE,
+    PRIMARY KEY (familyID)
 );
 
 -- Holds private user account info
@@ -21,7 +29,8 @@ CREATE TABLE UserDetails(
 	username varchar(255),
 	password varchar(255),
     userType bool,
-    FOREIGN KEY (familyID) REFERENCES Users(familyID)
+    FOREIGN KEY (userID) REFERENCES Users(userID),
+    FOREIGN KEY (familyID) REFERENCES FamilyInfo(familyID)
 );
 
 -- 1 = gold, 2 = silver, 3 = bronze
@@ -31,17 +40,7 @@ CREATE TABLE ChildDetails(
     rating double,
     awards varchar(255),
     groundedStatus bool,
-    FOREIGN KEY (familyID) REFERENCES Users(familyID)
-);
-
--- Contact info should be consistent for entire family
-CREATE TABLE FamilyInfo(
-	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
-	email varchar(255),
-	address varchar(255),
-    phone int,
-	registrationDate DATE,
-    FOREIGN KEY (familyID) REFERENCES Users(familyID)
+    FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
 -- Note: notified = true indicates user has been notified of task
@@ -50,7 +49,9 @@ CREATE TABLE Tasks(
 	assigneeID int,
 	taskID int AUTO_INCREMENT UNIQUE,
 	status varchar(255),
-	notified bool
+	notified bool,
+    PRIMARY KEY (taskID),
+    FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
 -- Rating: 1 = gold, 2 = silver, 3 = bronze
@@ -60,18 +61,18 @@ CREATE TABLE TaskDetails(
     taskAward varchar(255),
 	taskTitle varchar(255),
 	taskDescript varchar(255),
-	deadline DATE
+	deadline DATE,
+    FOREIGN KEY (taskID) REFERENCES Tasks(taskID)
 );
 
 CREATE TABLE Infractions(
     userID int NOT NULL,
     infracID int NOT NULL AUTO_INCREMENT UNIQUE,
     infracDescript varchar(255),
-    notified bool
+    notified bool,
+    FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-
-    
 -- -- See what is in tables
 -- SELECT * FROM Users;
 -- SELECT * FROM UserDetails;
