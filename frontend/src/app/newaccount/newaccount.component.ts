@@ -25,12 +25,12 @@ export class NewaccountComponent implements OnInit {
   }
 
   validate() {
-    if (this.firstName && this.lastName 
+    if (this.firstName && this.lastName
       && this.address1 && this.city
        && this.state && this.zip
         && this.email && this.password1
          && this.password2
-          && (this.password1===this.password2)) {
+          && (this.password1 === this.password2)) {
       return true;
     }
     return false;
