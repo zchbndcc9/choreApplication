@@ -1,4 +1,3 @@
-import { PasswordValidator } from './../validators/password.validator';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../domain/models/user';
@@ -28,11 +27,14 @@ export class LoginComponent implements OnInit {
     console.log(this.currentUser);
     let tempUsername = this.currentUser.username;
     let tempPassword = this.currentUser.password;
-    if (this.users.forEach(function (user) {
+
+    let foundUser = false;
+    this.users.forEach(function (user) {
       if (user.username === tempUsername && user.password === tempPassword) {
-        return true;
+        foundUser = true;
       }
-    })) {
+    });
+    if (foundUser) {
       this.loginSuccess = true;
     } else {
       this.loginSuccess = false;

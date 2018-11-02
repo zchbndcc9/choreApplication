@@ -19,13 +19,6 @@
             <label for="exampleInputPassword1" class="card-text">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
           </div>
-          <div class="form-group">
-              <label for="user_loginSuccess">
-                <input type="checkbox"
-                id="account_isEmployee"
-                [(ngModel)]="loginSuccess" /> Success
-              </label>
-            </div>
           <!-- </form> -->
           <a href ="" class="btn btn-success btn-block" (click)="submit()">Sign In</a>
           <div id="lineBreak"></div>
@@ -36,9 +29,6 @@
       </div>
     </div>
     <div class="col-4">
-      {{currentUser.username}}
-      {{currentUser.password}}
-      {{loginSuccess}}
     </div>
   </div>
 </body>
