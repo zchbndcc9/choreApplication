@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 export class PasswordValidator {
   static match(passwordForm: FormGroup) {

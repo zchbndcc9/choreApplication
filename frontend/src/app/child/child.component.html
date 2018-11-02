@@ -1,0 +1,136 @@
+<div>
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1 class="display-4">Amanda Oh</h1>
+            <h5 class="display-8">Child</h5>
+          </div>
+          <div class="col-sm-6">
+            <h4 class="display-6">Rating</h4>
+            <fa-icon [icon]="faStar" size="lg"></fa-icon>
+            <fa-icon [icon]="faStar" size="lg"></fa-icon>
+            <fa-icon [icon]="faStar" size="lg"></fa-icon>
+            <fa-icon [icon]="faStar" size="lg"></fa-icon>
+            <fa-icon [icon]="faStarHalfAlt" size="lg"></fa-icon>
+          </div>
+        </div>
+        <p class="lead">
+          Parents: Josh Oh and Rebecca Oh
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Filter Tasks
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">All</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Approved</a>
+              <a class="dropdown-item" href="#">Pending Approval</a>
+              <a class="dropdown-item" href="#">Incomplete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                CLEAN THE KITCHEN
+              </button>
+              <button class="btn btn-success btn-sm float-right">Submit for Approval</button>
+              <button class="btn btn-dark btn-sm float-right">Add Note</button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <b>Tasks</b>
+              <ul>
+                <li>Wash the dishes</li>
+                <li>Clean the oven</li>
+                <li>Empty the dishwasher</li>
+              </ul>
+              <i>Assigned by: Rebecca Oh</i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                aria-controls="collapseTwo">
+                MOW THE LAWN
+              </button>
+              <button class="btn btn-primary btn-sm float-right">Resubmit</button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <b>Tasks</b>
+              <ul>
+                <li>Cut the grass</li>
+                <li>Clean up the clippings</li>
+              </ul>
+              <i>Assigned by: Josh Oh</i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" [disabled]="true" data-toggle="collapse" data-target="#collapseThree"
+                aria-expanded="false" aria-controls="collapseThree">
+                HELP SISTER WITH HOMEWORK
+              </button>
+              <button class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <b>Tasks</b>
+              <ul>
+                <li>Cut the grass</li>
+                <li>Clean up the clippings</li>
+              </ul>
+              <i>Assigned by: Josh Oh</i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+</div>

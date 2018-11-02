@@ -1,3 +1,4 @@
+import { MembersModule } from './members/members.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,25 +10,26 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { MemberFormComponent } from './member-form/member-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParentComponent } from './parent/parent.component';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
-
+import { ChildComponent } from './child/child.component';
+import { MembersComponent } from './members/containers/members.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ChildComponent,
     LoginComponent,
-    ParentComponent,
+    NewaccountComponent,
     NavbarComponent,
-    MemberFormComponent,
-    NewaccountComponent
+    ParentComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    MembersModule,
     FontAwesomeModule,
     NgbModule,
     ReactiveFormsModule,
@@ -35,7 +37,6 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
     NgbModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [MemberFormComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
