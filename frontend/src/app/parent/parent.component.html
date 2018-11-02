@@ -1,5 +1,4 @@
 <body>
-  <app-navbar></app-navbar>
   <div class="jumbotron" id="header">
     <div class="container" id="jumbotron-container">
       <div class="row justify-content-around align-items-center">
@@ -31,7 +30,7 @@
       <div class="col-md-6 col-lg-5 col-xl-4" id="members-container">
         <div class="table-section row justify-content-between align-items-center">
           <h1>Members</h1>
-          <button class="fast-animated scale plus btn btn-success add-btn"><span>Add Fam</span></button>
+          <button class="fast-animated scale plus btn btn-success add-btn" (click)="openMemberModal()"><span>Add Fam</span></button>
         </div>
         <table class="table table-striped rounded">
           <tbody>

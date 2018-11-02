@@ -1,34 +1,38 @@
+import { MembersModule } from './members/members.module';
 import { NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ParentComponent } from './parent/parent.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ParentComponent } from './parent/parent.component';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
-
+import { MembersComponent } from './members/containers/members.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ChildComponent,
     LoginComponent,
-    ParentComponent,
-    NavbarComponent,
     NewaccountComponent,
-    ChildComponent
+    NavbarComponent,
+    ParentComponent
   ],
   imports: [
-    BrowserModule,
-    NgbModule,
     AppRoutingModule,
-    FontAwesomeModule
+    BrowserModule,
+    MembersModule,
+    FontAwesomeModule,
+    NgbModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
