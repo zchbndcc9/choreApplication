@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './parent/containers/parent.component';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';

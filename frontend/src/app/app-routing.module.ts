@@ -3,7 +3,7 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
 import { MembersComponent } from './members/containers/members.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './parent/containers/parent.component';
 
 const routes: Routes = [
   { path: 'family', component: ParentComponent },
