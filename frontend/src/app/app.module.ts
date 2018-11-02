@@ -1,3 +1,4 @@
+import { ParentsModule } from './parent/parents.module';
 import { MembersModule } from './members/members.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,14 +27,13 @@ import { MembersComponent } from './members/containers/members.component';
     LoginComponent,
     NewaccountComponent,
     GroundingAppealComponent,
-    NavbarComponent,
-    ParentComponent
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     MembersModule,
-    FontAwesomeModule,
+    ParentsModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
