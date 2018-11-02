@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,9 @@ import { MembersComponent } from './members/containers/members.component';
     BrowserModule,
     MembersModule,
     FontAwesomeModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgbModule.forRoot()
   ],
   entryComponents: [

@@ -1,6 +1,6 @@
+import { faUsers, faPlus, faClipboardCheck, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faUsers, faPlus, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,6 +12,7 @@ export class ParentComponent implements OnInit {
   faUsers = faUsers;
   faClipboardCheck = faClipboardCheck;
   faPlus = faPlus;
+  faWindowClose = faWindowClose;
 
   tasks: any;
   members: any[];
