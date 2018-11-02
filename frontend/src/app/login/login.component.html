@@ -20,11 +20,11 @@
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
           </div>
           <!-- </form> -->
-          <a href ="" class="btn btn-success btn-block" (click)="submit()">Sign In</a>
+          <button class="btn btn-success btn-block" [disabled]="!validate()" (click)="submit()" [routerLink]="['/family']">Sign In</button>
           <div id="lineBreak"></div>
           <h6>New to Fam.ly?</h6>
           <p>Create a new account here.</p>
-          <a href="#" class="btn btn-light btn-block">Create Account</a>
+          <a class="btn btn-light btn-block" [routerLink]="['/new-account']">Create Account</a>
         </div>
       </div>
     </div>

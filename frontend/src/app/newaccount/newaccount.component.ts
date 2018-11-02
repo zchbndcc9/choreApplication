@@ -24,6 +24,18 @@ export class NewaccountComponent implements OnInit {
   ngOnInit() {
   }
 
+  validate() {
+    if (this.firstName && this.lastName 
+      && this.address1 && this.city
+       && this.state && this.zip
+        && this.email && this.password1
+         && this.password2
+          && (this.password1===this.password2)) {
+      return true;
+    }
+    return false;
+  }
+
   createAccount() {
     this.account.firstName = this.firstName;
     this.account.lastName = this.lastName;
