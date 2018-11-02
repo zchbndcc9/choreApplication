@@ -137,56 +137,97 @@ $app->post('/infractions/add', function ($request, $response, $args) {
 //////////////////////////
 
 $app->delete('/users/delete/[{userID}]', function ($request, $response, $args) {
-    // $input = $request->getParsedBody();
-    // $sql = "SELECT familyID FROM Users WHERE userID = :userID";
-    // $sth = $this->db->prepare($sql);
-    // $sth->bindParam("userID",$input['userID']);
-    // $family = $sth->execute();
 
-    $result = $conn->query($sql);
-    $sql = "DELETE FROM Users WHERE userID = :userID";
-    $sth = $this->db->prepare($sql);
-    $sth->bindParam("userID",$input['userID']);
-    $sth->execute();
-
-    // $sql = "DELETE FROM UserDetails WHERE familyID = :familyID";
-    // $sth = $this->db->prepare($sql);
-    // $sth->bindParam("familyID",$family);
-    // $sth->execute();
-
-    // $result = $conn->query($sql);
-    // $sql = "DELETE FROM Tasks WHERE userID = :userID";
-    // $sth = $this->db->prepare($sql);
-    // $sth->bindParam("userID",$input['userID']);
-    // $sth->execute();
+  $db = $this->dbConn;   
+  $get_id = $request->getAttribute('userID');
+  // $result = $conn->query($sql);
+  $sql = "DELETE FROM Users WHERE userID = :userID";
+  $sth = $this->dbConn->prepare($sql);
+  $sth->bindParam("userID",$get_id );
+  $result = $sth->execute();
 
 
-    return $this->response->withJson($input);
+
+
+  return $this->response->withJson($result);
 });
-$app->delete('/userDetails/delete/[{familyID}]', function ($request, $response, $args) {
- 
-    $sql = "DELETE FROM UserDetails WHERE familyID = :familyID";
-    $sth = $this->db->prepare($sql);
-    $sth->bindParam("familyID",$$input['familyID']);
-    $sth->execute();
-    return $this->response->withJson($input);
+$app->delete('/userDetails/delete/[{userID}]', function ($request, $response, $args) {
+
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('userID');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM UserDetails WHERE userID = :userID";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("userID",$get_id );
+$result = $sth->execute();
+
+
+
+
+return $this->response->withJson($result);
+
 });
 $app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $args) {
  
-    $sql = "DELETE FROM FamilyInfo WHERE familyID = :familyID";
-    $sth = $this->db->prepare($sql);
-    $sth->bindParam("familyID",$$input['familyID']);
-    $sth->execute();
-    return $this->response->withJson($input);
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('familyID');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM FamilyInfo WHERE familyID = :familyID";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("familyID",$get_id );
+$result = $sth->execute();
+return $this->response->withJson($result);
+
 });
-$app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
+
+$app->delete('/childDetails/delete/[{userID}]', function ($request, $response, $args) {
  
-    $sql = "DELETE FROM Tasks WHERE taskID = :taskId";
-    $sth = $this->db->prepare($sql);
-    $sth->bindParam("familyID",$$input['userID']);
-    $sth->execute();
-    return $this->response->withJson($input);
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('userID');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM ChildDetails WHERE userID = :userID";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("userID",$get_id );
+$result = $sth->execute();
+return $this->response->withJson($result);
+
 });
+
+$app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
+
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('taskId');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM Tasks WHERE taskId = :taskId";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("taskId",$get_id );
+$result = $sth->execute();
+return $this->response->withJson($result);
+});
+
+$app->delete('/taskDetails/delete/[{taskId}]', function ($request, $response, $args) {
+
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('taskId');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM TaskDetails WHERE taskId = :taskId";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("taskId",$get_id );
+$result = $sth->execute();
+return $this->response->withJson($result);
+});
+$app->delete('/infractions/delete/[{infracID}]', function ($request, $response, $args) {
+
+$db = $this->dbConn;   
+$get_id = $request->getAttribute('infracID');
+// $result = $conn->query($sql);
+$sql = "DELETE FROM Infractions WHERE infracID = :infracID";
+$sth = $this->dbConn->prepare($sql);
+$sth->bindParam("infracID",$get_id );
+$result = $sth->execute();
+return $this->response->withJson($result);
+});
+
 
 ///////////////////////////
 //          PUT         //
