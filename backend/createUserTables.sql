@@ -1,3 +1,4 @@
+
 -- Create new database
 CREATE DATABASE Family;
 USE Family;
@@ -15,7 +16,8 @@ CREATE TABLE Users(
 -- Holds private user account info
 -- Note: userType = true indicates a parent user
 CREATE TABLE UserDetails(
-	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
+	userID int NOT NULL,
+    familyID int NOT NULL AUTO_INCREMENT UNIQUE,
 	username varchar(255),
 	password varchar(255),
     userType bool,
@@ -55,6 +57,7 @@ CREATE TABLE Tasks(
 CREATE TABLE TaskDetails(
 	taskID int AUTO_INCREMENT UNIQUE,
     taskRating int,
+    taskAward varchar(255),
 	taskTitle varchar(255),
 	taskDescript varchar(255),
 	deadline DATE
