@@ -6,7 +6,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+<<<<<<< HEAD
 
+=======
+>>>>>>> b2e8551dff1382c99f63660a1e83fdd1125bd35f
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +41,7 @@ import { MembersComponent } from './members/containers/members.component';
     MembersModule,
     FontAwesomeModule,
     AppRoutingModule,
-    FontAwesomeModule,
+    ReactiveFormsModule,
     FormsModule,
     NgbModule.forRoot()
   ],
