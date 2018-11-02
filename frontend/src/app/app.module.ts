@@ -1,3 +1,4 @@
+import { ParentsModule } from './parent/parents.module';
 import { MembersModule } from './members/members.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './parent/containers/parent.component';
 
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
@@ -26,14 +27,13 @@ import { MembersComponent } from './members/containers/members.component';
     LoginComponent,
     NewaccountComponent,
     GroundingAppealComponent,
-    NavbarComponent,
-    ParentComponent
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     MembersModule,
-    FontAwesomeModule,
+    ParentsModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
