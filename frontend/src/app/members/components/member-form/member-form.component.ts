@@ -55,7 +55,11 @@ export class MemberFormComponent implements OnInit {
   }
 
   processMemberInfo() {
-    this.activeModal.close(this.memberForm.value);
+    let memberObj = Object.assign({}, this.memberForm.value);
+    if (!this.alreadyMember) {
+      memberObj = Object.assign(memberObj, {password: this.passwordForm.controls.password.value});
+    }
+    this.activeModal.close(memberObj);
     this.resetForm();
   }
 
