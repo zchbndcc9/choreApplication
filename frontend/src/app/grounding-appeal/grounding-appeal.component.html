@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title">Appeal Grounding</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <h6><i>NOTE: You are submitting an official appeal of your grounded status. Please type your reason for appeal below.</i></h6>
+  <div class="form-group">
+    <label for="groundingComment">Reason:</label>
+    <textarea ngbAutofocus class="form-control" rows="5" id="groundingComment"></textarea>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Save click')">Close</button>
+</div>
