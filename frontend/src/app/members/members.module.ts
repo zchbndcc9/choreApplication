@@ -8,6 +8,7 @@ import { MembersComponent } from './containers/members.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewTaskFormComponent } from './components/new-task-form/new-task-form.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MemberCardlistComponent,
     MemberListComponent,
     MemberFormComponent,
-    MemberGroundModalComponent
+    MemberGroundModalComponent,
+    NewTaskFormComponent
   ],
   providers: [
     MembersService
