@@ -1,42 +1,30 @@
 <div class="modal-header">
-  <h1>New Task</h1>
+  <h1>Create New Task</h1>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="taskForm" class="container">
     <div class="form-row">
       <div class="col form-group">
-        <input type="text" formControlName="firstName" class="form-control">
-        <label class="form-label-placeholder" for="firstName">First Name</label>
+        <input type="text" formControlName="title" class="form-control">
+        <label class="form-label-placeholder" for="title">Title</label>
         <div class="valid-feedback">
           Looks good!
         </div>
       </div>
       <div class="col form-group">
-        <input type="text" formControlName="lastName" class="form-control">
-        <label class="form-label-placeholder" for="lastName">Last Name</label>
+        <input type="date" formControlName="deadline" class="form-control">
+        <label class="form-label-placeholder" for="deadline">Deadline</label>
       </div>
     </div>
     <div class="form-row form-group">
-      <ng-container *ngIf="!alreadyMember">
-        <div class="switch col">
-          <input type="checkbox" formControlName="isParent" class="toggle-switch" id="parent-switch" checked="true">
-          <label for="parent-switch"></label>
-        </div>
-      </ng-container>
-      <div class="input-group col-8 form-label-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="text" class="form-control" formControlName="username" id="inlineFormInputGroup">
-        <label class="form-label-placeholder" for="inlineFormInputGroup" id="username-label">Username</label>
+      <div class="form-group col form-row">
+        <textarea type="text" class="form-control" formControlName="description" rows="3"></textarea>
+        <label class="form-label-placeholder" for="description" rows="3">Description</label>
       </div>
     </div>
   </form>
 </div>
-<!-- <div class="modal-footer">
-  <button class="btn btn-primary"
-    [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)"
-    (click)="processMemberInfo()"
-    type="submit">Submit</button>
-</div> -->
+<div class="modal-footer">
+  <button class="btn btn-primary" [disabled]="!taskForm.valid" (click)="processTask()" type="submit">Submit</button>
+</div>

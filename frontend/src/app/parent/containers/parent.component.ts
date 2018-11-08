@@ -1,4 +1,4 @@
-import { NewTaskFormComponent } from '../tasks/new-task-form/new-task-form.component';
+import { NewTaskFormComponent } from '../../tasks/new-task-form/new-task-form.component';
 import { faUsers, faPlus, faClipboardCheck, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { MemberFormComponent } from '../../members/components/member-form/member-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
