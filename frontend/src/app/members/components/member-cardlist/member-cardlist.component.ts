@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       <ng-container *ngFor="let member of members; trackBy: retrieveId">
         <app-member-card
           [member]="member"
-          (ground)="groundMember($event)"
+          (toggleGround)="toggleGround($event)"
           (edit)="editMember($event)"></app-member-card>
       </ng-container>
     </div>
@@ -25,7 +25,7 @@ export class MemberCardlistComponent {
   edit = new EventEmitter<Member>();
 
   @Output()
-  ground = new EventEmitter<number>();
+  ground = new EventEmitter<Member>();
 
   retrieveId(index: number, member: Member) {
     return member.id;
@@ -35,8 +35,8 @@ export class MemberCardlistComponent {
     this.edit.emit(member);
   }
 
-  groundMember(memberId: number) {
-    this.ground.emit(memberId);
+  toggleGround(child: Member) {
+    this.ground.emit(child);
   }
 
 }

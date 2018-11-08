@@ -42,12 +42,20 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  groundMember(memberId: number) {
-    const modal = this.openGroundModal();
+  toggleGround(member: Member) {
 
-    modal.result.then(result => {
-      this.membersService.groundMember(memberId);
-    });
+    if (member.isGrounded) {
+      // Confirm grounding
+      const modal = this.openGroundModal();
+      // Submits request if parent confirms
+      modal.result.then(result => {
+        this.membersService.toggleGround(member.id);
+      });
+    } else {
+      // Unground child
+      this.membersService.toggleGround(member.id);
+    }
+
   }
 
   openGroundModal() {

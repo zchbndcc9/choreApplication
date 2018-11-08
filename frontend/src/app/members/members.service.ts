@@ -41,7 +41,7 @@ export class MembersService {
 
   }
 
-  groundMember(memberId: number) {
+  toggleGround(memberId: number) {
     // API call
     const prevState = this.subject.value;
     const childIndex = prevState.children.findIndex(child => child.id === memberId);
