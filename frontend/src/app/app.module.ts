@@ -40,6 +40,7 @@ import { MembersComponent } from './members/containers/members.component';
     BrowserModule,
     MembersModule,
     ParentsModule,
+    NgbModule,
     FontAwesomeModule,
     AppRoutingModule,
     ReactiveFormsModule,

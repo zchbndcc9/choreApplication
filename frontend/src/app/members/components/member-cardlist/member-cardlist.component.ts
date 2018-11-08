@@ -1,4 +1,4 @@
-import { Member } from './../../../../domain/models/member';
+import { Member } from '../../../../domain/models/member';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
