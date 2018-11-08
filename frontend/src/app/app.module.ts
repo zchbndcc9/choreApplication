@@ -7,6 +7,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+<<<<<<< HEAD
+
+=======
+>>>>>>> b2e8551dff1382c99f63660a1e83fdd1125bd35f
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +21,8 @@ import { ParentComponent } from './parent/containers/parent.component';
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
 import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.component';
+import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
+import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 import { MembersComponent } from './members/containers/members.component';
 
@@ -27,7 +33,11 @@ import { MembersComponent } from './members/containers/members.component';
     LoginComponent,
     NewaccountComponent,
     GroundingAppealComponent,
-    NavbarComponent
+    NavbarComponent,
+    TaskNotificationComponent,
+    TasksDisplayComponent,
+    NavbarComponent,
+    ParentComponent
   ],
   imports: [
     AppRoutingModule,
@@ -35,7 +45,7 @@ import { MembersComponent } from './members/containers/members.component';
     MembersModule,
     ParentsModule,
     FontAwesomeModule,
-    NgbModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule.forRoot()
