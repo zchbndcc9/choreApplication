@@ -18,7 +18,8 @@ import { ParentsService } from './parents.service';
     ParentsService
   ],
   exports: [
-    ParentComponent
+    ParentComponent,
+    ParentGroundModalComponent
   ]
 })
 

@@ -7,11 +7,13 @@ import { MembersComponent } from './containers/members.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ParentGroundModalComponent } from '../parent/components/parent-ground-modal/parent-ground-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ParentGroundModalComponent
   ],
   declarations: [
     MembersComponent,
@@ -29,7 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   entryComponents: [
     MemberFormComponent,
-    MemberGroundModalComponent
+    ParentGroundModalComponent
   ]
 })
 export class MembersModule { }

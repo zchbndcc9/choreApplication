@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
   `,
-  styleUrls: ['./member-ground-modal.component.css']
+  styleUrls: ['./parent-ground-modal.component.css']
 })
 
 export class ParentGroundModalComponent {

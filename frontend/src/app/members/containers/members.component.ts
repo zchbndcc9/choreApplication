@@ -1,11 +1,9 @@
-import { MemberGroundModalComponent } from './../components/member-ground-modal/member-ground-modal.component';
+import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { pluck } from 'rxjs/operators';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-members',
@@ -53,7 +51,7 @@ export class MembersComponent implements OnInit {
   }
 
   openGroundModal() {
-   return this.modalService.open(MemberGroundModalComponent);
+   return this.modalService.open(ParentGroundModalComponent);
   }
 
   openMemberModal(member: Member, alreadyMember: boolean) {
