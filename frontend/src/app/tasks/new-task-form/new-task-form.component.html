@@ -3,7 +3,7 @@
   <button type="button" class="close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="memberForm" class="container">
+  <form [formGroup]="taskForm" class="container">
     <div class="form-row">
       <div class="col form-group">
         <input type="text" formControlName="firstName" class="form-control">
@@ -32,26 +32,11 @@
         <label class="form-label-placeholder" for="inlineFormInputGroup" id="username-label">Username</label>
       </div>
     </div>
-    <div *ngIf="!alreadyMember">
-      <div [formGroup]="passwordForm" class="form-row form-group">
-        <div class="col form-label-group">
-          <input type="password" formControlName="password" class="form-control">
-          <label class="form-label-placeholder" for="password">Password</label>
-        </div>
-        <div class="col form-label-group">
-          <input type="password" formControlName="confirmPassword" class="form-control">
-          <label class="form-label-placeholder" (invalid)="passwordForm.valid" for="confirmPassword">Confirm Password</label>
-          <div [hidden]="passwordForm.valid || passwordForm.controls['confirmPassword'].untouched">
-            Passwords must match
-          </div>
-        </div>
-      </div>
-    </div>
   </form>
 </div>
-<div class="modal-footer">
+<!-- <div class="modal-footer">
   <button class="btn btn-primary"
     [disabled]="!memberForm.valid || (passwordForm && !passwordForm.valid)"
     (click)="processMemberInfo()"
     type="submit">Submit</button>
-</div>
+</div> -->
