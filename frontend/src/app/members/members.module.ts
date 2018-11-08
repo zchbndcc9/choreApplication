@@ -12,8 +12,7 @@ import { ParentGroundModalComponent } from '../parent/components/parent-ground-m
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    ParentGroundModalComponent
+    ReactiveFormsModule
   ],
   declarations: [
     MembersComponent,
