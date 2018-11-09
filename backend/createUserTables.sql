@@ -16,7 +16,7 @@ CREATE TABLE FamilyInfo(
 	familyID int NOT NULL AUTO_INCREMENT UNIQUE,
 	email varchar(255),
 	address varchar(255),
-    phone int,
+    phone varchar(100),
 	registrationDate DATE,
     PRIMARY KEY (familyID)
 );
