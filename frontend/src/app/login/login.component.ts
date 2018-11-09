@@ -1,3 +1,4 @@
+import { LoginService } from '../../services/login/login.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../domain/models/user';
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   users: User[];
 
-  constructor() { }
+  constructor(
+    loginService: LoginService
+  ) { }
 
   ngOnInit() {
     this.users = [
