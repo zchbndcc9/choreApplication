@@ -410,13 +410,9 @@ $app->get('/login/{user}/{pass}', function($request, $response, $args){
     $sth->execute();
 
     if($sth->execute()) {
-        if($result = $sth->get_result()){
-            $count=mysqli_num_rows($result);
-            if($count>=1)
-                $outcome = "true";
-            else
-                $outcome = "false";
-        }
+        $count = $sth->rowCount();
+        if($count>=1)
+            $outcome = "true";
         else
             $outcome = "false";
     }
