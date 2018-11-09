@@ -36,7 +36,8 @@ export class MembersComponent implements OnInit {
   editMember(member: Member) {
     const modal = this.openMemberModal(member, true);
 
-    modal.result.then(editedMember => {
+    modal.result.then(updates => {
+      const editedMember = {...member, ...updates };
       this.membersService.editMember(editedMember);
     }).catch(error => {
       console.error(error);
