@@ -49,9 +49,12 @@ export class ParentComponent implements OnInit {
     const modalRef = this.modalService.open(NewTaskFormComponent);
     modalRef.componentInstance.task = {};
 
-    modalRef.result.catch(error => {
+    modalRef.result.then((result) => {
+      // save the task
+    }).catch(error => {
       console.error(error);
     });
+
   }
 
 }
