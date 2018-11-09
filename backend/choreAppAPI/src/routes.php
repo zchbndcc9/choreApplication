@@ -234,14 +234,14 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 //          PUT         //
 //////////////////////////
 
-$app->put('/users/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE users set edit='userID' where edit=':userID'";
+$app->put('/users/[{userID}]', function($request, $response, $args){
+  $input=$request->getAttribute('userID');
+  $sql="UPDATE users set userID='userID' where userID=':userID'";
   $sth=$this->$db->prepare($sql);
-  $sth->blindParam("edit",$input['edit']);
-  $sth->execute();
+  $sth->blindParam("userID",$input);
+  $result = $sth->execute();
 
-  return $this->response->withJson($input);
+  return $this->response->withJson($result);
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
