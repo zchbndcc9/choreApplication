@@ -403,7 +403,48 @@ $app->get('/users/[{userID}]', function($request, $response, $args){
 
     return $this->response->withJson($result);
 });
+$app->get('/getfamilyInfo/{familyID}', function($request, $response, $args){
 
+    $get_id=$request->getAttribute('familyID');
+    $sql="SELECT * FROM FamilyInfo WHERE familyID = :familyID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("familyID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
+});
+$app->get('/getTask/{userID}/{taskID}', function($request, $response, $args){
+
+    $get_id=$request->getAttribute('userID');
+    $get_task=$request->getAttribute('taskID');
+    $sql="SELECT * FROM Task WHERE userID = :userID and taskID = :taskID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $sth->blindParam("taskID",$get_task);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
+});
+$app->get('/getTasks/{userID}', function($request, $response, $args){
+
+    $get_id=$request->getAttribute('userID');
+    $sql="SELECT * FROM Tasks WHERE userID = :userID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $strToReturn = '';
+        foreach($db->query($sth) as $row) {
+            $strToReturn .= '<br />' . $row['userID'];
+            $strToReturn .= '<br />' . $row['asigneeID'];
+            $strToReturn .= '<br />' . $row['taskID'];
+            $strToReturn .= '<br />' . $row['status'];
+            $strToReturn .= '<br />' . $row['notified'];
+            
+        }        
+        return $response->write('' . $strToReturn);
+    //$result=$sth->execute();
+
+    return $this->response->withJson($result);
+});
 $app->get('/userDetails/[{userID}]', function($request, $response, $args){
 
     $get_id=$request->getAttribute('userID');
