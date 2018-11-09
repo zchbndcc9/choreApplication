@@ -15,14 +15,16 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
-    $app->get('/dbtest',    function ($request, $response, $args) {
-              $db = $this->db;
-              $strToReturn = '';
-              foreach($db->query('select * from Users') as $row) {
-              $strToReturn .= '<br />' . $row['userID'];
-              }
-              return $response->write('' . $strToReturn);
-              });
+
+$app->get('/dbtest',    function ($request, $response, $args) {
+    $db = $this->db;
+    $strToReturn = '';
+    foreach($db->query('select * from Users') as $row) {
+        $strToReturn .= '<br />' . $row['userID'];
+    }
+    return $response->write('' . $strToReturn);
+});
+
 ///////////////////////////
 //         POST         //
 //////////////////////////
@@ -420,7 +422,7 @@ $app->get('/login/{user}/{pass}', function($request, $response, $args){
     }
 
     $obj = (object) [
-        'Success' => $outcome,
+        'Success' => $outcome
     ];
     return json_encode($obj);
 });
