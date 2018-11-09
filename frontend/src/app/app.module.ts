@@ -32,8 +32,7 @@ import { MembersComponent } from './members/containers/members.component';
     NavbarComponent,
     TaskNotificationComponent,
     TasksDisplayComponent,
-    NavbarComponent,
-    ParentComponent
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
