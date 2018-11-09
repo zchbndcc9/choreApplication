@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from 'src/domain/models/member';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -27,7 +28,17 @@ export class MembersService {
   private subject = new BehaviorSubject<State>(state);
   store = this.subject.asObservable();
 
-  constructor() {}
+  protected baseUrl =
+    'http://ec2-18-222-217-233.us-east-2.compute.amazonaws.com:8080/';
+
+  protected httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: ''
+    })
+  };
+
+  constructor(protected httpClient: HttpClient) {}
 
   retrieveMember(memberId: number) {
 
@@ -40,7 +51,7 @@ export class MembersService {
     this.subject.next({...prevState, [type]: [...prevState[type], member]});
   }
 
-  editMember(member: Member) {
+  editMember(member: Member | Child) {
     const type = member.isParent ? 'parents' : 'children';
     const prevState = this.subject.value;
     const memberIndex = prevState[type].findIndex(mem => mem.id === member.id);
@@ -53,17 +64,21 @@ export class MembersService {
     this.subject.next({...prevState, [type]: newState });
   }
 
-  toggleGround(childId: number) {
-    // API call
-    const prevState = this.subject.value;
-    const childIndex = prevState.children.findIndex(child => child.id === childId);
-    const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
-    const newState = [
-      ...prevState.children.slice(0, childIndex),
-      updatedChild,
-      ...prevState.children.slice(childIndex + 1)
-    ];
-    this.subject.next({...prevState, children: newState });
+  toggleGround(isGrounded: boolean, childId: number) {
+    this.httpClient.put(`${this.baseUrl}/childDetails/${isGrounded ? 'unground' : 'ground'}/${childId}`, this.httpOptions)
+    .subscribe(result => {
+      const prevState = this.subject.value;
+      const childIndex = prevState.children.findIndex(child => child.id === childId);
+      const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
+      const newState = [
+        ...prevState.children.slice(0, childIndex),
+        updatedChild,
+        ...prevState.children.slice(childIndex + 1)
+      ];
+      this.subject.next({...prevState, children: newState });
+    }, error => {
+      console.error(error);
+    });
   }
 
   retrieve<T>(name: string): Observable<T> {

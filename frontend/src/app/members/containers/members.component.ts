@@ -26,7 +26,6 @@ export class MembersComponent implements OnInit {
     const modal = this.openMemberModal(new Member(), false);
 
     modal.result.then(newMember => {
-      console.log(newMember);
       this.membersService.addMember(newMember);
     }).catch(error => {
       console.error(error);
@@ -50,11 +49,11 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.id);
+        this.membersService.toggleGround(child.isGrounded, child.id);
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.id);
+      this.membersService.toggleGround(child.isGrounded, child.id);
     }
   }
 
