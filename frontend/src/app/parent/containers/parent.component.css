@@ -110,3 +110,13 @@
   background: rgb(37,112,233);
   background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
 }
+
+#newTaskModalTitle {
+  font-family: kollektif;
+  color: #f6f7f8;
+}
+
+#newTaskHeader {
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
+}

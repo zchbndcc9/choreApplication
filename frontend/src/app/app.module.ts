@@ -1,3 +1,4 @@
+import { TasksModule } from './tasks/tasks.module';
 import { ParentsModule } from './parent/parents.module';
 import { MembersModule } from './members/members.module';
 import { NgModule } from '@angular/core';
@@ -40,6 +41,7 @@ import { MembersComponent } from './members/containers/members.component';
     BrowserModule,
     MembersModule,
     ParentsModule,
+    TasksModule,
     NgbModule,
     FontAwesomeModule,
     AppRoutingModule,

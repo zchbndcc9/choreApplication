@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { Account } from '../../domain/models/account';
 
 @Component({
   selector: 'app-newaccount',
@@ -7,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newaccount.component.css']
 })
 export class NewaccountComponent implements OnInit {
-  // account: Account = {};
+  //account: Account = {};
   firstName: string;
   lastName: string;
   address1: string;
@@ -22,6 +21,18 @@ export class NewaccountComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  validate() {
+    if (this.firstName && this.lastName
+      && this.address1 && this.city
+       && this.state && this.zip
+        && this.email && this.password1
+         && this.password2
+          && (this.password1 === this.password2)) {
+      return true;
+    }
+    return false;
   }
 
   createAccount() {
