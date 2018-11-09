@@ -1,3 +1,4 @@
+import { Child } from './../../../domain/models/child';
 import { Task } from '../../../domain/models/task';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,12 +13,37 @@ export class NewTaskFormComponent implements OnInit {
 
   taskForm: FormGroup;
   task: Task;
+  children: Child[];
 
   constructor(
     private fb: FormBuilder, public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
+    this.children = [
+      {
+        username: 'one',
+        firstName: 'sam',
+        lastName: 'giles',
+        isParent: false,
+        rating: 5,
+        isGrounded: false,
+        infractions: [],
+        tasks: []
+      },
+      {
+        username: 'one',
+        firstName: 'giles',
+        lastName: 'sam',
+        isParent: false,
+        rating: 1,
+        isGrounded: false,
+        infractions: [],
+        tasks: []
+      }
+    ];
+    console.log(this.children);
+
     this.createForm();
   }
 
