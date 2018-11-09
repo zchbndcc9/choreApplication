@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from '../../domain/models/account';
 
 @Component({
   selector: 'app-newaccount',
@@ -7,7 +6,7 @@ import { Account } from '../../domain/models/account';
   styleUrls: ['./newaccount.component.css']
 })
 export class NewaccountComponent implements OnInit {
-  account: Account = {};
+  //account: Account = {};
   firstName: string;
   lastName: string;
   address1: string;
@@ -24,21 +23,33 @@ export class NewaccountComponent implements OnInit {
   ngOnInit() {
   }
 
-  createAccount() {
-    this.account.firstName = this.firstName;
-    this.account.lastName = this.lastName;
-    if (this.address2) {
-      this.account.address = `${this.address1} #${this.address2}, ${this.city}, ${this.state} ${this.zip}`;
-    } else {
-      this.account.address = `${this.address1}, ${this.city}, ${this.state} ${this.zip}`;
+  validate() {
+    if (this.firstName && this.lastName
+      && this.address1 && this.city
+       && this.state && this.zip
+        && this.email && this.password1
+         && this.password2
+          && (this.password1 === this.password2)) {
+      return true;
     }
-    this.account.email = this.email;
-    this.account.password = this.password2;
-    console.log(this.account.firstName);
-    console.log(this.account.lastName);
-    console.log(this.account.address);
-    console.log(this.account.email);
-    console.log(this.account.password);
+    return false;
+  }
+
+  createAccount() {
+    // this.account.firstName = this.firstName;
+    // this.account.lastName = this.lastName;
+    // if (this.address2) {
+    //   this.account.address = `${this.address1} #${this.address2}, ${this.city}, ${this.state} ${this.zip}`;
+    // } else {
+    //   this.account.address = `${this.address1}, ${this.city}, ${this.state} ${this.zip}`;
+    // }
+    // this.account.email = this.email;
+    // this.account.password = this.password2;
+    // console.log(this.account.firstName);
+    // console.log(this.account.lastName);
+    // console.log(this.account.address);
+    // console.log(this.account.email);
+    // console.log(this.account.password);
   }
 
 }

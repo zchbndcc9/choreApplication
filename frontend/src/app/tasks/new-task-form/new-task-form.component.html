@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <h1>Create New Task</h1>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="taskForm" class="container">
+    <div class="form-row">
+      <div class="col form-group">
+        <input type="text" formControlName="title" class="form-control" />
+        <label class="form-label-placeholder" for="title">Title</label>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="col form-group">
+        <input type="date" formControlName="deadline" class="form-control" />
+        <label class="form-label-placeholder" for="deadline"><span class="text-muted">Deadline</span></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <textarea
+          type="text"
+          class="form-control"
+          formControlName="description"
+          rows="3"
+        ></textarea>
+        <label
+          class="form-label-placeholder"
+          for="description"
+          rows="3"
+          id="descriptionLabel"
+          >Description</label
+        >
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="text" formControlName="award" class="form-control" />
+        <label class="form-label-placeholder" for="award">Reward</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="assignToChild"><span class="text-muted">Assign Task To...</span></label>
+        <select class="form-control" id="assignToChild">
+          <option selected="true">Choose a child</option>
+          <option *ngFor="let child of children">{{ child.firstName + ' ' + child.lastName }}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    class="btn btn-primary"
+    [disabled]="!taskForm.valid"
+    (click)="processTask()"
+    type="submit"
+  >
+    Submit
+  </button>
+</div>

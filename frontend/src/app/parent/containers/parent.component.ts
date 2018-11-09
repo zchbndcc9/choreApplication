@@ -1,3 +1,4 @@
+import { NewTaskFormComponent } from '../../tasks/new-task-form/new-task-form.component';
 import { faUsers, faPlus, faClipboardCheck, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { MemberFormComponent } from '../../members/components/member-form/member-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +43,18 @@ export class ParentComponent implements OnInit {
     modalRef.result.catch(error => {
       console.error(error);
     });
+  }
+
+  openTaskModal(event: string = 'create') {
+    const modalRef = this.modalService.open(NewTaskFormComponent);
+    modalRef.componentInstance.task = {};
+
+    modalRef.result.then((result) => {
+      // save the task
+    }).catch(error => {
+      console.error(error);
+    });
+
   }
 
 }
