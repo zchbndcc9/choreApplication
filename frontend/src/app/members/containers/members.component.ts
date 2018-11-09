@@ -44,7 +44,7 @@ export class MembersComponent implements OnInit {
   }
 
   toggleGround(child: Child) {
-    if (child.isGrounded) {
+    if (!child.isGrounded) {
       // Confirm grounding
       const modal = this.openGroundModal();
       // Submits request if parent confirms
