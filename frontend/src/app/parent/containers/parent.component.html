@@ -44,17 +44,17 @@
       <div class="col-md-12 col-lg-7 d-flex flex-column" id="tasks-container">
         <div class="table-section row justify-content-between align-items-center">
           <h1>Tasks</h1>
-          <button class="fast-animated scale plus btn btn-success add-btn" data-toggle="modal" data-target="#newTaskModal"><span>New
+          <button class="fast-animated scale plus btn btn-success add-btn" (click)="openTaskModal()" data-target="#newTaskModal"><span>New
               Task</span></button>
           <!-- Modal -->
-          <div class="modal" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <!-- <div class="modal" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" id="newTaskHeader">
                   <h5 class="modal-title" id="newTaskModalTitle">Create a New Task</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                     <!-- <span aria-hidden="true">&times;</span> -->
-                    <span><fa-icon [icon]="faWindowClose" size="md"></fa-icon></span>
+                    <!-- <span><fa-icon [icon]="faWindowClose" size="md"></fa-icon></span>
                   </button>
                 </div>
                 <div class="modal-body">
@@ -66,7 +66,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <table class="table table-striped rounded">
           <tbody>

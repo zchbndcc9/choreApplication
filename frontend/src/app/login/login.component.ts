@@ -23,8 +23,15 @@ export class LoginComponent implements OnInit {
     ];
   }
 
+  validate() {
+    if (this.currentUser.username
+      && this.currentUser.password) {
+        return true;
+      }
+    return false;
+  }
+
   submit(): void {
-    console.log(this.currentUser);
     let tempUsername = this.currentUser.username;
     let tempPassword = this.currentUser.password;
 

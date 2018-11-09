@@ -23,12 +23,12 @@
             </div>
             <div class="form-group">
               <label for="inputAddress2">Address Line 2</label>
-              <input type="text" [(ngModel)]="address2" class="form-control" id="inputAddress2" name="address2" placeholder="Apartment, studio, or floor" required>
+              <input type="text" [(ngModel)]="address2" class="form-control" id="inputAddress2" name="address2" placeholder="Apartment, studio, or floor #" required>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity" [(ngModel)]="city" name="city" required>
+                <input type="text" class="form-control" id="inputCity" [(ngModel)]="city" name="city" placeholder="City" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">State</label>
@@ -89,7 +89,7 @@
               </div>
               <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
-                <input type="text" [(ngModel)]="zip" class="form-control" id="inputZip" name="zip" required>
+                <input type="text" [(ngModel)]="zip" class="form-control" id="inputZip" name="zip" placeholder="XXXXX" required>
               </div>
             </div>
             <div class="form-group">
@@ -103,11 +103,11 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="confirmPassword" class="card-text">Confirm Password</label>
-                <input type="password" [(ngModel)]="password2" class="form-control" id="confirmPassword" placeholder="password" name="password2" required>
+                <input type="password" [(ngModel)]="password2" class="form-control" id="confirmPassword" placeholder="{{password1===password2 ? 'password': 'passwords must match'}}" name="password2" required [ngStyle]="{'border-color': (password1===password2) ? '#3985ff' : 'red'}">
               </div>
             </div>
           </form>
-          <a class="btn btn-success btn-block" (click)="createAccount()">Create Account and Sign Into Fam.ly</a>
+          <button class="btn btn-success btn-block" (click)="createAccount()" [routerLink]="['/family']" [disabled]="!validate()">Create Account and Sign Into Fam.ly</button>
         </div>
       </div>
     </div>
