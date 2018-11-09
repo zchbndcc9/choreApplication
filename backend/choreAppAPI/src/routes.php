@@ -148,6 +148,7 @@ $app->delete('/users/delete/[{userID}]', function ($request, $response, $args) {
     // $db = $this->dbConn;   
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
+   
     $sql = "DELETE FROM Users WHERE userID = :userID";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$get_id );
@@ -162,7 +163,7 @@ $app->delete('/userDetails/delete/[{userID}]', function ($request, $response, $a
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM UserDetails WHERE userID = :userID";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$get_id );
     $result = $sth->execute();
 
@@ -174,7 +175,7 @@ $app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $
     $get_id = $request->getAttribute('familyID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM FamilyInfo WHERE familyID = :familyID";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("familyID",$get_id );
     $result = $sth->execute();
 
@@ -187,7 +188,7 @@ $app->delete('/childDetails/delete/[{userID}]', function ($request, $response, $
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM ChildDetails WHERE userID = :userID";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$get_id );
     $result = $sth->execute();
 
@@ -200,7 +201,7 @@ $app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
     $get_id = $request->getAttribute('taskId');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM Tasks WHERE taskId = :taskId";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("taskId",$get_id );
     $result = $sth->execute();
 
@@ -213,7 +214,7 @@ $app->delete('/taskDetails/delete/[{taskId}]', function ($request, $response, $a
     $get_id = $request->getAttribute('taskId');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM TaskDetails WHERE taskId = :taskId";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("taskId",$get_id );
     $result = $sth->execute();
 
@@ -226,7 +227,7 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
     $get_id = $request->getAttribute('infracID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM Infractions WHERE infracID = :infracID";
-    $sth = $this->dbConn->prepare($sql);
+    $sth = $this->db->prepare($sql);
     $sth->bindParam("infracID",$get_id );
     $result = $sth->execute();
 
