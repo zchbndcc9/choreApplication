@@ -287,52 +287,48 @@ $app->put('/tasks/edit/[{}]', function($request, $response, $args){
 //////////////////////////
 
 $app->get('/users/[{userID}]', function($request, $response, $args){
-
-    $input=$request->getParsedBody();
-    foreach($db->query('select * from users')as $row){
-        $strToReturn .='<br/>'.$row['userID'];
-    }
-    return $response->write(''.$strToReturn);
-
+  $db=$this->dbConn;
+  $get_id=$request->getAttribute('userID');
+  $sql="SELECT userID FROM users WHERE userID = :userID";
+  $sth=$this->$dbConn->prepare($sql);
+  $sth->blindParam("userID",$get_id);
+  $result=$sth->execute();
+  return $this->response->withJson($result);
 });
-
 $app->get('/userDetails/[{userID}]', function($request, $response, $args){
-
-    $input=$request->getParsedBody();
-    foreach($db->query('select * from userDetails')as $row){
-        $strToReturn .='<br/>'.$row['userID'];
-    }
-    return $response->write(''.$strToReturn);
-
+  $db=$this->dbConn;
+  $get_id=$request->getAttribute('userID');
+  $sql="SELECT userID FROM userDetails WHERE userID = :userID";
+  $sth=$this->$dbConn->prepare($sql);
+  $sth->blindParam("userID",$get_id);
+  $result=$sth->execute();
+  return $this->response->withJson($result);
 });
-
 $app->get('/childDetails/[{userID}]', function($request, $response, $args){
-
-    $input=$request->getParsedBody();
-    foreach($db->query('select * from childDetails')as $row){
-        $strToReturn .='<br/>'.$row['userID'];
-    }
-    return $response->write(''.$strToReturn);
-
+  $db=$this->dbConn;
+  $get_id=$request->getAttribute('userID');
+  $sql="SELECT userID FROM childDetails WHERE userID = :userID";
+  $sth=$this->$dbConn->prepare($sql);
+  $sth->blindParam("userID",$get_id);
+  $result=$sth->execute();
+  return $this->response->withJson($result);
 });
-
 $app->get('/taskDetails/[{taskID}]', function($request, $response, $args){
-
-    $input=$request->getParsedBody();
-    foreach($db->query('select * from taskDetails')as $row){
-        $strToReturn .='<br/>'.$row['taskID'];
-    }
-    return $response->write(''.$strToReturn);
-
+  $db=$this->dbConn;
+  $get_id=$request->getAttribute('taskID');
+  $sql="SELECT taskID FROM taskDetails WHERE taskID = :taskID";
+  $sth=$this->$dbConn->prepare($sql);
+  $sth->blindParam("taskID",$get_id);
+  $result=$sth->execute();
+  return $this->response->withJson($result);
 });
-
 $app->get('/infractions/[{userID}]', function($request, $response, $args){
-
-    $input=$request->getParsedBody();
-    foreach($db->query('select * from infractions')as $row){
-        $strToReturn .='<br/>'.$row['userID'];
-    }
-    return $response->write(''.$strToReturn);
-
+  $db=$this->dbConn;
+  $get_id=$request->getAttribute('userID');
+  $sql="SELECT userID FROM infractions WHERE userID = :userID";
+  $sth=$this->$dbConn->prepare($sql);
+  $sth->blindParam("userID",$get_id);
+  $result=$sth->execute();
+  return $this->response->withJson($result);
 });
 ?>
