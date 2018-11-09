@@ -38,9 +38,10 @@ $app->post('/user/add', function ($request, $response, $args) {
 $app->post('/userDetails/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (familyID, username, password, userType) 
-            VALUES (:familyID, :username, :password, :userType)";
+    $sql = "INSERT INTO UserDetails (userID,familyID, username, password, userType) 
+            VALUES (:userID, :familyID, :username, :password, :userType)";
     $sth = $this->db->prepare($sql);
+    $sth->bindParam("userID",$input['userID']);
     $sth->bindParam("familyID",$input['familyID']);
     $sth->bindParam("username",$input['username']);
     $sth->bindParam("password",$input['password']);
