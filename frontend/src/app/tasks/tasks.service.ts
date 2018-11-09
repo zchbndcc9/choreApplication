@@ -52,7 +52,7 @@ export class TaskService {
 
   editTask(task: Task): Observable<Task> {
     return this.httpClient
-      .put<Task>(`${this.endpoint}/tasks/edit/${task.taskID}`, task, this.httpOptions)
+      .put<Task>(`${this.endpoint}/tasks/edit/${task.id}`, task, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
