@@ -4,20 +4,10 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// php -S localhost:8080 -t public public/index.php
-// ssh -i chores.pem ubuntu@18.222.217.233
-// php -S 0.0.0.0:8080 -t public public/index.php
-// http://ec2-18-222-217-233.us-east-2.compute.amazonaws.com:8080
-
-// $host="localhost"; // Host name
-// $username="userhere"; // Mysql username
-// $password="passwordhere"; // Mysql password
-// $db_name="Family"; // Database name
-// $tbl_name="Users"; // Table name
-// $db = new PDO('mysql:host=127.0.0.1:8889;dbname=Family;charset=utf8mb4', 'root', 'root'); 
-$app->options('/{routes:.+}', function ($request, $response, $args) {
-  return $response;
+$app->options('/{routes:.+}', function($request, $response, $args){
+    return $response;
 });
+
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
@@ -63,7 +53,7 @@ $app->post('/userDetails/add', function ($request, $response, $args) {
 $app->post('/childDetails/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (userID, familyID, rating, awards, groundedStatus) 
+    $sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
             VALUES (:userID, :familyID, :rating, :awards, :groundedStatus)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
@@ -79,7 +69,7 @@ $app->post('/childDetails/add', function ($request, $response, $args) {
 $app->post('/familyInfo/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (familyID, email, address, phone, registrationDate) 
+    $sql = "INSERT INTO FamilyInfo (familyID, email, address, phone, registrationDate) 
             VALUES (:familyID, :email, :address, :phone, :registrationDate)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("familyID",$input['familyID']);
@@ -95,7 +85,7 @@ $app->post('/familyInfo/add', function ($request, $response, $args) {
 $app->post('/tasks/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (userID, assigneeID, taskID, status, notified) 
+    $sql = "INSERT INTO Tasks (userID, assigneeID, taskID, status, notified) 
             VALUES (:userID, :assigneeID, :taskID, :status, :notified)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
@@ -111,7 +101,7 @@ $app->post('/tasks/add', function ($request, $response, $args) {
 $app->post('/taskDetails/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (taskID, taskRating, taskAward, taskTitle, taskDescription, deadline) 
+    $sql = "INSERT INTO TaskDetails (taskID, taskRating, taskAward, taskTitle, taskDescription, deadline) 
             VALUES (:taskID, :taskRating, :taskAward, :taskTitle, :taskDescription, :deadline)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("taskID",$input['taskID']);
@@ -128,7 +118,7 @@ $app->post('/taskDetails/add', function ($request, $response, $args) {
 $app->post('/infractions/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO UserDetails (userID, infracID, infracDescript, notified) 
+    $sql = "INSERT INTO Infractions (userID, infracID, infracDescript, notified) 
             VALUES (:userID, :infracID, :infracDescript, :notified)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
@@ -350,8 +340,10 @@ $app->get('/infractions/[{userID}]', function($request, $response, $args){
   $result=$sth->execute();
   return $this->response->withJson($result);
 });
-$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
-  $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
-  return $handler($req, $res);
+
+$app->map(['GET','POST','PUT','DELETE','PATCH'],'/{routes:.+}',function($req, $res){
+    $handler = $this->notFoundHandler;
+    return $handler($req, $res);
 });
+
 ?>
