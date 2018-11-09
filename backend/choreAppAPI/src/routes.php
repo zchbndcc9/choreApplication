@@ -288,6 +288,78 @@ $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
 
     return $this->response->withJson($input);
 });
+$app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set edit='userID' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/taskDetails/edit/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set edit='userID' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set edit='userID' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set parent='TRUE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set child='FALSE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set known='TRUE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set unknown='FALSE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/infractions/edit/known/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set known='TRUE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
+$app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, $args){
+  $input=$request->getParsedBody();
+  $sql="UPDATE tasks set unknown='FALSE' where edit=':userID'";
+  $sth=$this->$db->prepare($sql);
+  $sth->blindParam("edit",$input['edit']);
+  $sth->execute();
+  return $this->response->withJson($input);
+});
 
 ///////////////////////////
 //         GET          //
