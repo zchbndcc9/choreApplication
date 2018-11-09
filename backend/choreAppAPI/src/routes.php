@@ -136,8 +136,7 @@ $app->post('/infractions/add', function ($request, $response, $args) {
 //////////////////////////
 
 $app->delete('/users/delete/[{userID}]', function ($request, $response, $args) {
-
-    // $db = $this->dbConn;   
+ 
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
    
@@ -150,8 +149,7 @@ $app->delete('/users/delete/[{userID}]', function ($request, $response, $args) {
 });
 
 $app->delete('/userDetails/delete/[{userID}]', function ($request, $response, $args) {
-
-  //  $db = $this->dbConn;   
+  
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM UserDetails WHERE userID = :userID";
@@ -162,8 +160,7 @@ $app->delete('/userDetails/delete/[{userID}]', function ($request, $response, $a
     return $this->response->withJson($result);
 });
 $app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $args) {
- 
-   // $db = $this->dbConn;   
+   
     $get_id = $request->getAttribute('familyID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM FamilyInfo WHERE familyID = :familyID";
@@ -176,7 +173,6 @@ $app->delete('/familyInfo/delete/[{familyID}]', function ($request, $response, $
 
 $app->delete('/childDetails/delete/[{userID}]', function ($request, $response, $args) {
     
-  //  $db = $this->dbConn;   
     $get_id = $request->getAttribute('userID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM ChildDetails WHERE userID = :userID";
@@ -188,8 +184,7 @@ $app->delete('/childDetails/delete/[{userID}]', function ($request, $response, $
 });
 
 $app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
-
-  //  $db = $this->dbConn;   
+ 
     $get_id = $request->getAttribute('taskId');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM Tasks WHERE taskId = :taskId";
@@ -201,8 +196,7 @@ $app->delete('/tasks/delete/[{taskId}]', function ($request, $response, $args) {
 });
 
 $app->delete('/taskDetails/delete/[{taskId}]', function ($request, $response, $args) {
-
-   // $db = $this->dbConn;   
+ 
     $get_id = $request->getAttribute('taskId');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM TaskDetails WHERE taskId = :taskId";
@@ -215,7 +209,6 @@ $app->delete('/taskDetails/delete/[{taskId}]', function ($request, $response, $a
 
 $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, $args) {
 
-    //$db = $this->dbConn;   
     $get_id = $request->getAttribute('infracID');
     // $result = $conn->query($sql);
     $sql = "DELETE FROM Infractions WHERE infracID = :infracID";
@@ -242,22 +235,25 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE userDetails set edit='userID' where edit=':userID'";
-  $sth=$this->$db->prepare($sql);
-  $sth->blindParam("edit",$input['edit']);
-  $sth->execute();
 
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE userDetails set edit='userID' where edit=':userID'";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("edit",$input['edit']);
+    $sth->execute();
+
+    return $this->response->withJson($input);
 });
 
 $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE familyInfo set edit='familyID' where edit=':familyID'";
-  $sth=$this->$db->prepare($sql);
-  $sth->blindParam("edit",$input['edit']);
-  $sth->execute();
-  return $this->response->withJson($input);
+
+    $input=$request->getParsedBody();
+    $sql="UPDATE familyInfo set edit='familyID' where edit=':familyID'";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("edit",$input['edit']);
+    $sth->execute();
+
+    return $this->response->withJson($input);
 });
 
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
@@ -267,8 +263,8 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $sth=$this->$db->prepare($sql);
     $sth->blindParam("userID",$input['userID']);
     $sth->execute();
-    return $this->response->withJson($input);
 
+    return $this->response->withJson($input);
 });
 
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
@@ -278,17 +274,19 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $sth=$this->$db->prepare($sql);
     $sth->blindParam("userID",$input['userID']);
     $sth->execute();
-    return $this->response->withJson($input);
 
+    return $this->response->withJson($input);
 });
 
 $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE tasks set edit='userID' where edit=':userID'";
-  $sth=$this->$db->prepare($sql);
-  $sth->blindParam("edit",$input['edit']);
-  $sth->execute();
-  return $this->response->withJson($input);
+
+    $input=$request->getParsedBody();
+    $sql="UPDATE tasks set edit='userID' where edit=':userID'";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("edit",$input['edit']);
+    $sth->execute();
+
+    return $this->response->withJson($input);
 });
 
 ///////////////////////////
@@ -296,49 +294,58 @@ $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
 //////////////////////////
 
 $app->get('/users/[{userID}]', function($request, $response, $args){
-  $db=$this->dbConn;
-  $get_id=$request->getAttribute('userID');
-  $sql="SELECT userID FROM users WHERE userID = :userID";
-  $sth=$this->$dbConn->prepare($sql);
-  $sth->blindParam("userID",$get_id);
-  $result=$sth->execute();
-  return $this->response->withJson($result);
+
+    $get_id=$request->getAttribute('userID');
+    $sql="SELECT userID FROM users WHERE userID = :userID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
 });
+
 $app->get('/userDetails/[{userID}]', function($request, $response, $args){
-  $db=$this->dbConn;
-  $get_id=$request->getAttribute('userID');
-  $sql="SELECT userID FROM userDetails WHERE userID = :userID";
-  $sth=$this->$dbConn->prepare($sql);
-  $sth->blindParam("userID",$get_id);
-  $result=$sth->execute();
-  return $this->response->withJson($result);
+
+    $get_id=$request->getAttribute('userID');
+    $sql="SELECT userID FROM userDetails WHERE userID = :userID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
 });
+
 $app->get('/childDetails/[{userID}]', function($request, $response, $args){
-  $db=$this->dbConn;
-  $get_id=$request->getAttribute('userID');
-  $sql="SELECT userID FROM childDetails WHERE userID = :userID";
-  $sth=$this->$dbConn->prepare($sql);
-  $sth->blindParam("userID",$get_id);
-  $result=$sth->execute();
-  return $this->response->withJson($result);
+
+    $get_id=$request->getAttribute('userID');
+    $sql="SELECT userID FROM childDetails WHERE userID = :userID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
 });
+
 $app->get('/taskDetails/[{taskID}]', function($request, $response, $args){
-  $db=$this->dbConn;
-  $get_id=$request->getAttribute('taskID');
-  $sql="SELECT taskID FROM taskDetails WHERE taskID = :taskID";
-  $sth=$this->$dbConn->prepare($sql);
-  $sth->blindParam("taskID",$get_id);
-  $result=$sth->execute();
-  return $this->response->withJson($result);
+
+    $get_id=$request->getAttribute('taskID');
+    $sql="SELECT taskID FROM taskDetails WHERE taskID = :taskID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("taskID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
 });
+
 $app->get('/infractions/[{userID}]', function($request, $response, $args){
-  $db=$this->dbConn;
-  $get_id=$request->getAttribute('userID');
-  $sql="SELECT userID FROM infractions WHERE userID = :userID";
-  $sth=$this->$dbConn->prepare($sql);
-  $sth->blindParam("userID",$get_id);
-  $result=$sth->execute();
-  return $this->response->withJson($result);
+
+    $get_id=$request->getAttribute('userID');
+    $sql="SELECT userID FROM infractions WHERE userID = :userID";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$get_id);
+    $result=$sth->execute();
+
+    return $this->response->withJson($result);
 });
 
 $app->map(['GET','POST','PUT','DELETE','PATCH'],'/{routes:.+}',function($req, $res){
