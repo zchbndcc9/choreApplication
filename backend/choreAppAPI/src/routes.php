@@ -102,8 +102,8 @@ $app->post('/tasks/add', function ($request, $response, $args) {
 $app->post('/taskDetails/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO TaskDetails (taskID, taskRating, taskAward, taskTitle, taskDescription, deadline) 
-            VALUES (:taskID, :taskRating, :taskAward, :taskTitle, :taskDescription, :deadline)";
+    $sql = "INSERT INTO TaskDetails (taskID, taskRating, taskAward, taskTitle, taskDescript, deadline) 
+            VALUES (:taskID, :taskRating, :taskAward, :taskTitle, :taskDescript, :deadline)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("taskID",$input['taskID']);
     $sth->bindParam("taskRating",$input['taskRating']);
