@@ -243,7 +243,7 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 
 $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
-  $sql="UPDATE users set edit=userID where edit=:userID";
+  $sql="UPDATE users set edit='userID' where edit=':userID'";
   $sth=$this->$db->prepare($sql);
   $sth->blindParam("edit",$input['edit']);
   $sth->execute();
@@ -253,7 +253,7 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
-  $sql="UPDATE userDetails set edit=userID where edit=:userID";
+  $sql="UPDATE userDetails set edit='userID' where edit=':userID'";
   $sth=$this->$db->prepare($sql);
   $sth->blindParam("edit",$input['edit']);
   $sth->execute();
@@ -263,7 +263,7 @@ $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
 
 $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
-  $sql="UPDATE familyInfo set edit=familyID where edit=:familyID";
+  $sql="UPDATE familyInfo set edit='familyID' where edit=':familyID'";
   $sth=$this->$db->prepare($sql);
   $sth->blindParam("edit",$input['edit']);
   $sth->execute();
@@ -294,7 +294,7 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
 
 $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
-  $sql="UPDATE tasks set edit=userID where edit=:userID";
+  $sql="UPDATE tasks set edit='userID' where edit=':userID'";
   $sth=$this->$db->prepare($sql);
   $sth->blindParam("edit",$input['edit']);
   $sth->execute();
