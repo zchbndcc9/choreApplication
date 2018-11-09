@@ -41,7 +41,16 @@ export class MembersService {
   }
 
   editMember(member: Member) {
-
+    const type = member.isParent ? 'parents' : 'children';
+    const prevState = this.subject.value;
+    const memberIndex = prevState[type].findIndex(mem => mem.id === member.id);
+    const newState = [
+      ...prevState[type].slice(0, memberIndex),
+      member,
+      ...prevState[type].slice(memberIndex + 1)
+    ];
+    console.dir(newState);
+    this.subject.next({...prevState, [type]: newState });
   }
 
   toggleGround(childId: number) {
