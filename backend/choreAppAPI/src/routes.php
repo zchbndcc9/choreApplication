@@ -15,7 +15,14 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
-
+    $app->get('/dbtest',    function ($request, $response, $args) {
+              $db = $this->db;
+              $strToReturn = '';
+              foreach($db->query('select * from Users') as $row) {
+              $strToReturn .= '<br />' . $row['userID'];
+              }
+              return $response->write('' . $strToReturn);
+              });
 ///////////////////////////
 //         POST         //
 //////////////////////////
@@ -23,7 +30,7 @@ $app->add(function ($req, $res, $next) {
 $app->post('/user/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO Users (userID, familyID, lastName, firstName) 
+    $sql = "INSERT INTO Users (userID, familyID, lastName, firstName)
             VALUES (:userID, :familyID, :lastName, :firstName)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
@@ -393,100 +400,95 @@ $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, 
 //         GET          //
 //////////////////////////
 
-$app->get('/users/[{userID}]', function($request, $response, $args){
+$app->get('/users/[{id}]', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('userID');
-    $sql="SELECT userID FROM users WHERE userID = :userID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $result=$sth->execute();
+//    $get_id=$request->getAttribute('userID');
+//          $sql="SELECT * FROM Users WHERE userID = :a;";
+//    $sth=$this->db->prepare($sql);
+//    $sth->bindParam("a",$get_id);
+//    $result=$sth->fetchObject();
+//
+//
+          $sth = $this->db->prepare("SELECT * FROM Users WHERE userID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
+     
 
-    return $this->response->withJson($result);
+   // return $this->response->withJson($sql);
 });
-$app->get('/getfamilyInfo/{familyID}', function($request, $response, $args){
+$app->get('/getfamilyInfo/{id}', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('familyID');
-    $sql="SELECT * FROM FamilyInfo WHERE familyID = :familyID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("familyID",$get_id);
-    $result=$sth->execute();
-
-    return $this->response->withJson($result);
+          $sth = $this->db->prepare("SELECT * FROM FamilyInfo WHERE familyID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
 });
-$app->get('/getTask/{userID}/{taskID}', function($request, $response, $args){
+$app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('userID');
-    $get_task=$request->getAttribute('taskID');
-    $sql="SELECT * FROM Task WHERE userID = :userID and taskID = :taskID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $sth->blindParam("taskID",$get_task);
-    $result=$sth->execute();
-
-    return $this->response->withJson($result);
+          $sth = $this->db->prepare("SELECT * FROM Tasks WHERE userID=:id AND taskID=:id2");
+          $sth->bindParam("id", $args['id']);
+          $sth->bindParam("id2", $args['id2']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
 });
-$app->get('/getTasks/{userID}', function($request, $response, $args){
+$app->get('/getTasks/{id}', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('userID');
-    $sql="SELECT * FROM Tasks WHERE userID = :userID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $strToReturn = '';
-        foreach($db->query($sth) as $row) {
-            $strToReturn .= '<br />' . $row['userID'];
-            $strToReturn .= '<br />' . $row['asigneeID'];
-            $strToReturn .= '<br />' . $row['taskID'];
-            $strToReturn .= '<br />' . $row['status'];
-            $strToReturn .= '<br />' . $row['notified'];
-            
-        }        
-        return $response->write('' . $strToReturn);
-    //$result=$sth->execute();
-
-    return $this->response->withJson($result);
+          $sth = $this->db->prepare("SELECT * FROM Tasks WHERE userID=:id");
+          $sth->bindParam("id", $args['id']);
+       
+          $sth->execute();
+          $userInfo = $sth->fetchAll();
+          return $this->response->withJson($userInfo);
+    
 });
-$app->get('/userDetails/[{userID}]', function($request, $response, $args){
+    $app->get('/getInfractions/{id}', function($request, $response, $args){
+              
+              $sth = $this->db->prepare("SELECT * FROM Infractions WHERE userID=:id");
+              $sth->bindParam("id", $args['id']);
+              
+              $sth->execute();
+              $userInfo = $sth->fetchAll();
+              return $this->response->withJson($userInfo);
+              
+              });
+$app->get('/userDetails/[{id}]', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('userID');
-    $sql="SELECT userID FROM userDetails WHERE userID = :userID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $result=$sth->execute();
-
-    return $this->response->withJson($result);
-});
-
-$app->get('/childDetails/[{userID}]', function($request, $response, $args){
-
-    $get_id=$request->getAttribute('userID');
-    $sql="SELECT userID FROM childDetails WHERE userID = :userID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $result=$sth->execute();
-
-    return $this->response->withJson($result);
+          $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE userID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
 });
 
-$app->get('/taskDetails/[{taskID}]', function($request, $response, $args){
+$app->get('/childDetails/[{id}]', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('taskID');
-    $sql="SELECT taskID FROM taskDetails WHERE taskID = :taskID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("taskID",$get_id);
-    $result=$sth->execute();
-
-    return $this->response->withJson($result);
+          $sth = $this->db->prepare("SELECT * FROM ChildDetails WHERE userID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
 });
 
-$app->get('/infractions/[{userID}]', function($request, $response, $args){
+$app->get('/taskDetails/[{id}]', function($request, $response, $args){
 
-    $get_id=$request->getAttribute('userID');
-    $sql="SELECT userID FROM infractions WHERE userID = :userID";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$get_id);
-    $result=$sth->execute();
+          $sth = $this->db->prepare("SELECT * FROM TaskDetails WHERE taskID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
+});
 
-    return $this->response->withJson($result);
+$app->get('/infractions/[{id}]', function($request, $response, $args){
+
+          $sth = $this->db->prepare("SELECT * FROM Infractions WHERE infracID=:id");
+          $sth->bindParam("id", $args['id']);
+          $sth->execute();
+          $userInfo = $sth->fetchObject();
+          return $this->response->withJson($userInfo);
 });
 
 $app->map(['GET','POST','PUT','DELETE','PATCH'],'/{routes:.+}',function($req, $res){
