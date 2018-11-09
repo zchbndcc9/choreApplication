@@ -1,3 +1,4 @@
+import { Child } from './../../../domain/models/child';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -42,20 +43,18 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  toggleGround(member: Member) {
-
-    if (member.isGrounded) {
+  toggleGround(child: Child) {
+    if (child.isGrounded) {
       // Confirm grounding
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(member.id);
+        this.membersService.toggleGround(child.id);
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(member.id);
+      this.membersService.toggleGround(child.id);
     }
-
   }
 
   openGroundModal() {

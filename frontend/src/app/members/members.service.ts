@@ -2,9 +2,10 @@ import { Member } from 'src/domain/models/member';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
+import { Child } from 'src/domain/models/child';
 export interface State {
   parents: Member[];
-  children: Member[];
+  children: Child[];
 }
 
 const state = {
@@ -13,8 +14,10 @@ const state = {
     {id: 2, familyId: 1,  firstName: 'Jane', lastName: 'Doe', username: 'doewoman', isParent: true}
   ],
   children: [
-    {id: 3, familyId: 1, firstName: 'Jimbo', lastName: 'Doe', username: 'doemango', isParent: false, grounded: false },
-    {id: 4, familyId: 1, firstName: 'Janda', lastName: 'Doe', username: 'doewomfan', isParent: false, grounded: false}
+    {id: 3, familyId: 1, firstName: 'Jimbo', lastName: 'Doe', username: 'doemango', isParent: false,
+    isGrounded: false, rating: 5, tasks: [], infractions: []},
+    {id: 4, familyId: 1, firstName: 'Janda', lastName: 'Doe', username: 'doewomfan',
+    isParent: false, isGrounded: false, rating: 4, tasks: [], infractions: []}
   ]
 };
 
@@ -41,14 +44,14 @@ export class MembersService {
 
   }
 
-  toggleGround(memberId: number) {
+  toggleGround(childId: number) {
     // API call
     const prevState = this.subject.value;
-    const childIndex = prevState.children.findIndex(child => child.id === memberId);
-    const updatedMember  = { ...prevState.children[childIndex], grounded: !prevState.children[childIndex].grounded }
+    const childIndex = prevState.children.findIndex(child => child.id === childId);
+    const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
     const newState = [
       ...prevState.children.slice(0, childIndex),
-      updatedMember,
+      updatedChild,
       ...prevState.children.slice(childIndex + 1)
     ];
     this.subject.next({...prevState, children: newState });
