@@ -21,7 +21,7 @@ $container['logger'] = function ($c) {
 
 $container['db'] = function ($c) {    
     //create a new PDO object for our DB connection    
-    $db = new PDO('mysql:host=127.0.0.1:8889;dbname=Family;charset=utf8mb4', 'db', 'db');    
+    $db = new PDO('mysql:host=127.0.0.1:3306;dbname=Family;charset=utf8mb4', 'db', 'db');    
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
