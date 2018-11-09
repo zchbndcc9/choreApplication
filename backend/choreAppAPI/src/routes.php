@@ -15,7 +15,9 @@ use Slim\Http\Response;
 // $db_name="Family"; // Database name
 // $tbl_name="Users"; // Table name
 // $db = new PDO('mysql:host=127.0.0.1:8889;dbname=Family;charset=utf8mb4', 'root', 'root'); 
-
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+  return $response;
+});
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
@@ -347,5 +349,9 @@ $app->get('/infractions/[{userID}]', function($request, $response, $args){
   $sth->blindParam("userID",$get_id);
   $result=$sth->execute();
   return $this->response->withJson($result);
+});
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
+  $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+  return $handler($req, $res);
 });
 ?>
