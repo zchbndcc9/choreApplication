@@ -271,6 +271,28 @@ $app->put('/familyInfo/edit/[{}]', function($request, $response, $args){
 
 });
 
+$app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
+
+    $input=$request->getParsedBody();
+    $sql="UPDATE childDetails set groundedStatus='TRUE' where userID=':userID'";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$input['userID']);
+    $sth->execute();
+    return $this->response->withJson($input);
+
+});
+
+$app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
+
+    $input=$request->getParsedBody();
+    $sql="UPDATE childDetails set groundedStatus='FALSE' where userID=':userID'";
+    $sth=$this->$db->prepare($sql);
+    $sth->blindParam("userID",$input['userID']);
+    $sth->execute();
+    return $this->response->withJson($input);
+
+});
+
 $app->put('/tasks/edit/[{}]', function($request, $response, $args){
 
     $input=$request->getParsedBody();
