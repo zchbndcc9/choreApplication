@@ -4,6 +4,8 @@ export class Task {
   description: string;
   deadline: Date;
   notified: boolean;
-  rating: number;
+  assignedBy: string;
+  rating?: number;
   award: string;
+  status: string;
 }

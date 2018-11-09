@@ -1,3 +1,4 @@
+import { ViewAllTasksComponent } from './tasks/view-all-tasks/view-all-tasks.component';
 import { LoginComponent } from './login/login.component';
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { MembersComponent } from './members/containers/members.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'new-account', component: NewaccountComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'family/members', component: MembersComponent }
+  { path: 'family/members', component: MembersComponent },
+  { path: 'family/tasks', component: ViewAllTasksComponent}
 ];
 
 @NgModule({

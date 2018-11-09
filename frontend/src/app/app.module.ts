@@ -20,7 +20,6 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
 import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.component';
 import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
-import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 import { MembersComponent } from './members/containers/members.component';
 
@@ -33,7 +32,6 @@ import { MembersComponent } from './members/containers/members.component';
     GroundingAppealComponent,
     NavbarComponent,
     TaskNotificationComponent,
-    TasksDisplayComponent,
     NavbarComponent
   ],
   imports: [
