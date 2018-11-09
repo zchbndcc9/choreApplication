@@ -404,7 +404,7 @@ $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, 
 
 $app->get('/login/{user}/{pass}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM Tasks WHERE userID=:user AND taskID=:pass");
+    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE username=:user AND password=:pass");
     $sth->bindParam("user", $args['user']);
     $sth->bindParam("pass", $args['pass']);
     $sth->execute();
