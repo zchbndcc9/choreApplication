@@ -234,18 +234,18 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 //          PUT         //
 //////////////////////////
 
-$app->put('/users/edit/[{userID}]', function($request, $response, $args){
+$app->group('/users',function() use ($app){
+$app->put('/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
-  $sth=$this->db->prepare($sql);
+  $sth=$this->$db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
   $sth->bindParam("firstName",$input['firstName']);
   $sth->execute();
-
   return $this->response->withJson($input);
-});
+});});
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
