@@ -1,0 +1,8 @@
+.filterBtn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#deadlineWarning {
+  color: darkred;
+}
