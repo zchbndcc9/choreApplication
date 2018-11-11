@@ -29,7 +29,7 @@ $app->get('/dbtest',    function ($request, $response, $args) {
 //         POST         //
 //////////////////////////
 
-$app->post('/user/add', function ($request, $response, $args) {
+$app->post('/users/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
     $sql = "INSERT INTO Users (userID, lastName, firstName)
