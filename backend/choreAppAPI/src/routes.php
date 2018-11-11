@@ -237,7 +237,7 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
@@ -250,7 +250,7 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE userDetails set familyID=:familyID, username=:username, password=:password, userType=:userType where userID=:userID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("username",$input['username']);
@@ -263,7 +263,7 @@ $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
 $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE familyInfo set email=:email, address=:address, phone=:phone, registrationDate=:registrationDate where familyID=:familyID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("email",$input['email']);
   $sth->bindParam("address",$input['address']);
@@ -276,7 +276,7 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
 $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where userID=:userID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("assigneeID",$input['assigneeID']);
   $sth->bindParam("taskID",$input['taskID']);
@@ -288,7 +288,7 @@ $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
 $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE tasks set infracID=:infracID, infracDescript=:infracDescript, notified=:notified where userID=:userID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("infracID",$input['infracID']);
   $sth->bindParam("infracDescript",$input['infracDescript']);
@@ -299,7 +299,7 @@ $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
 $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE tasks set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("taskID",$input['taskID']);
   $sth->bindParam("taskRating",$input['taskRating']);
   $sth->bindParam("taskAward",$input['taskAward']);
@@ -312,7 +312,7 @@ $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
 $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE tasks set familyID=:familyID, rating=:rating, awards=:awards, groundedStatus=:groundedStatus where userID=:userID";
-  $sth=$this->$db->prepare($sql);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("userID",$input['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("rating",$input['rating']);
@@ -324,9 +324,9 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
 
     $input=$request->getParsedBody();
-    $sql="UPDATE childDetails set groundedStatus='TRUE' where userID=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$input['userID']);
+    $sql="UPDATE ChildDetails set groundedStatus='TRUE' where userID=':userID'";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$input['userID']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -335,9 +335,9 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
 
     $input=$request->getParsedBody();
-    $sql="UPDATE childDetails set groundedStatus='FALSE' where userID=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("userID",$input['userID']);
+    $sql="UPDATE ChildDetails set groundedStatus='FALSE' where userID=':userID'";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$input['userID']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -347,8 +347,8 @@ $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set parent='TRUE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -358,8 +358,8 @@ $app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $a
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set child='FALSE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -369,8 +369,8 @@ $app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set known='TRUE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -380,8 +380,8 @@ $app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args)
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set unknown='FALSE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -391,8 +391,8 @@ $app->put('/infractions/edit/known/[{userID}]', function($request, $response, $a
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set known='TRUE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -402,8 +402,8 @@ $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, 
 
     $input=$request->getParsedBody();
     $sql="UPDATE tasks set unknown='FALSE' where edit=':userID'";
-    $sth=$this->$db->prepare($sql);
-    $sth->blindParam("edit",$input['edit']);
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("edit",$input['edit']);
     $sth->execute();
 
     return $this->response->withJson($input);
