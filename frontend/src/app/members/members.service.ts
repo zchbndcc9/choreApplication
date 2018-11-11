@@ -24,21 +24,21 @@ const state = {
 
 @Injectable()
 export class MembersService {
+  constructor(protected httpClient: HttpClient) {}
 
   private subject = new BehaviorSubject<State>(state);
   store = this.subject.asObservable();
 
   protected baseUrl =
-    'http://ec2-18-222-217-233.us-east-2.compute.amazonaws.com:8080/';
+    'http://ec2-18-222-217-233.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: ''
+      'Authorization': ''
     })
   };
 
-  constructor(protected httpClient: HttpClient) {}
 
   retrieveMember(memberId: number) {
 
@@ -51,7 +51,7 @@ export class MembersService {
     this.subject.next({...prevState, [type]: [...prevState[type], member]});
   }
 
-  editMember(member: Member | Child) {
+  editMember(member: Member) {
     const type = member.isParent ? 'parents' : 'children';
     const prevState = this.subject.value;
     const memberIndex = prevState[type].findIndex(mem => mem.id === member.id);
@@ -65,7 +65,7 @@ export class MembersService {
   }
 
   toggleGround(isGrounded: boolean, childId: number) {
-    this.httpClient.put(`${this.baseUrl}/childDetails/${isGrounded ? 'unground' : 'ground'}/${childId}`, this.httpOptions)
+    this.httpClient.put(`${this.baseUrl}/childDetails/edit/${isGrounded ? 'unground' : 'ground'}/${childId}`, this.httpOptions)
     .subscribe(result => {
       const prevState = this.subject.value;
       const childIndex = prevState.children.findIndex(child => child.id === childId);
