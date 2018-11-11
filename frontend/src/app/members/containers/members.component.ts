@@ -13,14 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersComponent implements OnInit {
   parents$ = this.membersService.retrieve<Member[]>('parents');
-  children$ = this.membersService.retrieve<Member[]>('children');
+  children$ = this.membersService.retrieve<Child[]>('children');
 
   constructor(
-    private membersService: MembersService,
-    private modalService: NgbModal
+    protected membersService: MembersService,
+    protected modalService: NgbModal,
   ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
