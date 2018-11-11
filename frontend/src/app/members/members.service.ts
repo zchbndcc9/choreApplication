@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from 'src/domain/models/member';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { pluck, catchError } from 'rxjs/operators';
 import { Child } from 'src/domain/models/child';
 export interface State {
   parents: Member[];
@@ -65,23 +65,30 @@ export class MembersService {
   }
 
   toggleGround(isGrounded: boolean, childId: number) {
-    this.httpClient.put(`${this.baseUrl}/childDetails/edit/${isGrounded ? 'unground' : 'ground'}/${childId}`, this.httpOptions)
-    .subscribe(result => {
-      const prevState = this.subject.value;
-      const childIndex = prevState.children.findIndex(child => child.id === childId);
-      const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
-      const newState = [
-        ...prevState.children.slice(0, childIndex),
-        updatedChild,
-        ...prevState.children.slice(childIndex + 1)
-      ];
-      this.subject.next({...prevState, children: newState });
-    }, error => {
-      console.error(error);
-    });
+    const groundType: string = isGrounded ? 'unground' : 'ground';
+    return this.httpClient.put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
+      .pipe(catchError(this.handleException))
+      .subscribe(result => {
+        const prevState = this.subject.value;
+        const childIndex = prevState.children.findIndex(child => child.id === childId);
+        const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
+        const newState = [
+          ...prevState.children.slice(0, childIndex),
+          updatedChild,
+          ...prevState.children.slice(childIndex + 1)
+        ];
+        this.subject.next({...prevState, children: newState });
+      }, error => {
+        console.error(error);
+      });
   }
 
   retrieve<T>(name: string): Observable<T> {
     return this.store.pipe(pluck(name));
+  }
+
+  protected handleException(exception: any) {
+    const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
+    return Observable.throw(exception);
   }
 }
