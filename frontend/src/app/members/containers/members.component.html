@@ -17,7 +17,7 @@
         <app-member-cardlist
           [members]="children$ | async"
           (edit)="editMember($event)"
-          (ground)="groundMember($event)"
+          (ground)="toggleGround($event)"
         ></app-member-cardlist>
       </div>
       <div clas="vl"></div>

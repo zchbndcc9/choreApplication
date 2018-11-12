@@ -1,11 +1,10 @@
-import { MemberGroundModalComponent } from './../components/member-ground-modal/member-ground-modal.component';
+import { Child } from './../../../domain/models/child';
+import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { pluck } from 'rxjs/operators';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-members',
@@ -14,20 +13,19 @@ import { Template } from '@angular/compiler/src/render3/r3_ast';
 })
 export class MembersComponent implements OnInit {
   parents$ = this.membersService.retrieve<Member[]>('parents');
-  children$ = this.membersService.retrieve<Member[]>('children');
+  children$ = this.membersService.retrieve<Child[]>('children');
 
   constructor(
-    private membersService: MembersService,
-    private modalService: NgbModal
+    protected membersService: MembersService,
+    protected modalService: NgbModal,
   ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
     modal.result.then(newMember => {
-      console.log(newMember);
       this.membersService.addMember(newMember);
     }).catch(error => {
       console.error(error);
@@ -37,23 +35,30 @@ export class MembersComponent implements OnInit {
   editMember(member: Member) {
     const modal = this.openMemberModal(member, true);
 
-    modal.result.then(editedMember => {
+    modal.result.then(updates => {
+      const editedMember = {...member, ...updates };
       this.membersService.editMember(editedMember);
     }).catch(error => {
       console.error(error);
     });
   }
 
-  groundMember(memberId: number) {
-    const modal = this.openGroundModal();
-
-    modal.result.then(result => {
-      this.membersService.groundMember(memberId);
-    });
+  toggleGround(child: Child) {
+    if (!child.isGrounded) {
+      // Confirm grounding
+      const modal = this.openGroundModal();
+      // Submits request if parent confirms
+      modal.result.then(result => {
+        this.membersService.toggleGround(child.isGrounded, child.id);
+      });
+    } else {
+      // Unground child
+      this.membersService.toggleGround(child.isGrounded, child.id);
+    }
   }
 
   openGroundModal() {
-   return this.modalService.open(MemberGroundModalComponent);
+   return this.modalService.open(ParentGroundModalComponent);
   }
 
   openMemberModal(member: Member, alreadyMember: boolean) {

@@ -1,3 +1,4 @@
+import { Child } from 'src/domain/models/child';
 import { Member } from '../../../../domain/models/member';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       <ng-container *ngFor="let member of members; trackBy: retrieveId">
         <app-member-card
           [member]="member"
-          (ground)="groundMember($event)"
+          (ground)="toggleGround($event)"
           (edit)="editMember($event)"></app-member-card>
       </ng-container>
     </div>
@@ -19,24 +20,24 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class MemberCardlistComponent {
 
   @Input()
-  members: Member[];
+  members: Child[];
 
   @Output()
-  edit = new EventEmitter<Member>();
+  edit = new EventEmitter<Child>();
 
   @Output()
-  ground = new EventEmitter<number>();
+  ground = new EventEmitter<Child>();
 
   retrieveId(index: number, member: Member) {
     return member.id;
   }
 
-  editMember(member: Member) {
-    this.edit.emit(member);
+  editMember(child: Child) {
+    this.edit.emit(child);
   }
 
-  groundMember(memberId: number) {
-    this.ground.emit(memberId);
+  toggleGround(child: Child) {
+    this.ground.emit(child);
   }
 
 }

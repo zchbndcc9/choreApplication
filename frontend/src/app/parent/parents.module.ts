@@ -1,3 +1,4 @@
+import { ParentGroundModalComponent } from './components/parent-ground-modal/parent-ground-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ParentComponent } from './containers/parent.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,8 @@ import { ParentsService } from './parents.service';
 
 @NgModule({
   declarations: [
-    ParentComponent
+    ParentComponent,
+    ParentGroundModalComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { ParentsService } from './parents.service';
     ParentsService
   ],
   exports: [
-    ParentComponent
+    ParentComponent,
+    ParentGroundModalComponent
   ]
 })
 

@@ -14,9 +14,9 @@ export class ChildComponent implements OnInit {
   faStarHalfAlt = faStarHalfAlt;
 
   isGrounded = true;
+  tasks: Task[];
 
   constructor(private modalService: NgbModal) { }
-  tasks: Task[];
 
   ngOnInit() {
     this.tasks = [
