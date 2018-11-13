@@ -1,5 +1,6 @@
+import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
+import { ParentsService } from './../../parent/parents.service';
 import { Task } from './../../models/Task';
-import { ParentsService } from './../../../services/parents/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
 import { ActivatedRoute } from '@angular/router';
 import { ChildrenService } from './../../../services/children/children.service';
@@ -93,4 +94,4 @@ export class MembersComponent implements OnInit {
     return member.id;
   }
 }
-()
+
