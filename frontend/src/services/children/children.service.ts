@@ -22,7 +22,7 @@ export class ChildrenService {
   constructor(protected httpClient: HttpClient) {}
 
   getChildren(familyId: number): Observable<Child[]> {
-    return this.httpClient.get<Child[]>(`${this.baseUrl}/family/${familyId}/children`, this.httpOptions)
+    return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions)
     .pipe(catchError(this.handleException));
   }
 
