@@ -23,7 +23,27 @@ export class LoginService {
     protected httpClient: HttpClient
   ) {}
 
-  
+  login(email: string, password: string): Object {
+    let result = this.httpClient.
+    get<Object>(`${this.endpoint}/${email}/${password}`).
+    pipe(catchError(this.handleException));
+    if (result.success === true) {
+      //return an object with true and the token
+    }
+    else {
+      //return an object with false and no token
+    }
+    //this is just a placeholder for now
+    return {};
+  }
+
+  protected handleException(exception: any) {
+    const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
+    alert(message);
+    return Observable.throw(exception);
+  }
+
+
 
 
 
