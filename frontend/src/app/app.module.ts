@@ -22,6 +22,8 @@ import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.co
 import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
 
 import { MembersComponent } from './members/containers/members.component';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import { MembersComponent } from './members/containers/members.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule
   ],
   entryComponents: [
     GroundingAppealComponent
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
