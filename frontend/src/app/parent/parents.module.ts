@@ -4,6 +4,7 @@ import { ParentComponent } from './containers/parent.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParentsService } from './parents.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ParentsService } from './parents.service';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FontAwesomeModule
   ],
   providers: [
