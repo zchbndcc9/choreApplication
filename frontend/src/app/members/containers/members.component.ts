@@ -1,10 +1,16 @@
+import { Task } from './../../models/Task';
+import { ParentsService } from './../../../services/parents/parents.service';
+import { TasksService } from './../../../services/tasks/tasks.service';
+import { ActivatedRoute } from '@angular/router';
+import { ChildrenService } from './../../../services/children/children.service';
 import { Child } from './../../../domain/models/child';
-import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
 import { Component, OnInit } from '@angular/core';
+import { map, mergeMap } from 'rxjs/operators';
+import { from, Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-members',
@@ -12,15 +18,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  parents$ = this.membersService.retrieve<Member[]>('parents');
-  children$ = this.membersService.retrieve<Child[]>('children');
+  parents: Member[];
+  children: Child[];
 
   constructor(
     protected membersService: MembersService,
+    protected childrenService: ChildrenService,
+    protected parentsService: ParentsService,
+    protected tasksService: TasksService,
+    protected route: ActivatedRoute,
     protected modalService: NgbModal,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const famId = params['id'];
+      const getChildren = this.childrenService.getChildren(famId);
+      const getParents = this.parentsService.getParents(famId);
+      forkJoin([getParents, getChildren]).subscribe(results => {
+        this.parents = results[0];
+        this.children = results[1];
+      });
+    });
+  }
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
@@ -73,3 +93,4 @@ export class MembersComponent implements OnInit {
     return member.id;
   }
 }
+()
