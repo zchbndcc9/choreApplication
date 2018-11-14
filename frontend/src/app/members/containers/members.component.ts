@@ -39,39 +39,48 @@ export class MembersComponent implements OnInit {
     });
   }
 
-
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
     modal.result.then(newMember => {
-      this.membersService.addMember(newMember);
+      this.membersService.addMember(newMember).subscribe(_newMember => {
+        const type = _newMember.isParent ? this.parents : this.children;
+        type.push(_newMember);
+      });
     }).catch(error => {
       console.error(error);
     });
   }
 
-  editMember(member: Member) {
+  editMember({member, index}) {
     const modal = this.openMemberModal(member, true);
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(editedMember);
+      this.membersService.editMember(editedMember).subscribe(_member => {
+        const type = _member.isParent ? this.parents : this.children;
+        type[index] = {...type[index], ..._member };
+      });
     }).catch(error => {
       console.error(error);
     });
   }
 
-  toggleGround(child: Child) {
+  toggleGround({child, index}) {
     if (!child.isGrounded) {
       // Confirm grounding
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.id);
+        this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+          this.children[index].isGrounded = !this.children[index].isGrounded;
+        });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.id);
+      this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+        this.children[index].isGrounded = !this.children[index].isGrounded;
+      });
     }
   }
 
