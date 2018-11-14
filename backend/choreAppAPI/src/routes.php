@@ -242,8 +242,8 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
   $sth->bindParam("firstName",$input['firstName']);
-  $sth->execute();
-  return $this->response->withJson($input);
+  $result = $sth->execute();
+  return $this->response->withJson($result);
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
