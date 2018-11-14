@@ -1,4 +1,3 @@
-import { Observable, of, forkJoin } from 'rxjs';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
@@ -10,8 +9,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-members',
