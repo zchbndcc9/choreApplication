@@ -242,7 +242,7 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
   $sth->bindParam("firstName",$input['firstName']);
-  $result = $sth->execute();
+  $sth->execute();
   return $this->response->withJson($input);
 });
 
@@ -250,7 +250,7 @@ $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE UserDetails set familyID=:familyID, username=:username, password=:password, userType=:userType where userID=:userID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth->bindParam("userID",$args['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("username",$input['username']);
   $sth->bindParam("password",$input['password']);
@@ -263,7 +263,7 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE FamilyInfo set email=:email, address=:address, phone=:phone, registrationDate=:registrationDate where familyID=:familyID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("familyID",$input['familyID']);
+  $sth->bindParam("familyID",$args['familyID']);
   $sth->bindParam("email",$input['email']);
   $sth->bindParam("address",$input['address']);
   $sth->bindParam("phone",$input['phone']);
@@ -276,7 +276,7 @@ $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where userID=:userID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth->bindParam("userID",$args['userID']);
   $sth->bindParam("assigneeID",$input['assigneeID']);
   $sth->bindParam("taskID",$input['taskID']);
   $sth->bindParam("status",$input['status']);
@@ -288,7 +288,7 @@ $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE Infractions set infracID=:infracID, infracDescript=:infracDescript, notified=:notified where userID=:userID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth->bindParam("userID",$args['userID']);
   $sth->bindParam("infracID",$input['infracID']);
   $sth->bindParam("infracDescript",$input['infracDescript']);
   $sth->bindParam("notified",$input['notified']);
@@ -299,7 +299,7 @@ $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE TasksDetails set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("taskID",$input['taskID']);
+  $sth->bindParam("taskID",$args['taskID']);
   $sth->bindParam("taskRating",$input['taskRating']);
   $sth->bindParam("taskAward",$input['taskAward']);
   $sth->bindParam("taskTitle",$input['taskTitle']);
@@ -312,7 +312,7 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE ChildDetails set familyID=:familyID, rating=:rating, awards=:awards, groundedStatus=:groundedStatus where userID=:userID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth->bindParam("userID",$args['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("rating",$input['rating']);
   $sth->bindParam("awards",$input['awards']);
@@ -325,7 +325,7 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $input=$request->getParsedBody();
     $sql="UPDATE ChildDetails set groundedStatus='TRUE' where userID=':userID'";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("userID",$input['userID']);
+    $sth->bindParam("userID",$args['userID']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -336,7 +336,7 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $input=$request->getParsedBody();
     $sql="UPDATE ChildDetails set groundedStatus='FALSE' where userID=':userID'";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("userID",$input['userID']);
+    $sth->bindParam("userID",$args['userID']);
     $sth->execute();
 
     return $this->response->withJson($input);
@@ -347,7 +347,7 @@ $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $
     $input=$request->getParsedBody();
     $sql="UPDATE UserDetails set parent='TRUE' where edit=':userID'";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("edit",$args['userID']);
     $sth->execute();
 
     return $this->response->withJson($input);
