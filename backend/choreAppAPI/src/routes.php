@@ -237,8 +237,7 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE Users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
-  $sth=$this->$db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth=$this->db->prepare($sql);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
   $sth->bindParam("firstName",$input['firstName']);
