@@ -238,12 +238,12 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
   $input=$request->getParsedBody();
   $sql="UPDATE Users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
   $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$input['userID']);
+  $sth->bindParam("userID",$args['userID']);
   $sth->bindParam("familyID",$input['familyID']);
   $sth->bindParam("lastName",$input['lastName']);
   $sth->bindParam("firstName",$input['firstName']);
   $result = $sth->execute();
-  return $this->response->withJson($result);
+  return $this->response->withJson($input);
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
