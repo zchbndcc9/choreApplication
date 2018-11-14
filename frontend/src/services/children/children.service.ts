@@ -1,8 +1,9 @@
+import { Task } from '../../domain/models/task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Child } from 'src/domain/models/child';
+import { Child } from '../../domain/models/child';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { toArray, catchError } from 'rxjs/operators';
+import { Observable, forkJoin, from, of } from 'rxjs';
+import { map, mergeMap, catchError, toArray } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,23 @@ export class ChildrenService {
 
   constructor(protected httpClient: HttpClient) {}
 
-  getChildren(familyId: number): Observable<Child[]> {
-    return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions)
-    .pipe(catchError(this.handleException));
+  getChildrenDetailed(familyId: number): Observable<Child[]> {
+    return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions).pipe(
+      mergeMap((children) => {
+        return forkJoin(
+          from(children).pipe(
+            mergeMap((child) => {
+              return this.httpClient.get<Task[]>(`${this.baseUrl}/getTasks/${child.id}`, this.httpOptions).pipe(
+                map((tasks: Task[]) => {
+                  child.tasks = tasks;
+                  return child;
+                })
+              );
+            })
+          )
+        );
+      })
+    );
   }
 
   protected handleException(exception: any) {
