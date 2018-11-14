@@ -25,7 +25,7 @@ export class MembersService {
   }
 
   addMember(member: Member) {
-
+    return this.httpClient.post<Member | Child>(`${this.baseUrl}/`)
   }
 
   editMember(member: Member) {

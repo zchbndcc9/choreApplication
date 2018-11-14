@@ -12,9 +12,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  parents$ = this.membersService.retrieve<Member[]>('parents');
-  children$ = this.membersService.retrieve<Child[]>('children');
-
+  private children: Child[];
+  private parents: Member[];
+  
   constructor(
     protected membersService: MembersService,
     protected modalService: NgbModal,
