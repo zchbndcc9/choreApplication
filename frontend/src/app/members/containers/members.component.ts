@@ -1,6 +1,6 @@
+import { Observable, of, forkJoin } from 'rxjs';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
-import { Task } from './../../models/Task';
 import { TasksService } from './../../../services/tasks/tasks.service';
 import { ActivatedRoute } from '@angular/router';
 import { ChildrenService } from './../../../services/children/children.service';
@@ -9,9 +9,9 @@ import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { map, mergeMap } from 'rxjs/operators';
-import { from, Observable, forkJoin } from 'rxjs';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-members',
@@ -34,14 +34,11 @@ export class MembersComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const famId = params['id'];
-      const getChildren = this.childrenService.getChildren(famId);
-      const getParents = this.parentsService.getParents(famId);
-      forkJoin([getParents, getChildren]).subscribe(results => {
-        this.parents = results[0];
-        this.children = results[1];
-      });
+      this.parentsService.getParents(famId).subscribe(_parents => this.parents = _parents );
+      this.childrenService.getChildrenDetailed(famId).subscribe(_children => this.children = _children);
     });
   }
+
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
