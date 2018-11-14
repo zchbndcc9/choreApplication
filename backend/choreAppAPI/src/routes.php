@@ -461,6 +461,22 @@ $app->get('/getfamilyInfo/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
 });
+$app->get('/getChildren/{id}', function($request, $response, $args){
+
+    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE familyID=:id AND userType = 0");
+    $sth->bindParam("id", $args['id']);
+    $sth->execute();
+    $userInfo = $sth->fetchAll();
+    return $this->response->withJson($userInfo);
+});
+$app->get('/getParents/{id}', function($request, $response, $args){
+
+    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE familyID=:id AND userType = 1");
+    $sth->bindParam("id", $args['id']);
+    $sth->execute();
+    $userInfo = $sth->fetchAll();
+    return $this->response->withJson($userInfo);
+});
 
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
