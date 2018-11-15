@@ -507,7 +507,7 @@ $app->get('/getChildren/{id}', function($request, $response, $args){
 });
 $app->get('/getParents/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE familyID=:id AND userType = 1");
+    $sth = $this->db->prepare("SELECT UD.userID, UD.userType U.lastName, U.firstName FROM UserDetails UD inner join Users U on UD.userID = U.userID WHERE UD.familyID=:id AND UD.userType = 1");
     $sth->bindParam("id", $args['id']);
     $sth->execute();
     $userInfo = $sth->fetchAll();
@@ -517,6 +517,24 @@ $app->get('/getParents/{id}', function($request, $response, $args){
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT * FROM Tasks WHERE userID=:id AND taskID=:id2");
+    $sth->bindParam("id", $args['id']);
+    $sth->bindParam("id2", $args['id2']);
+    $sth->execute();
+    $userInfo = $sth->fetchObject();
+    return $this->response->withJson($userInfo);
+});
+$app->get('/getTaskAmount/{id}', function($request, $response, $args){
+
+    $sth = $this->db->prepare("SELECT count(taskID) FROM Tasks WHERE userID=:id");
+    $sth->bindParam("id", $args['id']);
+    $sth->bindParam("id2", $args['id2']);
+    $sth->execute();
+    $userInfo = $sth->fetchObject();
+    return $this->response->withJson($userInfo);
+});
+$app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
+
+    $sth = $this->db->prepare("SELECT count(infracID) FROM Infractions WHERE userID=:id");
     $sth->bindParam("id", $args['id']);
     $sth->bindParam("id2", $args['id2']);
     $sth->execute();
