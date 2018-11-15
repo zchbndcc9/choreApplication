@@ -29,6 +29,43 @@ $app->get('/dbtest',    function ($request, $response, $args) {
 //         POST         //
 //////////////////////////
 
+$app->post('/familyMember/add', function ($request, $response, $args) {
+
+    $input = $request->getParsedBody();
+    $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
+            VALUES (:familyID, :lastName, :firstName)";
+
+    $sth = $this->db->prepare($users_sql);
+    $sth->bindParam("familyID",$input['familyID']);
+    $sth->bindParam("lastName",$input['lastName']);
+    $sth->bindParam("firstName",$input['firstName']);
+    $sth->execute();
+    $userID = $this->db->lastInsertId();
+    echo $userID;
+
+    $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType) 
+            VALUES (:userID, :familyID, :username, :password, :userType)";
+
+    $stmt = $this->db->prepare($ud_sql);
+    $stmt->bindParam("userID", $userID);
+    $stmt->bindParam("familyID",$input['familyID']);
+    $stmt->bindParam("username",$input['username']);
+    $stmt->bindParam("password",$input['password']);
+    $stmt->bindParam("userType",$input['userType']);
+    $stmt->execute();
+
+    $obj = (object) [
+        'userID' => $userID,
+        'familyID' => $input['familyID'],
+        'lastName' => $input['lastName'],
+        'firstName' => $input['firstName'],
+        'username' => $input['username'],
+        'userType' => $input['userType']
+    ];
+
+    return $this->response->withJson($obj);
+});
+    
 $app->post('/users/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
