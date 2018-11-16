@@ -29,6 +29,28 @@ $app->get('/dbtest',    function ($request, $response, $args) {
 //         POST         //
 //////////////////////////
 
+$app->post('/login', function($request, $response, $args){
+
+    $input = $request->getParsedBody();
+    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE username=:user AND password=:pass");
+    $sth->bindParam("user", $input['user']);
+    $sth->bindParam("pass", $input['pass']);
+    $sth->execute();
+
+    if($sth->execute()) {
+        $count = $sth->rowCount();
+        if($count>=1)
+            $outcome = "true";
+        else
+            $outcome = "false";
+    }
+
+    $obj = (object) [
+        'Success' => $outcome
+    ];
+    return json_encode($obj);
+});
+
 $app->post('/family/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
