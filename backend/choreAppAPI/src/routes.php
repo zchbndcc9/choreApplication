@@ -1,6 +1,6 @@
 <?php
 // Routes for Fam.ly
-
+header("Access-Control-Allow-Origin: *");
 use Slim\Http\Request;
 use Slim\Http\Response;
 
