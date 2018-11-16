@@ -18,8 +18,8 @@
             </span>
           </div>
           <div class="row justify-content-around">
-            <h4 id="num-tasks">{{ members.length }}</h4>
-            <h4 id="num-members">{{ members.length }}</h4>
+            <h4 id="num-tasks">{{ numCompletedTasks }}</h4>
+            <h4 id="num-members">{{ members?.length }}</h4>
           </div>
         </div>
       </div>
@@ -46,36 +46,15 @@
           <h1>Tasks</h1>
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openTaskModal()" data-target="#newTaskModal"><span>New
               Task</span></button>
-          <!-- Modal -->
-          <!-- <div class="modal" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header" id="newTaskHeader">
-                  <h5 class="modal-title" id="newTaskModalTitle">Create a New Task</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-                    <!-- <span aria-hidden="true">&times;</span> -->
-                    <!-- <span><fa-icon [icon]="faWindowClose" size="md"></fa-icon></span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-success">Create Task</button>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <table class="table table-striped rounded">
           <tbody>
-            <tr *ngFor="let task of tasks" [ngSwitch]="task.status">
-              <td>{{ task.name }}</td>
-              <td>{{ task.member }}</td>
-              <td *ngSwitchCase="'In Progress'" align="center"><span class="badge badge-primary">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'Completed'" align="center"><span class="badge badge-success">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'Pending Verification'" align="center"><span class="badge badge-warning">{{ task.status
+            <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
+              <td>{{ task.taskTitle }}</td>
+              <td>{{ task.assigneeID }}</td>
+              <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{ task.status }}</span></td>
+              <td *ngSwitchCase="'pending'" align="center"><span class="badge badge-warning">{{ task.status
                   }}</span></td>
               <td *ngSwitchDefault></td>
             </tr>

@@ -62,7 +62,7 @@ export class NewTaskFormComponent implements OnInit {
     this.task.assigneeID = +this.taskForm.value.assignedTo;
     this.task.taskTitle = this.taskForm.value.title;
     this.task.taskDescript = this.taskForm.value.description;
-    this.task.taskAward = this.taskForm.value.taskAward;
+    this.task.taskAward = this.taskForm.value.award;
     this.task.deadline = this.taskForm.value.deadline;
     this.activeModal.close(this.task);
     this.resetForm();
