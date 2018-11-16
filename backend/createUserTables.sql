@@ -25,7 +25,7 @@ CREATE TABLE FamilyInfo(
 -- Note: userType = true indicates a parent user
 CREATE TABLE UserDetails(
 	userID int NOT NULL,
-    familyID int NOT NULL AUTO_INCREMENT UNIQUE,
+    familyID int NOT NULL,
 	username varchar(255),
 	password varchar(255),
     userType bool,
