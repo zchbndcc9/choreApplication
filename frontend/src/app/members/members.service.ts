@@ -21,13 +21,13 @@ export class MembersService {
 
   addMember(member: Member): Observable<Member> {
     return this.httpClient
-      .post<Member>(`${this.baseUrl}/users/${member.id}`, member, this.httpOptions)
+      .post<Member>(`${this.baseUrl}/users/${member.userID}`, member, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
   editMember(member: Member): Observable<Member | Child> {
     return this.httpClient
-      .post<Member>(`${ this.baseUrl }/users/edit/${member.id}`, member, this.httpOptions)
+      .post<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, member, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
