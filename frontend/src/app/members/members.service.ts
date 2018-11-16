@@ -35,7 +35,7 @@ export class MembersService {
   toggleGround(isGrounded: boolean, childId: number): Observable<Child> {
     const groundType: string = isGrounded ? 'unground' : 'ground';
     return this.httpClient
-      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
+      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${+childId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
