@@ -2,8 +2,8 @@ import { Task } from '../../domain/models/task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Child } from '../../domain/models/child';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, from, of } from 'rxjs';
-import { map, mergeMap, catchError, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,19 +24,15 @@ export class ChildrenService {
 
   getChildrenDetailed(familyId: number): Observable<Child[]> {
     return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions).pipe(
-      mergeMap((children) => {
-        return forkJoin(
-          from(children).pipe(
-            mergeMap((child) => {
-              return this.httpClient.get<Task[]>(`${this.baseUrl}/getTasks/${child.id}`, this.httpOptions).pipe(
-                map((tasks: Task[]) => {
-                  child.tasks = tasks;
-                  return child;
-                })
-              );
-            })
-          )
-        );
+      mergeMap((children, index) => this.httpClient
+      .get<any>(`${this.baseUrl}/getTaskAmount/${children[index].userID}`, this.httpOptions), (oVal, iVal, oIndex) => {
+          oVal[oIndex].tasks = iVal.count;
+          return oVal;
+      }),
+      mergeMap((children, index) => this.httpClient
+        .get<Number>(`${this.baseUrl}/getInfractionsAmount/${children[index].userID}`, this.httpOptions), (oVal, iVal, oIndex) => {
+          oVal[oIndex].infractions = iVal;
+          return oVal;
       })
     );
   }
