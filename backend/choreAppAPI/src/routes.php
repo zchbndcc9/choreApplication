@@ -202,7 +202,11 @@ $app->post('/tasks/add', function ($request, $response, $args) {
     $sth->bindParam("deadline",$input['deadline']);
     $sth->execute();
 
-    return $this->response->withJson($input);
+    $obj = (object) [
+        'taskID' => $userID
+    ];
+
+    return $this->response->withJson($obj);
 });
 
 $app->post('/infractions/add', function ($request, $response, $args) {
