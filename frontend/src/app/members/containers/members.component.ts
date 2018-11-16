@@ -55,8 +55,11 @@ export class MembersComponent implements OnInit {
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
       this.membersService.editMember(editedMember).subscribe(_member => {
-        const type = _member.isParent ? this.parents : this.children;
-        type[index] = {...type[index], ..._member };
+        if (_member.isParent) {
+          this.parents[index] = { ...this.parents[index], ..._member };
+        } else {
+          this.children[index] = {...this.children[index], ..._member };
+        }
       });
     }).catch(error => {
       console.error(error);
@@ -94,7 +97,7 @@ export class MembersComponent implements OnInit {
   }
 
   retrieveID(index: number, member: Member) {
-    return member.id;
+    return member.userID;
   }
 }
 
