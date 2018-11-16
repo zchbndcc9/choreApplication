@@ -475,7 +475,7 @@ $app->get('/getParents/{id}', function($request, $response, $args){
 });
 $app->get('/children/{id}/avg-rating', function($request, $response, $args){
 
-    $sth = $this->db->prepare("select avg(TD.taskRating) From TaskDetails TD inner join Tasks T on T.taskID = TD.taskID where T.userID = :id;");
+    $sth = $this->db->prepare("select avg(TD.taskRating) From TaskDetails TD inner join Tasks T on T.taskID = TD.taskID where T.userID = :id and TD.taskRating > 0;");
     $sth->bindParam("id", $args['id']);
     $sth->execute();
     $userInfo = $sth->fetchObject();
