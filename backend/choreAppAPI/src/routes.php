@@ -41,7 +41,6 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
     $sth->bindParam("firstName",$input['firstName']);
     $sth->execute();
     $userID = $this->db->lastInsertId();
-    echo $userID;
 
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType) 
             VALUES (:userID, :familyID, :username, :password, :userType)";
