@@ -496,7 +496,7 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 
 $app->get('/getTasks/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM Tasks inner join TaskDetails TD on T.taskID = TD.taskID WHERE T.userID=:id");
+    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID WHERE T.userID=:id");
     $sth->bindParam("id", $args['id']);
 
     $sth->execute();
