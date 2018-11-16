@@ -22,7 +22,11 @@ export class TasksDisplayComponent implements OnInit {
   }
 
   filterTasks() {
-    if (this.filterBy === 'all') {
+    if (!this.tasks) {
+      this.tasks = [];
+      this.filteredTasks = [];
+    }
+    else if (this.filterBy === 'all') {
       this.filteredTasks = this.tasks;
     } else if (this.filterBy === 'overdue') {
       this.filteredTasks = this.tasks.filter(task => !this.isWithinDeadline(task.deadline));
