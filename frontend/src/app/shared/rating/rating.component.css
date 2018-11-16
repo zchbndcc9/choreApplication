@@ -1,0 +1,7 @@
+#ratings:hover .rating-star {
+  color: gold !important;
+}
+
+#ratings .rating-star:hover ~ .rating-star {
+  color: black !important;
+}
