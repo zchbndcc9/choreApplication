@@ -4,6 +4,7 @@ import { Child } from '../../domain/models/child';
 import { Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,11 @@ export class ChildrenService {
   getDetails(children: Child[]): Observable<Child> {
     return from(children).pipe(
       mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getTaskAmount/${child.userID}`, this.httpOptions), (child, tasks) => {
-          child.tasks = tasks.count;
-          return child;
-        }),
-    mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getInfractionsAmount/${child.userID}`, this.httpOptions), (child, infractions) => {
-        child.infractions = infractions.count;
+        child.tasks = tasks['count(taskID)'];
+        return child;
+      }),
+      mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getInfractionsAmount/${child.userID}`, this.httpOptions), (child, infractions) => {
+        child.infractions = infractions['count(infractionID)'];
         return child;
       }),
       catchError(this.handleException)
