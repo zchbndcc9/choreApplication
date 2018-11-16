@@ -32,9 +32,9 @@ $app->get('/dbtest',    function ($request, $response, $args) {
 $app->post('/login', function($request, $response, $args){
 
     $input = $request->getParsedBody();
-    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE username=:user AND password=:pass");
-    $sth->bindParam("user", $input['user']);
-    $sth->bindParam("pass", $input['pass']);
+    $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE username=:username AND password=:password");
+    $sth->bindParam("username", $input['username']);
+    $sth->bindParam("password", $input['password']);
     $sth->execute();
 
     if($sth->execute()) {
