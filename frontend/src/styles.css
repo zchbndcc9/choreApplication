@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
 .btn-primary {
   background-color: #2176ff !important;
   border-color: #2176ff !important;
@@ -18,7 +17,8 @@
 .btn-dark {
   background-color: #ff3366 !important;
   border-color: #ff3366 !important;
-=======
+}
+
 body {
   min-height: 100vh;
 }
@@ -95,5 +95,4 @@ nav {
   color: #f6f7f8;
   background: rgb(37,112,233);
   background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
->>>>>>> a9191bae3f666fed4fead83aa2216aa3601636b4
 }

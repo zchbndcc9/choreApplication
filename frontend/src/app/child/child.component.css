@@ -4,9 +4,9 @@
 }
 
 .jumbotron {
-  background: rgb(1,22,39);
-  background: linear-gradient(90deg, rgba(1,22,39,1) 0%, rgba(33,118,255,1) 100%);
-  color: white;
+  color: #f6f7f8;
+  background: rgb(37,112,233);
+  background: linear-gradient(34deg, rgba(37,112,233,1) 9%, rgba(36,182,255,1) 94%);
 }
 
 fa-icon {

@@ -7,7 +7,7 @@
         <div class="card-body">
           <h5 class="card-title" class="card-text">Login</h5>
           <!-- <form> -->
-          <div *ngIf="!this.loginSuccess" class="alert alert-danger" role="alert">
+          <div *ngIf="this.loginSuccess == false" class="alert alert-danger" role="alert">
             Oops! That email and password don't match.
           </div>
           <div class="form-group">
@@ -19,26 +19,16 @@
             <label for="exampleInputPassword1" class="card-text">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" [(ngModel)]="currentUser.password">
           </div>
-          <div class="form-group">
-              <label for="user_loginSuccess">
-                <input type="checkbox"
-                id="account_isEmployee"
-                [(ngModel)]="loginSuccess" /> Success
-              </label>
-            </div>
           <!-- </form> -->
-          <a href ="" class="btn btn-success btn-block" (click)="submit()">Sign In</a>
+          <button class="btn btn-success btn-block" [disabled]="!validate()" (click)="submit()">Sign In</button>
           <div id="lineBreak"></div>
           <h6>New to Fam.ly?</h6>
           <p>Create a new account here.</p>
-          <a href="#" class="btn btn-light btn-block">Create Account</a>
+          <a class="btn btn-light btn-block" [routerLink]="['/new-account']">Create Account</a>
         </div>
       </div>
     </div>
     <div class="col-4">
-      {{currentUser.username}}
-      {{currentUser.password}}
-      {{loginSuccess}}
     </div>
   </div>
 </body>

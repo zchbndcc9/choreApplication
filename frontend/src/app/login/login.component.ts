@@ -1,4 +1,5 @@
-import { PasswordValidator } from './../validators/password.validator';
+import { Observable } from 'rxjs';
+import { LoginService } from '../../services/login/login.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../domain/models/user';
@@ -13,32 +14,33 @@ export class LoginComponent implements OnInit {
   currentUser: User = {};
   loginSuccess: boolean = true;
 
-  users: User[];
-
-  constructor() { }
+  constructor(
+    protected loginService: LoginService,
+    protected router: Router
+  ) { }
 
   ngOnInit() {
-    this.users = [
-      {username: 'samdotgiles@gmail.com', password: 'password'},
-      {username: 'test@test.com', password: 'test'}
-    ];
+  }
+
+  validate() {
+    if (this.currentUser.username
+      && this.currentUser.password) {
+        return true;
+      }
+    return false;
   }
 
   submit(): void {
-    console.log(this.currentUser);
-    let tempUsername = this.currentUser.username;
-    let tempPassword = this.currentUser.password;
-    if (this.users.forEach(function (user) {
-      if (user.username === tempUsername && user.password === tempPassword) {
-        return true;
+    this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
+      if (result.Success == "true") {
+        this.loginSuccess = true;
+        //authenticate
+        this.router.navigateByUrl('/family');
       }
-    })) {
-      this.loginSuccess = true;
-    } else {
-      this.loginSuccess = false;
-    }
-    this.currentUser.username = '';
-    this.currentUser.password = '';
+      else {
+        this.loginSuccess = false;
+      }
+    });
   }
 
 }

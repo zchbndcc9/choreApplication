@@ -1,4 +1,4 @@
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faBell } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   faCog = faCog;
+  faBell = faBell;
 
   constructor() { }
 

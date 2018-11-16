@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewaccountComponent } from './newaccount.component';
+import { GroundingAppealComponent } from './grounding-appeal.component';
 
-describe('NewaccountComponent', () => {
-  let component: NewaccountComponent;
-  let fixture: ComponentFixture<NewaccountComponent>;
+describe('GroundingAppealComponent', () => {
+  let component: GroundingAppealComponent;
+  let fixture: ComponentFixture<GroundingAppealComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewaccountComponent ]
+      declarations: [ GroundingAppealComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewaccountComponent);
+    fixture = TestBed.createComponent(GroundingAppealComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
