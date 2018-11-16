@@ -30,10 +30,15 @@ export class MembersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.children = [];
     this.route.params.subscribe(params => {
       this.famID = params['id'];
       this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
-      this.childrenService.getChildrenDetailed(this.famID).subscribe(_children => this.children = _children);
+      this.childrenService.getChildren(this.famID).subscribe(children => {
+        this.childrenService.getDetails(children).subscribe(child => {
+          this.children.push(child);
+        });
+      });
     });
   }
 
@@ -42,6 +47,7 @@ export class MembersComponent implements OnInit {
 
     modal.result.then((newMember: Member) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
+        console.dir(_newMember);
         const type = _newMember.isParent ? this.parents : this.children;
         type.push(_newMember);
       });
@@ -74,13 +80,13 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+        this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
           this.children[index].isGrounded = !this.children[index].isGrounded;
         });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+      this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
         this.children[index].isGrounded = !this.children[index].isGrounded;
       });
     }

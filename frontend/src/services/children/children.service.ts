@@ -2,8 +2,8 @@ import { Task } from '../../domain/models/task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Child } from '../../domain/models/child';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, of, from } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,18 +22,23 @@ export class ChildrenService {
 
   constructor(protected httpClient: HttpClient) {}
 
-  getChildrenDetailed(familyId: number): Observable<Child[]> {
+  getChildren(familyId: number): Observable<Child[]> {
     return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions).pipe(
-      mergeMap((children, index) => this.httpClient
-        .get<any>(`${this.baseUrl}/getTaskAmount/${children[index].userID}`, this.httpOptions), (children, tasks, index) => {
-          children[index].tasks = tasks.count;
-          return children;
+      catchError(this.handleException)
+    );
+  }
+
+  getDetails(children: Child[]): Observable<Child> {
+    return from(children).pipe(
+      mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getTaskAmount/${child.userID}`, this.httpOptions), (child, tasks) => {
+          child.tasks = tasks.count;
+          return child;
+        }),
+    mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getInfractionsAmount/${child.userID}`, this.httpOptions), (child, infractions) => {
+        child.infractions = infractions.count;
+        return child;
       }),
-      mergeMap((children, index) => this.httpClient
-        .get<any>(`${this.baseUrl}/getInfractionsAmount/${children[index].userID}`, this.httpOptions), (children, infractions, index) => {
-          children[index].infractions = infractions.count;
-          return children;
-      })
+      catchError(this.handleException)
     );
   }
 
