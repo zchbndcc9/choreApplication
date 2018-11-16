@@ -393,7 +393,7 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
 });
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus=1 where userID=:userID";
+    $sql="UPDATE ChildDetails set groundedStatus=:groundedStatus where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("groundedStatus",$input['groundedStatus']);
@@ -402,7 +402,7 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
 });
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus=0 where userID=:userID";
+    $sql="UPDATE ChildDetails set groundedStatus=groundedStatus where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("groundedStatus",$input['groundedStatus']);
@@ -411,7 +411,7 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
 });
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set userType=1 where userID=:userID";
+    $sql="UPDATE UserDetails set userType=:userType where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("userType",$input['userType']);
@@ -420,7 +420,7 @@ $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $
 });
 $app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set userType=0 where userID=:userID";
+    $sql="UPDATE UserDetails set userType=:userType where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("userType",$input['userType']);
@@ -429,7 +429,7 @@ $app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $a
 });
 $app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set notified=1 where userID=:userID";
+    $sql="UPDATE Tasks set notified=:notified where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("notified",$input['notified']);
@@ -438,7 +438,7 @@ $app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
 });
 $app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set notified=0 where userID=:userID";
+    $sql="UPDATE Tasks set notified=:notified where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("notified",$input['notified']);
@@ -447,7 +447,7 @@ $app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args)
 });
 $app->put('/infractions/edit/known/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set notified=1 where userID=:userID";
+    $sql="UPDATE Infractions set notified=:notified where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("notified",$input['notified']);
@@ -456,7 +456,7 @@ $app->put('/infractions/edit/known/[{userID}]', function($request, $response, $a
 });
 $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set notified=0 where userID=:userID";
+    $sql="UPDATE Infractions set notified=:notified where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->bindParam("notified",$input['notified']);
