@@ -78,7 +78,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     VALUES (:userID, :familyID, :email, :password, true";
 
     $sth = $this->db->prepare($ud_sql);
-    $sth->bindParam("familyID",$userID);
+    $sth->bindParam("userID",$userID);
     $sth->bindParam("familyID",$userID);
     $sth->bindParam("username",$input['email']);
     $sth->bindParam("password",$input['password']);
