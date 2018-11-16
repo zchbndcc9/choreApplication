@@ -14,11 +14,18 @@
     <div class="row">
       <div class="col-9" id="children-section">
         <h1>Children</h1>
-        <app-member-cardlist
-          [members]="children"
-          (edit)="editMember($event)"
-          (ground)="toggleGround($event)"
-        ></app-member-cardlist>
+        <ng-container *ngIf="children.length === 0; else cardList">
+          <div class="container">
+            <div class="alert alert-primary">No Children yet. Add your kids!</div>
+          </div>
+        </ng-container>
+        <ng-template #cardList>
+          <app-member-cardlist
+            [members]="children"
+            (edit)="editMember($event)"
+            (ground)="toggleGround($event)"
+          ></app-member-cardlist>
+        </ng-template>
       </div>
       <div clas="vl"></div>
       <div class="col-3" id="parent-section">
