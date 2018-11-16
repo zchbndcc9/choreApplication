@@ -392,90 +392,75 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
   return $this->response->withJson($input);
 });
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus='TRUE' where userID=':userID'";
+    $sql="UPDATE ChildDetails set groundedStatus=1 where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("groundedStatus",$input['groundedStatus']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus='FALSE' where userID=':userID'";
+    $sql="UPDATE ChildDetails set groundedStatus=0 where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("groundedStatus",$input['groundedStatus']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set parent='TRUE' where edit=':userID'";
+    $sql="UPDATE UserDetails set userType=1 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$args['userID']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("userType",$input['userType']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set child='FALSE' where edit=':userID'";
+    $sql="UPDATE UserDetails set userType=0 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("userType",$input['userType']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set known='TRUE' where edit=':userID'";
+    $sql="UPDATE Tasks set notified=1 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set unknown='FALSE' where edit=':userID'";
+    $sql="UPDATE Tasks set notified=0 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/infractions/edit/known/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set known='TRUE' where edit=':userID'";
+    $sql="UPDATE Infractions set notified=1 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
-
 $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, $args){
-
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set unknown='FALSE' where edit=':userID'";
+    $sql="UPDATE Infractions set notified=0 where userID=:userID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("edit",$input['edit']);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-
     return $this->response->withJson($input);
 });
 
