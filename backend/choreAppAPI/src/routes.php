@@ -568,7 +568,6 @@ $app->get('/getTaskAmount/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT count(taskID) FROM Tasks WHERE userID=:id");
     $sth->bindParam("id", $args['id']);
-    $sth->bindParam("id2", $args['id2']);
     $sth->execute();
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
@@ -577,7 +576,6 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT count(infracID) FROM Infractions WHERE userID=:id");
     $sth->bindParam("id", $args['id']);
-    $sth->bindParam("id2", $args['id2']);
     $sth->execute();
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
