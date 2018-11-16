@@ -1,5 +1,5 @@
 import { Child } from './../../../domain/models/child';
-import { Task } from '../../../domain/models/task';
+import { Task } from '../../../domain/models';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,6 +22,7 @@ export class NewTaskFormComponent implements OnInit {
   ngOnInit() {
     this.children = [
       {
+        userID: 5,
         username: 'one',
         firstName: 'sam',
         lastName: 'giles',
@@ -32,7 +33,8 @@ export class NewTaskFormComponent implements OnInit {
         tasks: []
       },
       {
-        username: 'one',
+        userID: 12,
+        username: 'two',
         firstName: 'giles',
         lastName: 'sam',
         isParent: false,
@@ -42,7 +44,6 @@ export class NewTaskFormComponent implements OnInit {
         tasks: []
       }
     ];
-    console.log(this.children);
 
     this.createForm();
   }
@@ -52,12 +53,18 @@ export class NewTaskFormComponent implements OnInit {
       title: [this.task.taskTitle || '', Validators.required],
       description: [this.task.taskDescript || '', Validators.required],
       deadline: [this.task.deadline || '00-00-0000', Validators.required],
-      award: [this.task.taskAward || '', Validators.required]
+      award: [this.task.taskAward || '', Validators.required],
+      assignedTo: [this.task.assigneeID || '', Validators.required]
     });
   }
 
   processTask() {
-    this.activeModal.close(this.taskForm.value);
+    this.task.assigneeID = +this.taskForm.value.assignedTo;
+    this.task.taskTitle = this.taskForm.value.title;
+    this.task.taskDescript = this.taskForm.value.description;
+    this.task.taskAward = this.taskForm.value.taskAward;
+    this.task.deadline = this.taskForm.value.deadline;
+    this.activeModal.close(this.task);
     this.resetForm();
   }
 

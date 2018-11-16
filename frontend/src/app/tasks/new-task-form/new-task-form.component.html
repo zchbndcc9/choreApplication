@@ -45,10 +45,10 @@
     </div>
     <div class="form-row">
       <div class="form-group col">
-        <label for="assignToChild"><span class="text-muted">Assign Task To...</span></label>
-        <select class="form-control" id="assignToChild">
+        <label for="assignedTo"><span class="text-muted">Assign Task To...</span></label>
+        <select class="form-control" formControlName="assignedTo" id="assignedTo">
           <option selected="true">Choose a child</option>
-          <option *ngFor="let child of children">{{ child.firstName + ' ' + child.lastName }}</option>
+          <option *ngFor="let child of children" value="{{child.userID}}">{{ child.firstName + ' ' + child.lastName }}</option>
         </select>
       </div>
     </div>

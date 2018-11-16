@@ -3,7 +3,7 @@ export class Task {
   assigneeID?: number;
   taskID?: number;
   status?: string;
-  notified?: boolean;
+  notified?: number;
   taskRating?: number;
   taskAward?: string;
   taskTitle?: string;

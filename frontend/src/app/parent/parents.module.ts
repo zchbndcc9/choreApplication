@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParentsService } from './parents.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TasksService } from 'src/services/tasks/tasks.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     FontAwesomeModule
   ],
   providers: [
-    ParentsService
+    ParentsService,
+    TasksService
   ],
   exports: [
     ParentComponent,
