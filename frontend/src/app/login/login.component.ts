@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
-      if (result.Success) {
+      if (result.Success == "true") {
         this.loginSuccess = true;
         //authenticate
         this.router.navigateByUrl('/family');

@@ -15,7 +15,7 @@ export class LoginService {
   protected httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': ''
+      'Authorization': ''
     })
   };
 
@@ -24,8 +24,12 @@ export class LoginService {
   ) {}
 
   login(email: string, password: string): Observable<any> {
+    let body = {
+      username: email,
+      password: password
+    }
     return this.httpClient.
-    get<any>(`${this.endpoint}/login/${email}/${password}`).
+    post<any>(`${this.endpoint}/login`, body, this.httpOptions).
     pipe(catchError(this.handleException));
   }
 

@@ -13,8 +13,7 @@ export class NewAccountService {
 
   protected httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': ''
+      'Content-Type': 'application/json'
     })
   };
 
@@ -29,12 +28,13 @@ export class NewAccountService {
       var address = `${address1}, ${city}, ${state} ${zip}`;
     }
     let body = {
-      'firstName': firstName,
-      'lastName': lastName,
-      'address': address,
-      'email': email,
-      'password': password
+      "firstName": firstName,
+      "lastName": lastName,
+      "address": address,
+      "email": email,
+      "password": password
     };
+    console.log(body);
     return this.httpClient.
       post<any>(`${this.endpoint}/family/add`, body, this.httpOptions).
       pipe(catchError(this.handleException));
