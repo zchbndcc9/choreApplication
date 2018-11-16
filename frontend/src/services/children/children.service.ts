@@ -25,7 +25,7 @@ export class ChildrenService {
   getChildrenDetailed(familyId: number): Observable<Child[]> {
     return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions).pipe(
       mergeMap((children, index) => this.httpClient
-      .get<any>(`${this.baseUrl}/getTaskAmount/${children[index].userID}`, this.httpOptions), (oVal, iVal, oIndex) => {
+        .get<any>(`${this.baseUrl}/getTaskAmount/${children[index].userID}`, this.httpOptions), (oVal, iVal, oIndex) => {
           oVal[oIndex].tasks = iVal.count;
           return oVal;
       }),
