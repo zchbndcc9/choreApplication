@@ -1,33 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from 'src/domain/models/member';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { pluck, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Child } from 'src/domain/models/child';
-export interface State {
-  parents: Member[];
-  children: Child[];
-}
-
-const state = {
-  parents: [
-    {id: 1, familyId: 1,  firstName: 'John', lastName: 'Doe', username: 'doeman', isParent: true},
-    {id: 2, familyId: 1,  firstName: 'Jane', lastName: 'Doe', username: 'doewoman', isParent: true}
-  ],
-  children: [
-    {id: 3, familyId: 1, firstName: 'Jimbo', lastName: 'Doe', username: 'doemango', isParent: false,
-    isGrounded: false, rating: 5, tasks: [], infractions: []},
-    {id: 4, familyId: 1, firstName: 'Janda', lastName: 'Doe', username: 'doewomfan',
-    isParent: false, isGrounded: false, rating: 4, tasks: [], infractions: []}
-  ]
-};
 
 @Injectable()
 export class MembersService {
   constructor(protected httpClient: HttpClient) {}
-
-  private subject = new BehaviorSubject<State>(state);
-  store = this.subject.asObservable();
 
   protected baseUrl =
     'http://ec2-18-222-217-233.us-east-2.compute.amazonaws.com:8080';
@@ -39,18 +19,19 @@ export class MembersService {
     })
   };
 
-
-  retrieveMember(memberId: number) {
-
+  addMember(member: Member): Observable<Member> {
+    return this.httpClient
+      .post<Member>(`${this.baseUrl}/users/${member.userID}`, member, this.httpOptions)
+      .pipe(catchError(this.handleException));
   }
 
-  addMember(member: Member) {
-    // API call
-    const type = member.isParent ? 'parents' : 'children';
-    const prevState = this.subject.value;
-    this.subject.next({...prevState, [type]: [...prevState[type], member]});
+  editMember(member: Member): Observable<Member | Child> {
+    return this.httpClient
+      .post<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, member, this.httpOptions)
+      .pipe(catchError(this.handleException));
   }
 
+<<<<<<< HEAD
   editMember(member: Member) {
     const type = member.isParent ? 'parents' : 'children';
     const prevState = this.subject.value;
@@ -65,26 +46,13 @@ export class MembersService {
   }
 
   toggleGround(isGrounded: boolean, childId: number) {
+=======
+  toggleGround(isGrounded: boolean, childId: number): Observable<Child> {
+>>>>>>> 44f9b0f5f326dd399503477846c151b092f7cf23
     const groundType: string = isGrounded ? 'unground' : 'ground';
-    return this.httpClient.put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
-      .pipe(catchError(this.handleException))
-      .subscribe(result => {
-        const prevState = this.subject.value;
-        const childIndex = prevState.children.findIndex(child => child.id === childId);
-        const updatedChild  = { ...prevState.children[childIndex], isGrounded: !prevState.children[childIndex].isGrounded };
-        const newState = [
-          ...prevState.children.slice(0, childIndex),
-          updatedChild,
-          ...prevState.children.slice(childIndex + 1)
-        ];
-        this.subject.next({...prevState, children: newState });
-      }, error => {
-        console.error(error);
-      });
-  }
-
-  retrieve<T>(name: string): Observable<T> {
-    return this.store.pipe(pluck(name));
+    return this.httpClient
+      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
   }
 
   protected handleException(exception: any) {

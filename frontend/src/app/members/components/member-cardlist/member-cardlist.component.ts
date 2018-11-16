@@ -7,11 +7,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./member-cardlist.component.css'],
   template: `
     <div class="card-columns">
-      <ng-container *ngFor="let member of members; trackBy: retrieveId">
+      <ng-container *ngFor="let member of members; let i = index; trackBy: retrieveId">
         <app-member-card
           [member]="member"
           (ground)="toggleGround($event)"
-          (edit)="editMember($event)"></app-member-card>
+          (edit)="editMember($event, i)"></app-member-card>
       </ng-container>
     </div>
   `
@@ -23,17 +23,18 @@ export class MemberCardlistComponent {
   members: Child[];
 
   @Output()
-  edit = new EventEmitter<Child>();
+  edit = new EventEmitter<any>();
 
   @Output()
   ground = new EventEmitter<Child>();
 
   retrieveId(index: number, member: Member) {
-    return member.id;
+    return member.userID;
   }
 
-  editMember(child: Child) {
-    this.edit.emit(child);
+  editMember(child: Child, index: number) {
+    const pair: any = { child, index };
+    this.edit.emit(pair);
   }
 
   toggleGround(child: Child) {

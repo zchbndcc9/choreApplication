@@ -1,10 +1,14 @@
-import { Child } from './../../../domain/models/child';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
+import { ParentsService } from './../../parent/parents.service';
+import { TasksService } from './../../../services/tasks/tasks.service';
+import { ActivatedRoute } from '@angular/router';
+import { ChildrenService } from './../../../services/children/children.service';
+import { Child } from './../../../domain/models/child';
 import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-members',
@@ -12,48 +16,71 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  parents$ = this.membersService.retrieve<Member[]>('parents');
-  children$ = this.membersService.retrieve<Child[]>('children');
+  parents: Member[];
+  children: Child[];
 
   constructor(
     protected membersService: MembersService,
+    protected childrenService: ChildrenService,
+    protected parentsService: ParentsService,
+    protected tasksService: TasksService,
+    protected route: ActivatedRoute,
     protected modalService: NgbModal,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const famId = params['id'];
+      this.parentsService.getParents(famId).subscribe(_parents => this.parents = _parents );
+      this.childrenService.getChildrenDetailed(famId).subscribe(_children => this.children = _children);
+    });
+  }
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
     modal.result.then(newMember => {
-      this.membersService.addMember(newMember);
+      this.membersService.addMember(newMember).subscribe(_newMember => {
+        const type = _newMember.isParent ? this.parents : this.children;
+        type.push(_newMember);
+      });
     }).catch(error => {
       console.error(error);
     });
   }
 
-  editMember(member: Member) {
+  editMember({member, index}) {
     const modal = this.openMemberModal(member, true);
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(editedMember);
+      this.membersService.editMember(editedMember).subscribe(_member => {
+        if (_member.isParent) {
+          this.parents[index] = { ...this.parents[index], ..._member };
+        } else {
+          this.children[index] = {...this.children[index], ..._member };
+        }
+      });
     }).catch(error => {
       console.error(error);
     });
   }
 
-  toggleGround(child: Child) {
+  toggleGround({child, index}) {
     if (!child.isGrounded) {
       // Confirm grounding
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.id);
+        this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+          this.children[index].isGrounded = !this.children[index].isGrounded;
+        });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.id);
+      this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+        this.children[index].isGrounded = !this.children[index].isGrounded;
+      });
     }
   }
 
@@ -70,6 +97,7 @@ export class MembersComponent implements OnInit {
   }
 
   retrieveID(index: number, member: Member) {
-    return member.id;
+    return member.userID;
   }
 }
+
