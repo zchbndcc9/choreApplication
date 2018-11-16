@@ -49,10 +49,10 @@ export class NewTaskFormComponent implements OnInit {
 
   createForm() {
     this.taskForm = this.fb.group({
-      title: [this.task.title || '', Validators.required],
-      description: [this.task.description || '', Validators.required],
+      title: [this.task.taskTitle || '', Validators.required],
+      description: [this.task.taskDescript || '', Validators.required],
       deadline: [this.task.deadline || '00-00-0000', Validators.required],
-      award: [this.task.award || '', Validators.required]
+      award: [this.task.taskAward || '', Validators.required]
     });
   }
 

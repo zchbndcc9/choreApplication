@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from 'src/app/models/Task';
+import { Task } from '../../../domain/models';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -31,10 +31,10 @@ export class TasksDisplayComponent implements OnInit {
     }
 
     this.filteredTasks = this.filteredTasks.sort((t1, t2) => {
-      if (t1.title < t2.title) {
+      if (t1.taskTitle < t2.taskTitle) {
         return -1;
       }
-      if (t1.title > t2.title) {
+      if (t1.taskTitle > t2.taskTitle) {
         return 1;
       }
       return 0;

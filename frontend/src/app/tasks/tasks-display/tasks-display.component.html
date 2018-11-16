@@ -58,7 +58,7 @@
       <h5 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="true"
           attr.aria-controls="collapse{{i}}">
-          {{task.title}}
+          {{task?.taskTitle}}
         </button>
         <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
         <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
@@ -71,9 +71,9 @@
 
     <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordion">
       <div class="card-body">
-        <b>{{task.description}}</b>
+        <b>{{task?.taskDescript}}</b>
         <hr />
-        <i>Assigned by: {{task.assignedBy}}</i>
+        <i>Assigned by: {{task.assigneeID}}</i>
         <div></div>
         <i>Due by: {{task.deadline | date}}</i>
       </div>
