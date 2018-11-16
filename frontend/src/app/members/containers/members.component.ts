@@ -18,6 +18,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class MembersComponent implements OnInit {
   parents: Member[];
   children: Child[];
+  famID: number;
 
   constructor(
     protected membersService: MembersService,
@@ -29,18 +30,24 @@ export class MembersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.children = [];
     this.route.params.subscribe(params => {
-      const famId = params['id'];
-      this.parentsService.getParents(famId).subscribe(_parents => this.parents = _parents );
-      this.childrenService.getChildrenDetailed(famId).subscribe(_children => this.children = _children);
+      this.famID = params['id'];
+      this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
+      this.childrenService.getChildren(this.famID).subscribe(children => {
+        this.childrenService.getDetails(children).subscribe(child => {
+          this.children.push(child);
+        });
+      });
     });
   }
 
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
-    modal.result.then(newMember => {
-      this.membersService.addMember(newMember).subscribe(_newMember => {
+    modal.result.then((newMember: Member) => {
+      this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
+        console.dir(_newMember);
         const type = _newMember.isParent ? this.parents : this.children;
         type.push(_newMember);
       });
@@ -54,7 +61,8 @@ export class MembersComponent implements OnInit {
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(editedMember).subscribe(_member => {
+      this.membersService.editMember(editedMember).subscribe((_member: Member) => {
+        console.log(_member);
         if (_member.isParent) {
           this.parents[index] = { ...this.parents[index], ..._member };
         } else {
@@ -72,13 +80,13 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+        this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
           this.children[index].isGrounded = !this.children[index].isGrounded;
         });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.id).subscribe(ground => {
+      this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
         this.children[index].isGrounded = !this.children[index].isGrounded;
       });
     }

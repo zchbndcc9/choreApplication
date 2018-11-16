@@ -19,15 +19,16 @@ export class MembersService {
     })
   };
 
-  addMember(member: Member): Observable<Member> {
+  addMember(famID: number, member: Member): Observable<Member> {
+    const req = {...member, familyID: famID, userType: member.isParent ? '1' : '0'};
     return this.httpClient
-      .post<Member>(`${this.baseUrl}/users/${member.userID}`, member, this.httpOptions)
+      .post<Member>(`${this.baseUrl}/familyMember/add`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
   editMember(member: Member): Observable<Member | Child> {
     return this.httpClient
-      .post<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, member, this.httpOptions)
+      .put<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, member, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
@@ -51,7 +52,7 @@ export class MembersService {
 >>>>>>> 44f9b0f5f326dd399503477846c151b092f7cf23
     const groundType: string = isGrounded ? 'unground' : 'ground';
     return this.httpClient
-      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
+      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${+childId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
