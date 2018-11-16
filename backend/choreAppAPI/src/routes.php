@@ -513,7 +513,14 @@ $app->get('/getParents/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchAll();
     return $this->response->withJson($userInfo);
 });
+$app->get('/children/{id}/avg-rating', function($request, $response, $args){
 
+    $sth = $this->db->prepare("select avg(TD.taskRating) From TaskDetails TD inner join Tasks T on T.taskID = TD.taskID where T.userID = :id;");
+    $sth->bindParam("id", $args['id']);
+    $sth->execute();
+    $userInfo = $sth->fetchObject();
+    return $this->response->withJson($userInfo);
+});
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT * FROM Tasks WHERE userID=:id AND taskID=:id2");
