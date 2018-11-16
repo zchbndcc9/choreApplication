@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { LoginService } from '../../services/login/login.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   users: User[];
 
   constructor(
-    loginService: LoginService
+    protected loginService: LoginService,
+    protected router: Router
   ) { }
 
   ngOnInit() {
@@ -35,22 +37,17 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    let tempUsername = this.currentUser.username;
-    let tempPassword = this.currentUser.password;
-
-    let foundUser = false;
-    this.users.forEach(function (user) {
-      if (user.username === tempUsername && user.password === tempPassword) {
-        foundUser = true;
+    this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
+      //if (result.Success === true) {
+      if (false) {
+        this.loginSuccess = true;
+        //authenticate
+        this.router.navigateByUrl('/family');
+      }
+      else {
+        this.loginSuccess = false;
       }
     });
-    if (foundUser) {
-      this.loginSuccess = true;
-    } else {
-      this.loginSuccess = false;
-    }
-    this.currentUser.username = '';
-    this.currentUser.password = '';
   }
 
 }

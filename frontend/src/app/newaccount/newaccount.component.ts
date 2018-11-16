@@ -1,3 +1,4 @@
+import { NewAccountService } from './../../services/new-account/new-account.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newaccount.component.css']
 })
 export class NewaccountComponent implements OnInit {
-  //account: Account = {};
   firstName: string;
   lastName: string;
   address1: string;
@@ -18,7 +18,9 @@ export class NewaccountComponent implements OnInit {
   password1: string;
   password2: string;
 
-  constructor() { }
+  constructor(
+    protected newAccountService: NewAccountService
+  ) { }
 
   ngOnInit() {
   }
@@ -36,20 +38,10 @@ export class NewaccountComponent implements OnInit {
   }
 
   createAccount() {
-    // this.account.firstName = this.firstName;
-    // this.account.lastName = this.lastName;
-    // if (this.address2) {
-    //   this.account.address = `${this.address1} #${this.address2}, ${this.city}, ${this.state} ${this.zip}`;
-    // } else {
-    //   this.account.address = `${this.address1}, ${this.city}, ${this.state} ${this.zip}`;
+    let result = this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2);
+    // if (result.Success === true ) {
+    //   //create new account and sign into that account
     // }
-    // this.account.email = this.email;
-    // this.account.password = this.password2;
-    // console.log(this.account.firstName);
-    // console.log(this.account.lastName);
-    // console.log(this.account.address);
-    // console.log(this.account.email);
-    // console.log(this.account.password);
   }
 
 }
