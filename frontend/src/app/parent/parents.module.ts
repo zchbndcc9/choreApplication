@@ -7,6 +7,7 @@ import { ParentsService } from './parents.service';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TasksService } from 'src/services/tasks/tasks.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TasksService } from 'src/services/tasks/tasks.service';
     FontAwesomeModule,
     SharedModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   providers: [
     ParentsService,
