@@ -29,7 +29,7 @@ export class MemberCardlistComponent {
   ground = new EventEmitter<Child>();
 
   retrieveId(index: number, member: Member) {
-    return member.id;
+    return member.userID;
   }
 
   editMember(child: Child, index: number) {
