@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login/login.service';
 import { NewAccountService } from './../../services/new-account/new-account.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -21,6 +22,7 @@ export class NewaccountComponent implements OnInit {
 
   constructor(
     protected newAccountService: NewAccountService,
+    protected loginService: LoginService,
     protected router: Router
   ) { }
 
@@ -42,9 +44,18 @@ export class NewaccountComponent implements OnInit {
   createAccount() {
     this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2).subscribe(result => {
       if (result.Success == "true") {
-        //create new account and sign into that account
-        //navigate to the family page
-        this.router.navigateByUrl('/family');
+        this.loginService.login(this.email, this.password2).subscribe(result => {
+          if (result.Success == "true") {
+            //authenticate
+            this.router.navigateByUrl('/family');
+          }
+          else {
+            alert("There was an error logging in");
+          }
+        });
+      }
+      else {
+        alert("There was an error creating an account");
       }
     });
   }
