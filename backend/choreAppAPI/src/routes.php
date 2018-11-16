@@ -203,7 +203,7 @@ $app->post('/tasks/add', function ($request, $response, $args) {
     $sth->execute();
 
     $obj = (object) [
-        'taskID' => $userID
+        'taskID' => $taskID
     ];
 
     return $this->response->withJson($obj);
