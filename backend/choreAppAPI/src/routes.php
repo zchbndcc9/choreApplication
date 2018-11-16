@@ -29,40 +29,55 @@ $app->get('/dbtest',    function ($request, $response, $args) {
 //         POST         //
 //////////////////////////
 
-// /family/add
+$app->post('/family/add', function ($request, $response, $args) {
 
-// {
-// firstName : 
-// lastName :
-// address:
-// email:
-// password:
-// }
+    $input = $request->getParsedBody();
+    $family_sql = "INSERT INTO FamilyInfo (email, address, phone, registrationDate)
+            VALUES (:email, :address, 2146758862, CURDATE())";
 
-// $app->post('/family/add', function ($request, $response, $args) {
+    $sth = $this->db->prepare($family_sql);
+    $sth->bindParam("email",$input['email']);
+    $sth->bindParam("address",$input['address']);
+    $sth->execute();
+    $familyID = $this->db->lastInsertId();
 
-//     $input = $request->getParsedBody();
-//     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
-//             VALUES (:familyID, :lastName, :firstName)";
 
-//     $sth = $this->db->prepare($users_sql);
-//     $sth->bindParam("familyID",$input['familyID']);
-//     $sth->bindParam("lastName",$input['lastName']);
-//     $sth->bindParam("firstName",$input['firstName']);
-//     $sth->execute();
-//     $userID = $this->db->lastInsertId();
+    $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
+    VALUES (:familyID, :lastName, :firstName";
 
-//     $obj = (object) [
-//         'userID' => $userID,
-//         'familyID' => $input['familyID'],
-//         'lastName' => $input['lastName'],
-//         'firstName' => $input['firstName'],
-//         'username' => $input['username'],
-//         'userType' => $input['userType']
-//     ];
+    $sth = $this->db->prepare($users_sql);
+    $sth->bindParam("familyID",$familyID);
+    $sth->bindParam("lastName",$input['lastName']);
+    $sth->bindParam("firstName",$input['firstName']);
+    $sth->execute();
+    $userID = $this->db->lastInsertId();
 
-//     return $this->response->withJson($obj);
-// });
+    $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
+    VALUES (:userID, :familyID, :email, :password, true";
+
+    $sth = $this->db->prepare($ud_sql);
+    $sth->bindParam("familyID",$userID);
+    $sth->bindParam("familyID",$userID);
+    $sth->bindParam("username",$input['email']);
+    $sth->bindParam("password",$input['password']);
+    $success = $sth->execute();
+
+    if($success) {
+        $count = $sth->rowCount();
+        if($count>=1)
+            $outcome = "true";
+        else
+            $outcome = "false";
+    }
+
+    $obj = (object) [
+        'userID' => $userID,
+        'familyID' => $familyID,
+        'Success' => $outcome
+    ];
+
+    return $this->response->withJson($obj);
+});
 
 $app->post('/familyMember/add', function ($request, $response, $args) {
 
@@ -166,26 +181,20 @@ $app->post('/familyInfo/add', function ($request, $response, $args) {
 $app->post('/tasks/add', function ($request, $response, $args) {
 
     $input = $request->getParsedBody();
-    $sql = "INSERT INTO Tasks (userID, assigneeID, taskID, status, notified) 
-            VALUES (:userID, :assigneeID, :taskID, :status, :notified)";
+    $sql = "INSERT INTO Tasks (userID, assigneeID, status, notified) 
+            VALUES (:userID, :assigneeID, :status, :notified)";
     $sth = $this->db->prepare($sql);
     $sth->bindParam("userID",$input['userID']);
     $sth->bindParam("assigneeID",$input['assigneeID']);
-    $sth->bindParam("taskID",$input['taskID']);
     $sth->bindParam("status",$input['status']);
     $sth->bindParam("notified",$input['notified']);
     $sth->execute();
+    $taskID = $this->db->lastInsertId();
 
-    return $this->response->withJson($input);
-});
-
-$app->post('/taskDetails/add', function ($request, $response, $args) {
-
-    $input = $request->getParsedBody();
     $sql = "INSERT INTO TaskDetails (taskID, taskRating, taskAward, taskTitle, taskDescript, deadline) 
-            VALUES (:taskID, :taskRating, :taskAward, :taskTitle, :taskDescript, :deadline)";
+    VALUES (:taskID, :taskRating, :taskAward, :taskTitle, :taskDescript, :deadline)";
     $sth = $this->db->prepare($sql);
-    $sth->bindParam("taskID",$input['taskID']);
+    $sth->bindParam("taskID",$taskID);
     $sth->bindParam("taskRating",$input['taskRating']);
     $sth->bindParam("taskAward",$input['taskAward']);
     $sth->bindParam("taskTitle",$input['taskTitle']);
