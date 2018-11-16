@@ -34,7 +34,6 @@ export class NewAccountService {
       "email": email,
       "password": password
     };
-    console.log(body);
     return this.httpClient.
       post<any>(`${this.endpoint}/family/add`, body, this.httpOptions).
       pipe(catchError(this.handleException));
