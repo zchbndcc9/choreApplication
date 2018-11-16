@@ -1,5 +1,6 @@
 import { NewAccountService } from './../../services/new-account/new-account.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newaccount',
@@ -19,7 +20,8 @@ export class NewaccountComponent implements OnInit {
   password2: string;
 
   constructor(
-    protected newAccountService: NewAccountService
+    protected newAccountService: NewAccountService,
+    protected router: Router
   ) { }
 
   ngOnInit() {
@@ -38,10 +40,13 @@ export class NewaccountComponent implements OnInit {
   }
 
   createAccount() {
-    let result = this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2);
-    // if (result.Success === true ) {
-    //   //create new account and sign into that account
-    // }
+    this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2).subscribe(result => {
+      if (result.Success === true ) {
+        //create new account and sign into that account
+        //navigate to the family page
+        this.router.navigateByUrl('/family');
+      }
+    });
   }
 
 }

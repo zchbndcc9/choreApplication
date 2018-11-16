@@ -23,9 +23,9 @@ export class LoginService {
     protected httpClient: HttpClient
   ) {}
 
-  login(email: string, password: string): Observable<Object> {
+  login(email: string, password: string): Observable<any> {
     return this.httpClient.
-    get<Object>(`${this.endpoint}/${email}/${password}`).
+    get<any>(`${this.endpoint}/login/${email}/${password}`).
     pipe(catchError(this.handleException));
   }
 

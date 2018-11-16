@@ -22,21 +22,21 @@ export class NewAccountService {
     protected httpClient: HttpClient
   ) { }
 
-  createAccount(firstName: string, lastName: string, address1: string, address2: string, city: string, state: string, zip: string, email: string, password: string): Object {
+  createAccount(firstName: string, lastName: string, address1: string, address2: string, city: string, state: string, zip: string, email: string, password: string) {
     if (address2) {
       var address = `${address1} #${address2}, ${city}, ${state} ${zip}`;
     } else {
       var address = `${address1}, ${city}, ${state} ${zip}`;
     }
     let body = {
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      email: email,
-      password: password
-    }
+      'firstName': firstName,
+      'lastName': lastName,
+      'address': address,
+      'email': email,
+      'password': password
+    };
     return this.httpClient.
-      post<Object>(`${this.endpoint}/family/add`, body, this.httpOptions).
+      post<any>(`${this.endpoint}/family/add`, body, this.httpOptions).
       pipe(catchError(this.handleException));
   }
 

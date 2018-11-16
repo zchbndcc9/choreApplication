@@ -14,18 +14,12 @@ export class LoginComponent implements OnInit {
   currentUser: User = {};
   loginSuccess: boolean = true;
 
-  users: User[];
-
   constructor(
     protected loginService: LoginService,
     protected router: Router
   ) { }
 
   ngOnInit() {
-    this.users = [
-      {username: 'samdotgiles@gmail.com', password: 'password'},
-      {username: 'test@test.com', password: 'test'}
-    ];
   }
 
   validate() {
@@ -38,8 +32,7 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
-      //if (result.Success === true) {
-      if (false) {
+      if (result.Success) {
         this.loginSuccess = true;
         //authenticate
         this.router.navigateByUrl('/family');
