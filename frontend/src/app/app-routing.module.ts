@@ -6,11 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ParentComponent } from './parent/containers/parent.component';
 
 const routes: Routes = [
-  { path: 'family', component: ParentComponent },
+  { path: 'family/:id', component: ParentComponent },
   { path: 'new-account', component: NewaccountComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'family/members', component: MembersComponent }
+  { path: 'family/:id/members', component: MembersComponent }
 ];
 
 @NgModule({

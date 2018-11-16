@@ -19,22 +19,22 @@ export class MembersService {
     })
   };
 
-
-  retrieveMember(memberId: number) {
-
+  addMember(member: Member): Observable<Member> {
+    return this.httpClient
+      .post<Member>(`${this.baseUrl}/users/${member.userID}`, member, this.httpOptions)
+      .pipe(catchError(this.handleException));
   }
 
-  addMember(member: Member) {
-    return this.httpClient.post<Member | Child>(`${this.baseUrl}/`)
+  editMember(member: Member): Observable<Member | Child> {
+    return this.httpClient
+      .post<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, member, this.httpOptions)
+      .pipe(catchError(this.handleException));
   }
 
-  editMember(member: Member) {
-
-  }
-
-  toggleGround(isGrounded: boolean, childId: number) {
+  toggleGround(isGrounded: boolean, childId: number): Observable<Child> {
     const groundType: string = isGrounded ? 'unground' : 'ground';
-    return this.httpClient.put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
+    return this.httpClient
+      .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${childId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
