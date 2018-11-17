@@ -7,6 +7,7 @@ import { TasksService } from 'src/services/tasks/tasks.service';
 import { Task, Member } from 'src/domain/models';
 import { ParentsService } from '../parents.service';
 import { ChildrenService } from 'src/services/children/children.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-parent',
@@ -30,7 +31,8 @@ export class ParentComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private tasksService: TasksService,
               private parentsService: ParentsService,
-              private childrenService: ChildrenService) { }
+              private childrenService: ChildrenService,
+              private router: Router) { }
 
   ngOnInit() {
     this.members = [
@@ -81,7 +83,5 @@ export class ParentComponent implements OnInit {
     }).catch(error => {
       console.error(error);
     });
-
   }
-
 }

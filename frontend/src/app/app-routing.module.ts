@@ -4,7 +4,7 @@ import { MembersComponent } from './members/containers/members.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ParentComponent } from './parent/containers/parent.component';
-import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
+import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
 
 const routes: Routes = [
   { path: 'family/:id', component: ParentComponent },
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'family/:id/members', component: MembersComponent },
-  { path: 'family/:id/tasks', component: TasksDisplayComponent }
+  { path: 'family/:id/tasks', component: TasksPageComponent }
 ];
 
 @NgModule({

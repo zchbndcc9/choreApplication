@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Task } from 'src/domain/models';
+import { TasksService } from 'src/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-tasks-page',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksPageComponent implements OnInit {
 
-  constructor() { }
+  tasks: Task[] = [];
+
+  constructor(private tasksService: TasksService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.tasksService
+      .getUserTasks(this.activatedRoute.snapshot.params['id'])
+      .subscribe((results) => {
+        this.tasks = results;
+      })
+
+    // this.tasks = this.activatedRoute.paramMap.pipe(
+    //   switchMap((params: ParamMap) =>
+    //     this.tasksService.getUserTasks(+params.get('familyID')))
+    // );
   }
 
 }
