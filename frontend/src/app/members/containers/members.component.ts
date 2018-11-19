@@ -61,7 +61,7 @@ export class MembersComponent implements OnInit {
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(editedMember).subscribe((_member: Member) => {
+      this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
         console.log(_member);
         if (_member.isParent) {
           this.parents[index] = { ...this.parents[index], ..._member };
