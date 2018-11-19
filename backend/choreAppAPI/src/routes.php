@@ -74,8 +74,8 @@ $app->post('/family/add', function ($request, $response, $args) {
     $sth->execute();
     $userID = $this->db->lastInsertId();
 
-    $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
-    VALUES (:userID, :familyID, :email, :password, true)";
+    $ud_sql = 'INSERT INTO UserDetails (userID, familyID, username, password, userType)
+    VALUES (:userID, :familyID, :email, :password, "TRUE")';
 
     $sth = $this->db->prepare($ud_sql);
     $sth->bindParam("userID",$userID);
