@@ -65,7 +65,7 @@ $app->post('/family/add', function ($request, $response, $args) {
 
 
     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
-    VALUES (:familyID, :lastName, :firstName";
+    VALUES (:familyID, :lastName, :firstName)";
 
     $sth = $this->db->prepare($users_sql);
     $sth->bindParam("familyID",$familyID);
@@ -75,7 +75,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     $userID = $this->db->lastInsertId();
 
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
-    VALUES (:userID, :familyID, :email, :password, true";
+    VALUES (:userID, :familyID, :email, :password, true)";
 
     $sth = $this->db->prepare($ud_sql);
     $sth->bindParam("userID",$userID);
