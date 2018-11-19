@@ -13,6 +13,16 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
         <div *ngIf="member.isGrounded" class="badge badge-warning p-2">Grounded</div>
       </div>
       <div class="card-body">
+        <div class="d-flex justify-content-around">
+          <div class="d-flex flex-column align-items-center">
+            <div class="h4">Tasks</div>
+            <a class="h6">{{ member.tasks }}</a>
+          </div>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <div class="h4">Infractions</div>
+          <a class="h6">{{ member.infractions }}</a>
+        </div>
       </div>
       <div class="card-footer d-flex justify-content-around">
         <button class="btn btn-primary" (click)="editMember()">Edit</button>

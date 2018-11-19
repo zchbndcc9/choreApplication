@@ -34,7 +34,7 @@
           <tbody>
             <ng-container *ngFor="let parent of parents">
               <tr>
-                <td>{{ parent.firstName + " " + parent.lastName }}</td>
+                <td class="h5">{{ parent.firstName + " " + parent.lastName }}</td>
                 <td><button
                   class="btn btn-primary"
                   (onClick)="editMember(parent)">Edit</button></td>
