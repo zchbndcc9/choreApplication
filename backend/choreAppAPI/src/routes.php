@@ -36,6 +36,7 @@ $app->post('/login', function($request, $response, $args){
     $sth->bindParam("username", $input['username']);
     $sth->bindParam("password", $input['password']);
     $sth->execute();
+    // $result = $sth->fetch(PDO::FETCH_NUM);
 
     if($sth->execute()) {
         $count = $sth->rowCount();
@@ -46,6 +47,7 @@ $app->post('/login', function($request, $response, $args){
     }
 
     $obj = (object) [
+        // 'userID' => $result->,
         'Success' => $outcome
     ];
     return json_encode($obj);
@@ -67,22 +69,22 @@ $app->post('/family/add', function ($request, $response, $args) {
     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
     VALUES (:familyID, :lastName, :firstName)";
 
-    $sth = $this->db->prepare($users_sql);
-    $sth->bindParam("familyID",$familyID);
-    $sth->bindParam("lastName",$input['lastName']);
-    $sth->bindParam("firstName",$input['firstName']);
-    $sth->execute();
+    $stmt = $this->db->prepare($users_sql);
+    $stmt->bindParam("familyID",$familyID);
+    $stmt->bindParam("lastName",$input['lastName']);
+    $stmt->bindParam("firstName",$input['firstName']);
+    $stmt->execute();
     $userID = $this->db->lastInsertId();
 
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
     VALUES (:userID, :familyID, :email, :password, TRUE)";
 
-    $sth = $this->db->prepare($ud_sql);
-    $sth->bindParam("userID",$userID);
-    $sth->bindParam("familyID",$familyID);
-    $sth->bindParam("username",$input['email']);
-    $sth->bindParam("password",$input['password']);
-    $success = $sth->execute();
+    $stmt2 = $this->db->prepare($ud_sql);
+    $stmt2->bindParam("userID",$userID);
+    $stmt2->bindParam("familyID",$familyID);
+    $stmt2->bindParam("username",$input['email']);
+    $stmt2->bindParam("password",$input['password']);
+    $success = $stmt2->execute();
 
     if($success) {
         $count = $sth->rowCount();
