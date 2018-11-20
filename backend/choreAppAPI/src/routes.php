@@ -64,6 +64,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     $sth->bindParam("address",$input['address']);
     $sth->execute();
     $familyID = $this->db->lastInsertId();
+    echo "First Insert successful.\nFamilyID : " . $familyID;
 
 
     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
@@ -75,6 +76,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     $stmt->bindParam("firstName",$input['firstName']);
     $stmt->execute();
     $userID = $this->db->lastInsertId();
+    echo "Second Insert successful.\nUserID : " . $userID;
 
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
     VALUES (:userID, :familyID, :email, :password, TRUE)";
@@ -85,6 +87,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     $stmt2->bindParam("username",$input['email']);
     $stmt2->bindParam("password",$input['password']);
     $success = $stmt2->execute();
+    echo "Third Insert successful. ";
 
     if($success) {
         $count = $sth->rowCount();
