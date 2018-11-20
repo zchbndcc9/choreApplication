@@ -81,12 +81,13 @@ $app->post('/family/add', function ($request, $response, $args) {
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
     VALUES (:userID, :familyID, :email, :password, :userType)";
 
+    $userType = TRUE;
     $stmt2 = $this->db->prepare($ud_sql);
     $stmt2->bindParam("userID",$userID);
     $stmt2->bindParam("familyID",$familyID);
     $stmt2->bindParam("username",$input['email']);
     $stmt2->bindParam("password",$input['password']);
-    $stmt2->bindParam("userType",TRUE);
+    $stmt2->bindParam("userType",$userType);
     $success = $stmt2->execute();
     echo "Third Insert successful. ";
 
