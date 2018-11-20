@@ -79,7 +79,7 @@ $app->post('/family/add', function ($request, $response, $args) {
     echo "Second Insert successful.\nUserID : " . $userID;
 
     $ud_sql = "INSERT INTO UserDetails (userID, familyID, username, password, userType)
-    VALUES (:userID, :familyID, :email, :password, :userType)";
+    VALUES (:userID, :familyID, :username, :password, :userType)";
 
     $userType = TRUE;
     $stmt2 = $this->db->prepare($ud_sql);
