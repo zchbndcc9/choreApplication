@@ -52,10 +52,10 @@
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>
               <td>{{ task.assigneeID }}</td>
-              <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{ task.status }}</span></td>
-              <td *ngSwitchCase="'pending'" align="center"><span class="badge badge-warning">{{ task.status
-                  }}</span></td>
+              <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{ task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{ task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'pending'" align="center"><span class="badge badge-warning">{{ task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'rejected'" align="center"><span class="badge badge-dark">{{ task.status.toLowerCase() }}</span></td>
               <td *ngSwitchDefault></td>
             </tr>
           </tbody>

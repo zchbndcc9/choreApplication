@@ -2,7 +2,7 @@ import { Child } from './../../../domain/models/child';
 import { Task } from '../../../domain/models';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-new-task-form',
@@ -52,7 +52,7 @@ export class NewTaskFormComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: [this.task.taskTitle || '', Validators.required],
       description: [this.task.taskDescript || '', Validators.required],
-      deadline: [this.task.deadline || '00-00-0000', Validators.required],
+      deadline: [this.task.deadline || '00-00-0000', [Validators.required, this.validDateValidator]],
       award: [this.task.taskAward || '', Validators.required],
       assignedTo: [this.task.assigneeID || '', Validators.required]
     });
@@ -71,6 +71,15 @@ export class NewTaskFormComponent implements OnInit {
   resetForm() {
     this.taskForm.reset();
     this.activeModal.close();
+  }
+
+  validDateValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      console.log(control.value);
+      const valid = new Date(control.value) > new Date();
+      console.log(valid);
+      return valid ? {'deadline': {deadline: control.value}} : null;
+    };
   }
 
 }
