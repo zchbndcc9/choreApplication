@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../../domain/models';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { TasksService } from 'src/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-tasks-display',
@@ -15,11 +16,12 @@ export class TasksDisplayComponent implements OnInit {
   filteredTasks: Task[];
   filterBy: string;
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
     this.filterBy = 'all';
     this.filterTasks();
+    console.log(this.tasks);
   }
 
   filterTasks() {
@@ -47,6 +49,14 @@ export class TasksDisplayComponent implements OnInit {
   }
 
   isWithinDeadline(deadline) {
-    return deadline > new Date();
+    return new Date(deadline) > new Date();
+  }
+
+  approveTask(task: Task) {
+    task.status = 'complete';
+    this.tasksService.editTask(task).subscribe((result) => {
+      console.log(result);
+      console.log('task changed');
+    });
   }
 }

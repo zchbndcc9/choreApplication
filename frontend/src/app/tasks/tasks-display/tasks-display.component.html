@@ -44,7 +44,7 @@
           <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
           <button *ngIf="task.status.toLowerCase() == 'incomplete' && isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
           <button *ngIf="task.status.toLowerCase() == 'incomplete' && !isParent" class="btn btn-success btn-sm float-right">Submit for Approval</button>
-          <button *ngIf="task.status.toLowerCase() == 'pending' && isParent" class="btn btn-success btn-sm float-right">Approve</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && isParent" class="btn btn-success btn-sm float-right" (click)="approveTask(task)">Approve</button>
           <button *ngIf="task.status.toLowerCase() == 'pending' && !isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
           <button *ngIf="task.status.toLowerCase() == 'rejected' && isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
           <button *ngIf="task.status.toLowerCase() == 'rejected' && !isParent" class="btn btn-primary btn-sm float-right">Resubmit</button>
