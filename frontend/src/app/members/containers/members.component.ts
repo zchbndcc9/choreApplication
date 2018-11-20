@@ -1,7 +1,7 @@
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChildrenService } from './../../../services/children/children.service';
 import { Child } from './../../../domain/models/child';
 import { MembersService } from './../members.service';
@@ -27,6 +27,7 @@ export class MembersComponent implements OnInit {
     protected tasksService: TasksService,
     protected route: ActivatedRoute,
     protected modalService: NgbModal,
+    protected router: Router
   ) {}
 
   ngOnInit() {
@@ -90,6 +91,15 @@ export class MembersComponent implements OnInit {
         this.children[index].isGrounded = !this.children[index].isGrounded;
       });
     }
+  }
+
+
+  viewInfractions(memberId: number) {
+    this.router.navigateByUrl(`children/${memberId}/infractions`);
+  }
+
+  viewTasks(memberId: number) {
+    this.router.navigateByUrl(`children/${memberId}/tasks`);
   }
 
   openGroundModal() {

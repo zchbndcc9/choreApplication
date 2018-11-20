@@ -11,7 +11,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         <app-member-card
           [member]="member"
           (ground)="toggleGround($event, i)"
-          (edit)="editMember($event, i)"></app-member-card>
+          (edit)="editMember($event, i)"
+          (tasks)="viewTasks($event)"
+          (infractions)="viewInfractions($event)"></app-member-card>
       </ng-container>
     </div>
   `
@@ -24,9 +26,9 @@ export class MemberCardlistComponent {
 
   @Output()
   edit = new EventEmitter<any>();
-
-  @Output()
   ground = new EventEmitter<any>();
+  tasks = new EventEmitter<number>();
+  infractions = new EventEmitter<number>();
 
   retrieveId(index: number, member: Member) {
     return member.userID;
@@ -42,4 +44,11 @@ export class MemberCardlistComponent {
     this.ground.emit(pair);
   }
 
+  viewTasks(memberId: number) {
+    this.tasks.emit(memberId);
+  }
+
+  viewInfractions(memberId: number) {
+    this.infractions.emit(memberId);
+  }
 }

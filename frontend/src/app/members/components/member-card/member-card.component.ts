@@ -16,12 +16,12 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
         <div class="d-flex justify-content-around">
           <div class="d-flex flex-column align-items-center">
             <div class="h4">Tasks</div>
-            <a class="h6">{{ member.tasks }}</a>
+            <a class="h6" (click)="viewTasks()">{{ member.tasks }}</a>
           </div>
         </div>
         <div class="d-flex flex-column align-items-center">
           <div class="h4">Infractions</div>
-          <a class="h6">{{ member.infractions }}</a>
+          <a class="h6" (click)="viewInfractions()">{{ member.infractions }}</a>
         </div>
       </div>
       <div class="card-footer d-flex justify-content-around">
@@ -39,9 +39,9 @@ export class MemberCardComponent {
 
   @Output()
   edit = new EventEmitter<Child>();
-
-  @Output()
   ground = new EventEmitter<Child>();
+  tasks = new EventEmitter<number>();
+  infractions = new EventEmitter<number>();
 
   editMember() {
     this.edit.emit(this.member);
@@ -49,5 +49,13 @@ export class MemberCardComponent {
 
   toggleGround() {
     this.ground.emit(this.member);
+  }
+
+  viewTasks() {
+    this.tasks.emit(this.member.userID);
+  }
+
+  viewInfractions() {
+    this.infractions.emit(this.member.userID);
   }
 }

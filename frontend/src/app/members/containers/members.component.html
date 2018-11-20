@@ -24,6 +24,8 @@
             [members]="children"
             (edit)="editMember($event)"
             (ground)="toggleGround($event)"
+            (tasks)="viewTasks($event)"
+            (infractions)="viewInfractions($event)"
           ></app-member-cardlist>
         </ng-template>
       </div>
