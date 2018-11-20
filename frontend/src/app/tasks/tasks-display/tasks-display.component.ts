@@ -11,6 +11,7 @@ export class TasksDisplayComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   @Input() tasks: Task[];
+  @Input() isParent: boolean;
   filteredTasks: Task[];
   filterBy: string;
 
@@ -31,7 +32,7 @@ export class TasksDisplayComponent implements OnInit {
     } else if (this.filterBy === 'overdue') {
       this.filteredTasks = this.tasks.filter(task => !this.isWithinDeadline(task.deadline));
     } else {
-      this.filteredTasks = this.tasks.filter(task => task.status === this.filterBy);
+      this.filteredTasks = this.tasks.filter(task => task.status.toLowerCase() === this.filterBy);
     }
 
     this.filteredTasks = this.filteredTasks.sort((t1, t2) => {

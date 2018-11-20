@@ -7,13 +7,16 @@
           <input ngbButton type="radio" value="all"> All
         </label>
         <label ngbButtonLabel class="btn filterBtn">
-          <input ngbButton type="radio" value="rejected"> Rejected
+          <input ngbButton type="radio" value="incomplete"> Incomplete
         </label>
         <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="pending"> Pending Approval
         </label>
         <label ngbButtonLabel class="btn filterBtn">
-          <input ngbButton type="radio" value="incomplete"> Incomplete
+          <input ngbButton type="radio" value="rejected"> Rejected
+        </label>
+        <label ngbButtonLabel class="btn filterBtn">
+          <input ngbButton type="radio" value="complete"> Complete
         </label>
         <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="overdue"> Overdue
@@ -39,11 +42,13 @@
             {{task?.taskTitle}}
           </button>
           <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
-          <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
-          <button *ngIf="task.status == 'incomplete'" class="btn btn-dark btn-sm float-right">Add Note</button>
-          <button *ngIf="task.status == 'rejected'" class="btn btn-primary btn-sm float-right">Resubmit</button>
-          <button *ngIf="task.status == 'pending'" class="btn btn-light btn-sm float-right" [disabled]="true">Pending
-            Approval</button>
+          <button *ngIf="task.status.toLowerCase() == 'incomplete' && isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
+          <button *ngIf="task.status.toLowerCase() == 'incomplete' && !isParent" class="btn btn-success btn-sm float-right">Submit for Approval</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && isParent" class="btn btn-success btn-sm float-right">Approve</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && !isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
+          <button *ngIf="task.status.toLowerCase() == 'rejected' && isParent" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
+          <button *ngIf="task.status.toLowerCase() == 'rejected' && !isParent" class="btn btn-primary btn-sm float-right">Resubmit</button>
+          <button *ngIf="task.status.toLowerCase() == 'complete'" class="btn btn-primary btn-sm float-right" [disabled]="true">Complete</button>
         </h5>
       </div>
 
