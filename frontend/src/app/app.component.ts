@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'fam.ly';
+  shouldLoadNav: boolean = false;
+
+  constructor(
+    protected router: Router
+  ) {}
+
+  ngOnInit(): void {
+    console.log(this.router.url);
+  }
 }
 
 

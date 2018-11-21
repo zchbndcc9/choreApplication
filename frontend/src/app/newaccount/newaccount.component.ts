@@ -44,9 +44,9 @@ export class NewaccountComponent implements OnInit {
   createAccount() {
     this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2).subscribe(result => {
       if (result.Success == "true") {
-        this.loginService.login(this.email, this.password2).subscribe(result => {
-          if (result.Success == "true") {
-            //authenticate
+        this.loginService.login(this.email, this.password2).subscribe(newResult => {
+          if (newResult.Success == "true") {
+            window.localStorage.setItem('currentUser', JSON.stringify(newResult.currentUser));
             this.router.navigateByUrl('/family');
           }
           else {

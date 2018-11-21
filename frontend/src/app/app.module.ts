@@ -33,8 +33,7 @@ import { HttpModule } from '@angular/http';
     NewaccountComponent,
     GroundingAppealComponent,
     NavbarComponent,
-    TaskNotificationComponent,
-    NavbarComponent
+    TaskNotificationComponent
   ],
   imports: [
     AppRoutingModule,

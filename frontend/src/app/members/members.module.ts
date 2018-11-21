@@ -1,3 +1,4 @@
+import { NavbarComponent } from './../navbar/navbar.component';
 import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { MemberGroundModalComponent } from './components/member-ground-modal/member-ground-modal.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
