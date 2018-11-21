@@ -37,11 +37,6 @@ $app->post('/login', function($request, $response, $args){
     $sth->bindParam("password", $input['password']);
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
-    print "UserID:".$result->userID;
-    print "FamilyID:".$result->familyID;
-    print "Username:".$result->username;
-    print "Password:".$result->password;
-
 
     if($sth->execute()) {
         $count = $sth->rowCount();
@@ -52,7 +47,8 @@ $app->post('/login', function($request, $response, $args){
     }
 
     $obj = (object) [
-        // 'userID' => $result->,
+        'userID' => $result->userID,
+        'familyID' => $result->familyID,
         'Success' => $outcome
     ];
     return json_encode($obj);
