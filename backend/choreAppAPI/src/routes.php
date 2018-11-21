@@ -36,7 +36,12 @@ $app->post('/login', function($request, $response, $args){
     $sth->bindParam("username", $input['username']);
     $sth->bindParam("password", $input['password']);
     $sth->execute();
-    // $result = $sth->fetch(PDO::FETCH_NUM);
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    print "UserID:".$result->userID;
+    print "FamilyID:".$result->familyID;
+    print "Username:".$result->username;
+    print "Password:".$result->password;
+
 
     if($sth->execute()) {
         $count = $sth->rowCount();
