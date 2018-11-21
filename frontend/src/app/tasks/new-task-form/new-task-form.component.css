@@ -33,3 +33,7 @@
 #descriptionLabel {
   padding-top: .4em;
 }
+
+.form-control.ng-invalid.ng-touched {
+  border: solid red 1px;
+}

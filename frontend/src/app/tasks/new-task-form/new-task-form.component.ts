@@ -64,7 +64,12 @@ export class NewTaskFormComponent implements OnInit {
     this.task.taskDescript = this.taskForm.value.description;
     this.task.taskAward = this.taskForm.value.award;
     this.task.deadline = this.taskForm.value.deadline;
-    this.activeModal.close(this.task);
+    console.log(this.taskForm.errors);
+    console.log(this.taskForm.valid);
+    console.log(this.taskForm.controls.deadline);
+    console.log(this.taskForm.controls.deadline.valid);
+    //this.activeModal.close(this.task);
+    this.activeModal.close();
     this.resetForm();
   }
 
@@ -73,13 +78,11 @@ export class NewTaskFormComponent implements OnInit {
     this.activeModal.close();
   }
 
-  validDateValidator(): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      console.log(control.value);
-      const valid = new Date(control.value) > new Date();
-      console.log(valid);
-      return valid ? {'deadline': {deadline: control.value}} : null;
-    };
+  validDateValidator(control: AbstractControl) {
+    console.log(control.value);
+    const valid = new Date(control.value) > new Date();
+    console.log(valid);
+    return valid ? null : {'deadline': {deadline: control.value}};
   }
 
 }

@@ -15,7 +15,7 @@
         <label class="form-label-placeholder" for="title">Title</label>
         <div class="valid-feedback">Looks good!</div>
       </div>
-      <div class="col form-group">
+      <div class="col form-group" [ngClass]="{'has-error': taskForm.controls['deadline'].invalid}">
         <input type="date" formControlName="deadline" class="form-control" />
         <label class="form-label-placeholder" for="deadline"><span class="text-muted">Deadline</span></label>
       </div>
@@ -47,7 +47,7 @@
       <div class="form-group col">
         <label for="assignedTo"><span class="text-muted">Assign Task To...</span></label>
         <select class="form-control" formControlName="assignedTo" id="assignedTo">
-          <option selected="true">Choose a child</option>
+          <option selected="true" value="">Choose a child</option>
           <option *ngFor="let child of children" value="{{child.userID}}">{{ child.firstName + ' ' + child.lastName }}</option>
         </select>
       </div>
