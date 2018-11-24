@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          <h1 class="display-4">Amanda Oh</h1>
+          <h1 class="display-4">{{ child?.firstName }} {{ child?.lastName }}</h1>
           <h5 class="display-8">Child</h5>
           <p class="lead">
             Parents: Josh Oh and Rebecca Oh
@@ -13,21 +13,21 @@
           <div id="child-rating">
             <h4 class="display-6">
               Rating
-              <app-rating [numStars]="3" [editable]="false"></app-rating>
+              <app-rating [numStars]="child?.rating" [editable]="false"></app-rating>
             </h4>
           </div>
           <div id="child-status">
             <h4 class="display-6">
               Status
-              <span *ngIf="!isGrounded"class="badge badge-success">Not Grounded</span>
-              <span *ngIf="isGrounded" class="badge badge-danger">Grounded</span>
+              <span *ngIf="!child?.isGrounded"class="badge badge-success">Not Grounded</span>
+              <span *ngIf="child?.isGrounded" class="badge badge-danger">Grounded</span>
             </h4>
-            <button *ngIf="isGrounded" class="btn btn-light" (click)="openGroundingAppealModal()">Appeal Grounding</button>
+            <button *ngIf="child?.isGrounded" class="btn btn-light" (click)="openGroundingAppealModal()">Appeal Grounding</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-    <app-tasks-display [tasks]="tasks"></app-tasks-display>
+  <app-tasks-display [tasks]="child?.tasks"></app-tasks-display>
 </div>
