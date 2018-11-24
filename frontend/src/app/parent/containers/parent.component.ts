@@ -26,24 +26,24 @@ export class ParentComponent implements OnInit {
 
   tasks: Task[];
   members: Member[];
+  familyInfo: any;
 
   numCompletedTasks: number = 0;
 
   constructor(private modalService: NgbModal,
               private tasksService: TasksService,
-              private parentsService: ParentsService,
-              private childrenService: ChildrenService,
-              private router: Router) { }
+              private parentsService: ParentsService) { }
 
   ngOnInit() {
-    // this.members = [
-    //   { id: 1, name: 'John', type: 'Parent' },
-    //   { id: 2, name: 'Jane', type: 'Parent' },
-    //   { id: 3, name: 'Jimbo', type: 'Child' },
-    //   { id: 4, name: 'Janette', type: 'Child' }
-    // ];
+    this.getFamilyInfo();
     this.getFamilyMembers();
     this.getFamilyTasks();
+  }
+
+  getFamilyInfo() {
+    this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
+      this.familyInfo = result;
+    })
   }
 
   getFamilyMembers() {
