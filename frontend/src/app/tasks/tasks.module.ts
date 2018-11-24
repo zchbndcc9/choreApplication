@@ -6,6 +6,7 @@ import { TasksPageComponent } from './tasks-page/tasks-page.component';
 import { TasksDisplayComponent } from './tasks-display/tasks-display.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ],
   declarations: [
     NewTaskFormComponent,

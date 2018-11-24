@@ -2,7 +2,7 @@ import { Child } from './../../../domain/models/child';
 import { Task } from '../../../domain/models';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-new-task-form',
@@ -14,6 +14,7 @@ export class NewTaskFormComponent implements OnInit {
   taskForm: FormGroup;
   task: Task;
   children: Child[];
+  errors: any[];
 
   constructor(
     private fb: FormBuilder, public activeModal: NgbActiveModal
@@ -65,9 +66,6 @@ export class NewTaskFormComponent implements OnInit {
     this.task.taskAward = this.taskForm.value.award;
     this.task.deadline = this.taskForm.value.deadline;
     console.log(this.taskForm.errors);
-    console.log(this.taskForm.valid);
-    console.log(this.taskForm.controls.deadline);
-    console.log(this.taskForm.controls.deadline.valid);
     //this.activeModal.close(this.task);
     this.activeModal.close();
     this.resetForm();
@@ -79,10 +77,23 @@ export class NewTaskFormComponent implements OnInit {
   }
 
   validDateValidator(control: AbstractControl) {
-    console.log(control.value);
     const valid = new Date(control.value) > new Date();
-    console.log(valid);
-    return valid ? null : {'deadline': {deadline: control.value}};
+    return valid ? null : {'past deadline': true};
+  }
+
+  getAllValidationErrors() {
+    this.errors = [];
+    Object.keys(this.taskForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.taskForm.get(key).errors;
+      const touched = this.taskForm.get(key).touched;
+      if (controlErrors && touched) {
+        Object.keys(controlErrors).forEach(keyError => {
+          let errorMsg = key + " is " + keyError;
+          errorMsg = errorMsg.toUpperCase();
+          this.errors.push(errorMsg);
+        });
+      }
+    });
   }
 
 }
