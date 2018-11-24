@@ -2,9 +2,16 @@
   <div class="jumbotron" id="header">
     <div class="container" id="jumbotron-container">
       <div class="row justify-content-around align-items-center">
-        <div>
-          <h1 id="jumbo-title">Doe Family</h1>
-          <i>Fam since October 2018</i>
+        <div id="family-info">
+          <h1 id="jumbo-title">Family Page</h1>
+          <i>Fam since {{ familyInfo?.registrationDate | date }}</i>
+          <br>
+          <hr>
+          <span><b>Address</b>: {{ familyInfo?.address }}</span>
+          <br>
+          <span><b>Email</b>: {{ familyInfo?.email }}</span>
+          <br>
+          <span><b>Phone</b>: {{ familyInfo?.phone }}</span>
         </div>
         <div class="stats d-flex flex-column">
           <h2 class="align-self-center mb-1">Stats</h2>
@@ -27,19 +34,26 @@
   </div>
   <div class="container">
     <div class="row justify-content-around">
-      <div class="col-md-6 col-lg-5 col-xl-4" id="members-container">
+      <div class="col-md-6 col-lg-5 col-xl-4 d-flex flex-column" id="members-container">
         <div class="table-section row justify-content-between align-items-center">
           <h1>Members</h1>
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openMemberModal()"><span>Add Fam</span></button>
         </div>
-        <table class="table table-striped rounded">
+        <table *ngIf="members?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let member of members">
-              <td>{{ member.name }}</td>
-              <td>{{ member.type }}</td>
+              <td>{{ member.firstName }} {{ member.lastName }}</td>
+              <td *ngIf="member.isParent">Parent</td>
+              <td *ngIf="!member.isParent">Child</td>
+              <td *ngIf="!member.isParent">
+                <button class="btn btn-sm btn-warning" [routerLink]="['/child', member.userID]">Go To Child Page</button>
+              </td>
             </tr>
           </tbody>
         </table>
+        <button class="fast-animated push arrow btn btn-primary align-self-center" id="view-members-btn">
+          <span>View All Members</span>
+        </button>
       </div>
       <div class="col-md-12 col-lg-7 d-flex flex-column" id="tasks-container">
         <div class="table-section row justify-content-between align-items-center">
@@ -52,17 +66,21 @@
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>
               <td>{{ task.assigneeID }}</td>
-              <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{ task.status.toLowerCase() }}</span></td>
-              <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{ task.status.toLowerCase() }}</span></td>
-              <td *ngSwitchCase="'pending'" align="center"><span class="badge badge-warning">{{ task.status.toLowerCase() }}</span></td>
-              <td *ngSwitchCase="'rejected'" align="center"><span class="badge badge-dark">{{ task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{
+                  task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{
+                  task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'pending'" align="center"><span class="badge badge-warning">{{
+                  task.status.toLowerCase() }}</span></td>
+              <td *ngSwitchCase="'rejected'" align="center"><span class="badge badge-dark">{{ task.status.toLowerCase()
+                  }}</span></td>
               <td *ngSwitchDefault></td>
             </tr>
           </tbody>
         </table>
-          <button class="fast-animated push arrow btn btn-primary align-self-center" id="view-tasks-btn" [routerLink]="['tasks']">
-            <span>View All Tasks</span>
-          </button>
+        <button class="fast-animated push arrow btn btn-primary align-self-center" id="view-tasks-btn" [routerLink]="['tasks']">
+          <span>View All Tasks</span>
+        </button>
 
       </div>
     </div>

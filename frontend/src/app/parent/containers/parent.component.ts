@@ -8,6 +8,7 @@ import { Task, Member } from 'src/domain/models';
 import { ParentsService } from '../parents.service';
 import { ChildrenService } from 'src/services/children/children.service';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-parent',
@@ -24,25 +25,33 @@ export class ParentComponent implements OnInit {
   parentID = 3;
 
   tasks: Task[];
-  members: any[];
+  members: Member[];
+  familyInfo: any;
 
   numCompletedTasks: number = 0;
 
   constructor(private modalService: NgbModal,
               private tasksService: TasksService,
-              private parentsService: ParentsService,
-              private childrenService: ChildrenService,
-              private router: Router) { }
+              private parentsService: ParentsService) { }
 
   ngOnInit() {
-    this.members = [
-      { id: 1, name: 'John', type: 'Parent' },
-      { id: 2, name: 'Jane', type: 'Parent' },
-      { id: 3, name: 'Jimbo', type: 'Child' },
-      { id: 4, name: 'Janette', type: 'Child' }
-    ];
-
+    this.getFamilyInfo();
+    this.getFamilyMembers();
     this.getFamilyTasks();
+  }
+
+  getFamilyInfo() {
+    this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
+      this.familyInfo = result;
+    })
+  }
+
+  getFamilyMembers() {
+    forkJoin([this.parentsService.getParents(this.familyID), this.parentsService.getChildren(this.familyID)]).subscribe(results => {
+      let parents = results[0];
+      let children = results[1];
+      this.members = parents.concat(children);
+    });
   }
 
   getFamilyTasks() {

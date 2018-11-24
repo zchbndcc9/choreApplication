@@ -21,7 +21,6 @@ export class TasksDisplayComponent implements OnInit {
   ngOnInit() {
     this.filterBy = 'all';
     this.filterTasks();
-    console.log(this.tasks);
   }
 
   filterTasks() {

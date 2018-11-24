@@ -22,6 +22,7 @@ import { TaskNotificationComponent } from './tasks/task-notification/task-notifi
 import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 import { MembersComponent } from './members/containers/members.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MembersComponent } from './members/containers/members.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SharedModule
   ],
   entryComponents: [
     GroundingAppealComponent

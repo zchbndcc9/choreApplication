@@ -43,6 +43,18 @@ export class ChildrenService {
     );
   }
 
+  getChildDetails(childId: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/childDetails/${childId}`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
+  getChildAvgRating(childId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.baseUrl}/children/${childId}/avg-rating`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
+  }
+
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     return Observable.throw(exception);
