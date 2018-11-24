@@ -1,8 +1,9 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, concatAll } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from './../../domain/models/member';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Child } from 'src/domain/models';
 
 @Injectable()
 export class ParentsService {
@@ -20,6 +21,11 @@ export class ParentsService {
 
   getParents(familyId: number): Observable<Member[]> {
     return this.httpClient.get<Member[]>(`${this.baseUrl}/getParents/${familyId}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  getChildren(familyId: number): Observable<Child[]> {
+    return this.httpClient.get<Child[]>(`${this.baseUrl}/getChildren/${familyId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

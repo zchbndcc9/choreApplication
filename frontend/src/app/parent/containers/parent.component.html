@@ -32,11 +32,15 @@
           <h1>Members</h1>
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openMemberModal()"><span>Add Fam</span></button>
         </div>
-        <table class="table table-striped rounded">
+        <table *ngIf="members?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let member of members">
-              <td>{{ member.name }}</td>
-              <td>{{ member.type }}</td>
+              <td>{{ member.firstName }} {{ member.lastName }}</td>
+              <td *ngIf="member.isParent">Parent</td>
+              <td *ngIf="!member.isParent">Child</td>
+              <td *ngIf="!member.isParent">
+                <button class="btn btn-sm btn-primary" [routerLink]="['/child', member.userID]">Go To Child Page</button>
+              </td>
             </tr>
           </tbody>
         </table>
