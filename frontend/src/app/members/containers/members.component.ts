@@ -64,7 +64,7 @@ export class MembersComponent implements OnInit {
       this.membersService.editMember(editedMember).subscribe((_member: Member) => {
         console.log(_member);
         if (_member.isParent) {
-          this.parents[index] = { ...this.parents[index], ..._member };
+          // this.parents[index] = { ...this.parents[index], ..._member };
         } else {
           this.children[index] = {...this.children[index], ..._member };
         }

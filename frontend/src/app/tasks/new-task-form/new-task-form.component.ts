@@ -1,8 +1,8 @@
 import { Child } from './../../../domain/models/child';
-import { Task } from '../../../domain/models/task';
+import { Task } from '../../../domain/models';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-new-task-form',
@@ -14,6 +14,7 @@ export class NewTaskFormComponent implements OnInit {
   taskForm: FormGroup;
   task: Task;
   children: Child[];
+  errors: any[];
 
   constructor(
     private fb: FormBuilder, public activeModal: NgbActiveModal
@@ -22,6 +23,7 @@ export class NewTaskFormComponent implements OnInit {
   ngOnInit() {
     this.children = [
       {
+        userID: 5,
         username: 'one',
         firstName: 'sam',
         lastName: 'giles',
@@ -32,7 +34,8 @@ export class NewTaskFormComponent implements OnInit {
         tasks: []
       },
       {
-        username: 'one',
+        userID: 12,
+        username: 'two',
         firstName: 'giles',
         lastName: 'sam',
         isParent: false,
@@ -42,28 +45,55 @@ export class NewTaskFormComponent implements OnInit {
         tasks: []
       }
     ];
-    console.log(this.children);
 
     this.createForm();
   }
 
   createForm() {
     this.taskForm = this.fb.group({
-      title: [this.task.title || '', Validators.required],
-      description: [this.task.description || '', Validators.required],
-      deadline: [this.task.deadline || '00-00-0000', Validators.required],
-      award: [this.task.award || '', Validators.required]
+      title: [this.task.taskTitle || '', Validators.required],
+      description: [this.task.taskDescript || '', Validators.required],
+      deadline: [this.task.deadline || '00-00-0000', [Validators.required, this.validDateValidator]],
+      award: [this.task.taskAward || '', Validators.required],
+      assignedTo: [this.task.assigneeID || '', Validators.required]
     });
   }
 
   processTask() {
-    this.activeModal.close(this.taskForm.value);
+    this.task.assigneeID = +this.taskForm.value.assignedTo;
+    this.task.taskTitle = this.taskForm.value.title;
+    this.task.taskDescript = this.taskForm.value.description;
+    this.task.taskAward = this.taskForm.value.award;
+    this.task.deadline = this.taskForm.value.deadline;
+    console.log(this.taskForm.errors);
+    //this.activeModal.close(this.task);
+    this.activeModal.close();
     this.resetForm();
   }
 
   resetForm() {
     this.taskForm.reset();
     this.activeModal.close();
+  }
+
+  validDateValidator(control: AbstractControl) {
+    const valid = new Date(control.value) > new Date();
+    return valid ? null : {'past deadline': true};
+  }
+
+  getAllValidationErrors() {
+    this.errors = [];
+    Object.keys(this.taskForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.taskForm.get(key).errors;
+      const touched = this.taskForm.get(key).touched;
+      if (controlErrors && touched) {
+        Object.keys(controlErrors).forEach(keyError => {
+          let errorMsg = key + " is " + keyError;
+          errorMsg = errorMsg.toUpperCase();
+          this.errors.push(errorMsg);
+        });
+      }
+    });
   }
 
 }

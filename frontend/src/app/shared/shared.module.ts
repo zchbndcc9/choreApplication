@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RatingComponent } from './rating/rating.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ValidationMessagesComponent } from './validation-messages/validation-messages.component';
 
 @NgModule({
   imports: [
@@ -9,10 +10,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule
   ],
   declarations: [
-    RatingComponent
+    RatingComponent,
+    ValidationMessagesComponent
   ],
   exports: [
-    RatingComponent
+    RatingComponent,
+    ValidationMessagesComponent
   ]
 })
 export class SharedModule { }

@@ -32,7 +32,6 @@ import { MembersComponent } from './members/containers/members.component';
     GroundingAppealComponent,
     NavbarComponent,
     TaskNotificationComponent,
-    TasksDisplayComponent,
     NavbarComponent
   ],
   imports: [
