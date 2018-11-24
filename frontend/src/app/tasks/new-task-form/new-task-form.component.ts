@@ -65,9 +65,7 @@ export class NewTaskFormComponent implements OnInit {
     this.task.taskDescript = this.taskForm.value.description;
     this.task.taskAward = this.taskForm.value.award;
     this.task.deadline = this.taskForm.value.deadline;
-    console.log(this.taskForm.errors);
-    //this.activeModal.close(this.task);
-    this.activeModal.close();
+    this.activeModal.close(this.task);
     this.resetForm();
   }
 
