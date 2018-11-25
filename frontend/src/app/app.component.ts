@@ -1,5 +1,5 @@
 import { AppRoutingModule } from './app-routing.module';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,15 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'fam.ly';
-  shouldLoadNav: boolean = false;
 
-  constructor(
-    protected router: Router
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.router.url);
+  ngOnInit(){
   }
+
 }
 
 
