@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -22,8 +21,8 @@ import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.co
 import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
 
 import { MembersComponent } from './members/containers/members.component';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +32,8 @@ import { HttpModule } from '@angular/http';
     NewaccountComponent,
     GroundingAppealComponent,
     NavbarComponent,
-    TaskNotificationComponent
+    TaskNotificationComponent,
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
@@ -47,7 +47,7 @@ import { HttpModule } from '@angular/http';
     ReactiveFormsModule,
     FormsModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    SharedModule
   ],
   entryComponents: [
     GroundingAppealComponent

@@ -1,0 +1,14 @@
+<div id="ratings">
+  <div *ngIf="!editable">
+    <fa-icon *ngFor="let level of [1,2,3,4,5]" class="static-rating-star" [ngStyle]="{'color': numStars >= level ? 'gold' : 'black'}"
+      [icon]="faStar" size="lg">
+    </fa-icon>
+  </div>
+  <div *ngIf="editable">
+    <fa-icon *ngFor="let level of [1,2,3,4,5]" class="rating-star"
+    [ngStyle]="{'color': numStars >= level ? 'gold' : 'black'}"
+    [icon]="faStar" size="lg"
+    (click)="numStarsChanged(level)">
+    </fa-icon>
+  </div>
+</div>

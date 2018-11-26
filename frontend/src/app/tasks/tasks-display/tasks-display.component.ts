@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from 'src/app/models/Task';
+import { Task } from '../../../domain/models';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { TasksService } from 'src/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-tasks-display',
@@ -11,10 +12,11 @@ export class TasksDisplayComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   @Input() tasks: Task[];
+  @Input() isParent: boolean;
   filteredTasks: Task[];
   filterBy: string;
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
     this.filterBy = 'all';
@@ -22,19 +24,23 @@ export class TasksDisplayComponent implements OnInit {
   }
 
   filterTasks() {
-    if (this.filterBy === 'all') {
+    if (!this.tasks) {
+      this.tasks = [];
+      this.filteredTasks = [];
+    }
+    else if (this.filterBy === 'all') {
       this.filteredTasks = this.tasks;
     } else if (this.filterBy === 'overdue') {
       this.filteredTasks = this.tasks.filter(task => !this.isWithinDeadline(task.deadline));
     } else {
-      this.filteredTasks = this.tasks.filter(task => task.status === this.filterBy);
+      this.filteredTasks = this.tasks.filter(task => task.status.toLowerCase() === this.filterBy);
     }
 
     this.filteredTasks = this.filteredTasks.sort((t1, t2) => {
-      if (t1.title < t2.title) {
+      if (t1.taskTitle < t2.taskTitle) {
         return -1;
       }
-      if (t1.title > t2.title) {
+      if (t1.taskTitle > t2.taskTitle) {
         return 1;
       }
       return 0;
@@ -42,6 +48,14 @@ export class TasksDisplayComponent implements OnInit {
   }
 
   isWithinDeadline(deadline) {
-    return deadline > new Date();
+    return new Date(deadline) > new Date();
+  }
+
+  approveTask(task: Task) {
+    task.status = 'complete';
+    this.tasksService.editTask(task).subscribe((result) => {
+      console.log(result);
+      console.log('task changed');
+    });
   }
 }

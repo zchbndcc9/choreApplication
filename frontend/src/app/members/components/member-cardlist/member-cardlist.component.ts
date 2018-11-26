@@ -1,3 +1,4 @@
+import { Child } from 'src/domain/models/child';
 import { Member } from '../../../../domain/models/member';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
@@ -6,11 +7,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./member-cardlist.component.css'],
   template: `
     <div class="card-columns">
-      <ng-container *ngFor="let member of members; trackBy: retrieveId">
+      <ng-container *ngFor="let member of members; let i = index; trackBy: retrieveId">
         <app-member-card
           [member]="member"
-          (ground)="groundMember($event)"
-          (edit)="editMember($event)"></app-member-card>
+          (ground)="toggleGround($event, i)"
+          (edit)="editMember($event, i)"></app-member-card>
       </ng-container>
     </div>
   `
@@ -19,24 +20,26 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class MemberCardlistComponent {
 
   @Input()
-  members: Member[];
+  members: Child[];
 
   @Output()
-  edit = new EventEmitter<Member>();
+  edit = new EventEmitter<any>();
 
   @Output()
-  ground = new EventEmitter<number>();
+  ground = new EventEmitter<any>();
 
   retrieveId(index: number, member: Member) {
-    return member.id;
+    return member.userID;
   }
 
-  editMember(member: Member) {
-    this.edit.emit(member);
+  editMember(member: Child, index: number) {
+    const pair: any = { member, index };
+    this.edit.emit(pair);
   }
 
-  groundMember(memberId: number) {
-    this.ground.emit(memberId);
+  toggleGround(child: Child, index: number) {
+    const pair: any = { child, index };
+    this.ground.emit(pair);
   }
 
 }
