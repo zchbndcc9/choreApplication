@@ -49,14 +49,14 @@ export class ParentComponent implements OnInit {
     // this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
     //   this.familyInfo = result;
     // })
-    this.parentsService.getFamilyInfo(JSON.parse(window.localStorage.getItem('familyID'))).subscribe(result => {
+    this.parentsService.getFamilyInfo(JSON.parse(window.sessionStorage.getItem('familyID'))).subscribe(result => {
       this.familyInfo = result;
       console.log(result);
     });
   }
 
   getUser() {
-    this.parentsService.getUser(JSON.parse(window.localStorage.getItem('userID'))).subscribe(result => {
+    this.parentsService.getUser(JSON.parse(window.sessionStorage.getItem('userID'))).subscribe(result => {
       this.user = result;
     })
   }

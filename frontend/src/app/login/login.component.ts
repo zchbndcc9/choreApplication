@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
       if (result.Success == "true") {
         this.loginSuccess = true;
-        window.localStorage.setItem('userID', JSON.stringify(result.userID));
-        window.localStorage.setItem('familyID', JSON.stringify(result.familyID));
-        window.localStorage.setItem('Success', JSON.stringify(true));
+        window.sessionStorage.setItem('userID', JSON.stringify(result.userID));
+        window.sessionStorage.setItem('familyID', JSON.stringify(result.familyID));
+        window.sessionStorage.setItem('Success', JSON.stringify(true));
         this.router.navigateByUrl(`/family/${result.familyID}`);
       }
       else {

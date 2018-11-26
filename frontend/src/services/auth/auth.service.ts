@@ -11,8 +11,8 @@ export class AuthService {
   ) { }
 
   isAuthenticated(): boolean {
-    if (window.localStorage.getItem('userID') && window.localStorage.getItem('familyID')) {
-      if (JSON.parse(window.localStorage.getItem('Success')) == true) {
+    if (window.sessionStorage.getItem('userID') && window.localStorage.getItem('familyID')) {
+      if (JSON.parse(window.sessionStorage.getItem('Success')) == true) {
         return true;
       }
     }
