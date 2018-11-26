@@ -46,8 +46,10 @@ export class NewaccountComponent implements OnInit {
       if (result.Success == "true") {
         this.loginService.login(this.email, this.password2).subscribe(newResult => {
           if (newResult.Success == "true") {
-            window.localStorage.setItem('currentUser', JSON.stringify(newResult.currentUser));
-            this.router.navigateByUrl('/family');
+            window.localStorage.setItem('userID', JSON.stringify(result.userID));
+            window.localStorage.setItem('familyID', JSON.stringify(result.familyID));
+            window.localStorage.setItem('Success', JSON.stringify(true));
+            this.router.navigateByUrl(`/family/${result.familyID}`);
           }
           else {
             alert("There was an error logging in");

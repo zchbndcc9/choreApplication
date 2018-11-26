@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem('userID', JSON.stringify(result.userID));
         window.localStorage.setItem('familyID', JSON.stringify(result.familyID));
         window.localStorage.setItem('Success', JSON.stringify(true));
-        this.router.navigateByUrl('/family');
+        this.router.navigateByUrl(`/family/${result.familyID}`);
       }
       else {
         this.loginSuccess = false;
