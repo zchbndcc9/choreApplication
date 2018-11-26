@@ -1,3 +1,5 @@
+import { AuthGuardService } from './../services/auth/auth-guard.service';
+import { ViewAllTasksComponent } from './tasks/view-all-tasks/view-all-tasks.component';
 import { LoginComponent } from './login/login.component';
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { MembersComponent } from './members/containers/members.component';
@@ -8,13 +10,13 @@ import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
 import { ChildComponent } from './child/child.component';
 
 const routes: Routes = [
-  { path: 'family/:id', component: ParentComponent },
+  { path: 'family/:id', component: ParentComponent, canActivate: [AuthGuardService]  },
   { path: 'new-account', component: NewaccountComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'family/:id/members', component: MembersComponent },
-  { path: 'family/:id/tasks', component: TasksPageComponent },
-  { path: 'child/:id', component: ChildComponent }
+  { path: 'family/:id/members', component: MembersComponent, canActivate: [AuthGuardService]  },
+  { path: 'family/:id/tasks', component: TasksPageComponent, canActivate: [AuthGuardService]  },
+  { path: 'child/:id', component: ChildComponent, canActivate: [AuthGuardService]  }
 ];
 
 @NgModule({
@@ -23,4 +25,4 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -19,10 +19,10 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
 import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.component';
 import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
-import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 import { MembersComponent } from './members/containers/members.component';
 import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { SharedModule } from './shared/shared.module';
   entryComponents: [
     GroundingAppealComponent
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
