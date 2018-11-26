@@ -26,40 +26,47 @@ export class AuthGuardService implements CanActivate {
     };
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    //if the username and password matches something in the database
+    //if the username and password matches in the database
+    var returnVal = false;
     if (this._authService.isAuthenticated()) {
       //get the userID they used to sign in
       let userID = sessionStorage.getItem('userID');
       let familyID = sessionStorage.getItem('familyID');
       this.getUserDetails(JSON.parse(userID)).subscribe(result => {
-        console.log(result);
         //if they are a child
         if (JSON.parse(result.userType)==0) {
           //check if the stored userID matches the id of the page they are trying to navigate to
-          if (userID==next.params['id']) {
-            return true;
+          if (JSON.parse(userID)==next.params['id']) {
+            console.log('a');
+            returnVal = true;
           }
           else {
-            return false;
+            console.log('b');
+            returnVal = false;
           }
         }
         //if they are a parent
         else {
           //check if the stored familyID matches the id of the family page they are trying to hit
           //the second condition ensures that children cannot view their family page
-          if (familyID==next.params['id'] && (JSON.parse(window.sessionStorage.getItem('userType'))==1)) {
-            return true;
+          if (JSON.parse(familyID)==next.params['id'] && (JSON.parse(window.sessionStorage.getItem('userType'))==1)) {
+            console.log('c');
+            returnVal = true;
           }
           else {
-            return false;
+            console.log('d');
+            returnVal = false;
           }
         }
-      })
-      return false;
+        console.log(returnVal);
+      });
+      return returnVal;
     }
-    console.log('navigate to login page');
-    this._router.navigate(['/login']);
-    return false;
+    else {
+      this._router.navigate([this._router.url]);
+      return returnVal;
+    }
+    console.log('i got here');
   }
 
   getUserDetails(userID: number): Observable<any> {

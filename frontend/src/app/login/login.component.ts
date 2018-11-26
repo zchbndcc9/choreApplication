@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         window.sessionStorage.setItem('Success', JSON.stringify(true));
         this.loginService.getUserDetails(result.userID).subscribe(newResult => {
           window.sessionStorage.setItem('userType', JSON.stringify(newResult.userType));
+          console.log('userType set to ' + window.sessionStorage.getItem('userType'));
           if (JSON.parse(newResult.userType)==1) {
             this.router.navigateByUrl(`/family/${result.familyID}`);
           }
