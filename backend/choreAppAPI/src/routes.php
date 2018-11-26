@@ -557,7 +557,7 @@ $app->get('/getfamilyInfo/{id}', function($request, $response, $args){
 });
 $app->get('/getChildren/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT UD.username, UD.userID, UD.userType, U.lastName, U.firstName FROM UserDetails UD inner join Users U on UD.userID = U.userID WHERE UD.familyID=:id AND UD.userType = 0");
+    $sth = $this->db->prepare("SELECT UD.username, UD.userID, UD.userType, U.lastName, U.firstName, CD.groundedStatus FROM UserDetails UD inner join Users U on UD.userID = U.userID inner join ChildDetails CD on U.userID = CD.userID WHERE UD.familyID=:id AND UD.userType = 0");
     $sth->bindParam("id", $args['id']);
     $sth->execute();
     $userInfo = $sth->fetchAll();
