@@ -1,5 +1,4 @@
 import { AuthGuardService } from './../services/auth/auth-guard.service';
-import { ViewAllTasksComponent } from './tasks/view-all-tasks/view-all-tasks.component';
 import { LoginComponent } from './login/login.component';
 import { NewaccountComponent } from './newaccount/newaccount.component';
 import { MembersComponent } from './members/containers/members.component';
