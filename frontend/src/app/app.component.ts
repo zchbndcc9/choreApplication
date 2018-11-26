@@ -13,6 +13,9 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(){
+    window.sessionStorage.clear();
+    console.log('storage cleared');
+    console.log(window.sessionStorage.getItem('userID'));
   }
 
 }

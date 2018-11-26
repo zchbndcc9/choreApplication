@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +6,6 @@ import { LoginService } from '../login/login.service';
 export class AuthService {
 
   constructor(
-    private _loginService: LoginService
   ) { }
 
   isAuthenticated(): boolean {

@@ -49,6 +49,7 @@ export class NewaccountComponent implements OnInit {
             window.sessionStorage.setItem('userID', JSON.stringify(result.userID));
             window.sessionStorage.setItem('familyID', JSON.stringify(result.familyID));
             window.sessionStorage.setItem('Success', JSON.stringify(true));
+            window.sessionStorage.setItem('userType', JSON.stringify(1));
             this.router.navigateByUrl(`/family/${result.familyID}`);
           }
           else {

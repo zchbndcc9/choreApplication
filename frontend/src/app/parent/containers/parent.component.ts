@@ -46,12 +46,8 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyInfo() {
-    // this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
-    //   this.familyInfo = result;
-    // })
     this.parentsService.getFamilyInfo(JSON.parse(window.sessionStorage.getItem('familyID'))).subscribe(result => {
       this.familyInfo = result;
-      console.log(result);
     });
   }
 
@@ -62,7 +58,7 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyMembers() {
-    forkJoin([this.parentsService.getParents(this.familyID), this.parentsService.getChildren(this.familyID)]).subscribe(results => {
+    forkJoin([this.parentsService.getParents(JSON.parse(window.sessionStorage.getItem('familyID'))), this.parentsService.getChildren(JSON.parse(window.sessionStorage.getItem('familyID')))]).subscribe(results => {
       let parents = results[0];
       let children = results[1];
       this.members = parents.concat(children);
@@ -70,7 +66,7 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyTasks() {
-    this.tasksService.getUserTasks(this.parentID).subscribe(result => {
+    this.tasksService.getUserTasks(JSON.parse(window.sessionStorage.getItem('userID'))).subscribe(result => {
       this.tasks = result;
       this.countCompleteTasks();
     })
