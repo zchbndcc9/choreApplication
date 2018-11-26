@@ -1,9 +1,9 @@
-<body *ngIf="isLoaded">
+<body *ngIf="isLoaded && tasks && members && familyInfo && user">
   <div class="jumbotron" id="header">
     <div class="container" id="jumbotron-container">
       <div class="row justify-content-around align-items-center">
         <div id="family-info">
-          <h1 id="jumbo-title">{{userInfo.lastName}} Family Page</h1>
+          <h1 id="jumbo-title">{{ user.lastName }} Family</h1>
           <i>Fam since {{ familyInfo?.registrationDate | date }}</i>
           <br>
           <hr>

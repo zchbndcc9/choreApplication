@@ -27,7 +27,7 @@ export class ParentComponent implements OnInit {
   tasks: Task[];
   members: Member[];
   familyInfo: any;
-  userInfo: any;
+  user: any;
 
   isLoaded: boolean = false;
 
@@ -39,7 +39,7 @@ export class ParentComponent implements OnInit {
 
   ngOnInit() {
     this.getFamilyInfo();
-    this.getUserInfo();
+    this.getUser();
     this.getFamilyMembers();
     this.getFamilyTasks();
     this.isLoaded = true;
@@ -55,10 +55,9 @@ export class ParentComponent implements OnInit {
     });
   }
 
-  getUserInfo() {
+  getUser() {
     this.parentsService.getUser(JSON.parse(window.localStorage.getItem('userID'))).subscribe(result => {
-      this.userInfo = result;
-      console.log(this.userInfo);
+      this.user = result;
     })
   }
 
