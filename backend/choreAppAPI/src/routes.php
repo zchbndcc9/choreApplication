@@ -617,26 +617,12 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 
 $app->get('/getTasks/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID WHERE T.userID=:id");
+    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
+        inner join Users U on T.userID = U.userID WHERE T.userID=:id");
     $sth->bindParam("id", $args['id']);
 
     $sth->execute();
-    // $userInfo = $sth->fetchAll();
-    $userInfo = $sth->fetch(PDO::FETCH_OBJ);
-
-    $stmt = $this->db->prepare("SELECT * FROM Users WHERE userID = :id");
-    $stmt->bindParam("id", $args['id']);
-
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_OBJ);
-
-    $lastName = 'lastName';
-    $lastNameVal = $user->lastName;
-    $firstName = 'firstName';
-    $firstNameVal = $user->firstName;
-
-    $userInfo[$lastName] = $lastNameVal;
-    $userInfo[$firstName] = $firstNameVal;
+    $userInfo = $sth->fetchAll();
 
     return $this->response->withJson($userInfo);
     
