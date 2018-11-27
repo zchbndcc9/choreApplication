@@ -9,6 +9,7 @@ import { ParentsService } from '../parents.service';
 import { ChildrenService } from 'src/services/children/children.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { MembersService } from 'src/app/members/members.service';
 
 @Component({
   selector: 'app-parent',
@@ -21,28 +22,40 @@ export class ParentComponent implements OnInit {
   faPlus = faPlus;
   faWindowClose = faWindowClose;
 
-  familyID = 3;
-  parentID = 3;
+  familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
+  userID = JSON.parse(window.sessionStorage.getItem('userID'));
 
   tasks: Task[];
   members: Member[];
   familyInfo: any;
+  user: any;
+
+  isLoaded: boolean = false;
 
   numCompletedTasks: number = 0;
 
   constructor(private modalService: NgbModal,
               private tasksService: TasksService,
-              private parentsService: ParentsService) { }
+              private parentsService: ParentsService,
+              private membersService: MembersService) { }
 
   ngOnInit() {
     this.getFamilyInfo();
+    this.getUser();
     this.getFamilyMembers();
     this.getFamilyTasks();
+    this.isLoaded = true;
   }
 
   getFamilyInfo() {
     this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
       this.familyInfo = result;
+    });
+  }
+
+  getUser() {
+    this.parentsService.getUser(this.userID).subscribe(result => {
+      this.user = result;
     })
   }
 
@@ -55,7 +68,7 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyTasks() {
-    this.tasksService.getUserTasks(this.parentID).subscribe(result => {
+    this.tasksService.getUserTasks(this.userID).subscribe(result => {
       this.tasks = result;
       this.countCompleteTasks();
     })
@@ -71,17 +84,28 @@ export class ParentComponent implements OnInit {
     modalRef.componentInstance.member = {};
     modalRef.componentInstance.alreadyMember = false;
 
-    modalRef.result.catch(error => {
+    modalRef.result.then((member: Member) => {
+      console.log(member);
+
+      this.membersService.addMember(this.familyID, member).subscribe(result => {
+        this.getFamilyMembers();
+      })
+    }).catch(error => {
       console.error(error);
     });
   }
 
   openTaskModal(event: string = 'create') {
+    let children = this.members.filter(member => {
+      return member.userType === 0;
+    });
+
     const modalRef = this.modalService.open(NewTaskFormComponent);
     modalRef.componentInstance.task = {};
+    modalRef.componentInstance.children = children;
 
     modalRef.result.then((task: Task) => {
-      task.userID = this.parentID;
+      task.userID = this.userID;
       task.status = "incomplete";
       task.taskRating = 0;
       task.notified = 0;

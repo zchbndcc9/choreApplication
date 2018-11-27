@@ -1,17 +1,15 @@
-<body>
+<body *ngIf="isLoaded && tasks && members && familyInfo && user">
   <div class="jumbotron" id="header">
     <div class="container" id="jumbotron-container">
       <div class="row justify-content-around align-items-center">
         <div id="family-info">
-          <h1 id="jumbo-title">Family Page</h1>
+          <h1 id="jumbo-title">{{ user?.lastName }} Family</h1>
           <i>Fam since {{ familyInfo?.registrationDate | date }}</i>
           <br>
           <hr>
           <span><b>Address</b>: {{ familyInfo?.address }}</span>
           <br>
           <span><b>Email</b>: {{ familyInfo?.email }}</span>
-          <br>
-          <span><b>Phone</b>: {{ familyInfo?.phone }}</span>
         </div>
         <div class="stats d-flex flex-column">
           <h2 class="align-self-center mb-1">Stats</h2>
@@ -39,13 +37,18 @@
           <h1>Members</h1>
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openMemberModal()"><span>Add Fam</span></button>
         </div>
+        <div *ngIf="members?.length == 0">
+          <div class="alert alert-primary" role="alert">
+            No members to display
+          </div>
+        </div>
         <table *ngIf="members?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let member of members">
               <td>{{ member.firstName }} {{ member.lastName }}</td>
-              <td *ngIf="member.isParent">Parent</td>
-              <td *ngIf="!member.isParent">Child</td>
-              <td *ngIf="!member.isParent">
+              <td *ngIf="member.userType == 1">Parent</td>
+              <td *ngIf="member.userType == 0">Child</td>
+              <td *ngIf="member.userType == 0">
                 <button class="btn btn-sm btn-warning" [routerLink]="['/child', member.userID]">Go To Child Page</button>
               </td>
             </tr>
@@ -61,7 +64,12 @@
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openTaskModal()" data-target="#newTaskModal"><span>New
               Task</span></button>
         </div>
-        <table class="table table-striped rounded">
+        <div *ngIf="tasks?.length == 0">
+          <div class="alert alert-primary" role="alert">
+            No tasks to display
+          </div>
+        </div>
+        <table *ngIf="tasks?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>

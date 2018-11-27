@@ -49,7 +49,7 @@ export class MembersComponent implements OnInit {
     modal.result.then((newMember: Member) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
         console.dir(_newMember);
-        const type = _newMember.isParent ? this.parents : this.children;
+        const type = _newMember.userType ? this.parents : this.children;
         type.push(_newMember);
       });
     }).catch(error => {
@@ -58,13 +58,15 @@ export class MembersComponent implements OnInit {
   }
 
   editMember({member, index}) {
+    console.dir(member, index);
     const modal = this.openMemberModal(member, true);
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
       this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
-        if (_member.isParent) {
-          // this.parents[index] = { ...this.parents[index], ..._member };
+        console.log(_member);
+        if (_member.userType) {
+          this.parents[index] = { ...this.parents[index], ..._member };
         } else {
           this.children[index] = {...this.children[index], ..._member };
         }
