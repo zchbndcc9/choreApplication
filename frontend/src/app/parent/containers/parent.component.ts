@@ -77,8 +77,13 @@ export class ParentComponent implements OnInit {
   }
 
   openTaskModal(event: string = 'create') {
+    let children = this.members.filter(member => {
+      return !member.isParent;
+    });
+
     const modalRef = this.modalService.open(NewTaskFormComponent);
     modalRef.componentInstance.task = {};
+    modalRef.componentInstance.children = children;
 
     modalRef.result.then((task: Task) => {
       task.userID = this.parentID;
