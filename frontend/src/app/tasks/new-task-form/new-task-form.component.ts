@@ -1,6 +1,6 @@
 import { Child } from './../../../domain/models/child';
 import { Task } from '../../../domain/models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, Valid
 })
 export class NewTaskFormComponent implements OnInit {
 
+  // @Input() children: Child[];
   taskForm: FormGroup;
   task: Task;
   children: Child[];
@@ -21,31 +22,6 @@ export class NewTaskFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.children = [
-      {
-        userID: 5,
-        username: 'one',
-        firstName: 'sam',
-        lastName: 'giles',
-        isParent: false,
-        rating: 5,
-        isGrounded: false,
-        infractions: [],
-        tasks: []
-      },
-      {
-        userID: 12,
-        username: 'two',
-        firstName: 'giles',
-        lastName: 'sam',
-        isParent: false,
-        rating: 1,
-        isGrounded: false,
-        infractions: [],
-        tasks: []
-      }
-    ];
-
     this.createForm();
   }
 
