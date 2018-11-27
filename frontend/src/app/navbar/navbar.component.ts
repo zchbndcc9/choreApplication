@@ -10,9 +10,14 @@ export class NavbarComponent implements OnInit {
   faCog = faCog;
   faBell = faBell;
 
+  familyID: string;
+  userType: string;
+
   constructor() { }
 
   ngOnInit() {
+    this.familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
   }
+  // if child the only page that should apear is fam.ly
 
 }
