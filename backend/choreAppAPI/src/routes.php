@@ -138,7 +138,7 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
         VALUES (:userID, :familyID, '', '', FALSE)";
         $stmt3 = $this->db->prepare($cd_sql);
         $stmt3->bindParam("userID",$userID);
-        $stmt3->bindParam("familyID",$familyID);
+        $stmt3->bindParam("familyID",$input['familyID']);
         $stmt3->execute();
     }
 
