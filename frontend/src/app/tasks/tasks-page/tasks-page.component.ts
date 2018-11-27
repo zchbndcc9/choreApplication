@@ -34,6 +34,7 @@ export class TasksPageComponent implements OnInit {
     this.tasksService
       .getUserTasks(this.familyID)
       .subscribe((results) => {
+        console.log(results);
         this.tasks = results;
         this.isDataAvailable = true;
       });

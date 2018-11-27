@@ -105,7 +105,8 @@ export class ParentComponent implements OnInit {
     modalRef.componentInstance.children = children;
 
     modalRef.result.then((task: Task) => {
-      task.userID = this.userID;
+      task.userID = JSON.parse(window.sessionStorage.getItem('userID'));
+
       task.status = "incomplete";
       task.taskRating = 0;
       task.notified = 0;

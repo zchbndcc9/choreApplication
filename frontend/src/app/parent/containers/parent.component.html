@@ -64,13 +64,14 @@
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openTaskModal()" data-target="#newTaskModal"><span>New
               Task</span></button>
         </div>
-        <div *ngIf="tasks?.length == 0">
+        <!-- <div *ngIf="tasks?.length == 0">
           <div class="alert alert-primary" role="alert">
             No tasks to display
           </div>
-        </div>
-        <table *ngIf="tasks?.length > 0" class="table table-striped rounded">
+        </div> -->
+        <table class="table table-striped rounded">
           <tbody>
+            <tr *ngIf="tasks?.length == 0"><td>No Tasks To Display</td></tr>
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>
               <td>{{ task.assigneeID }}</td>
