@@ -133,14 +133,14 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
     $stmt->bindParam("userType",$input['userType']);
     $stmt->execute();
 
-    if($input['userType'] == 0 || $input['userType'] == FALSE){
-        $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
-        VALUES (:userID, :familyID, '', '', FALSE)";
-        $stmt3 = $this->db->prepare($cd_sql);
-        $stmt3->bindParam("userID",$userID);
-        $stmt3->bindParam("familyID",$familyID);
-        $stmt3->execute();
-    }
+    // if($input['userType'] == 0 || $input['userType'] == FALSE){
+    //     $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
+    //     VALUES (:userID, :familyID, '', '', FALSE)";
+    //     $stmt3 = $this->db->prepare($cd_sql);
+    //     $stmt3->bindParam("userID",$userID);
+    //     $stmt3->bindParam("familyID",$familyID);
+    //     $stmt3->execute();
+    // }
 
     $obj = (object) [
         'userID' => $userID,
