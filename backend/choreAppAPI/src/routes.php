@@ -110,7 +110,7 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
 
 
     $input = $request->getParsedBody();
-    echo $input;
+    echo json_encode($anArray);
 
     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
             VALUES (:familyID, :lastName, :firstName)";
