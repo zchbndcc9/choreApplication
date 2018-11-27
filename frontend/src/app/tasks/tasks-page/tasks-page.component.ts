@@ -22,6 +22,7 @@ export class TasksPageComponent implements OnInit {
     this.tasksService
       .getUserTasks(this.activatedRoute.snapshot.params['id'])
       .subscribe((results) => {
+        console.log(results);
         this.tasks = results;
         this.isParent = true; // this will be an api call later on
         this.isDataAvailable = true;

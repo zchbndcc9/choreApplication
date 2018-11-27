@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
-import { Task } from '../../domain/models';
+import { Task, Member } from '../../domain/models';
 
 @Injectable()
 export class TasksService {
