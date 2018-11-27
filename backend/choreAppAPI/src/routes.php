@@ -449,7 +449,7 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    $result = $sth->fetchObject();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
     return $this->response->withJson($result);
 });
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
@@ -458,7 +458,7 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    $result = $sth->fetchObject();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
     return $this->response->withJson($result);
 });
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
