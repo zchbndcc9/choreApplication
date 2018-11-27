@@ -19,6 +19,7 @@ export class MembersComponent implements OnInit {
   parents: Member[];
   children: Child[];
   famID: number;
+  isLoading: boolean;
 
   constructor(
     protected membersService: MembersService,
@@ -31,14 +32,23 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     this.children = [];
+    this.isLoading = true;
     this.route.params.subscribe(params => {
       this.famID = params['id'];
       this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
       this.childrenService.getChildren(this.famID).subscribe(children => {
         this.childrenService.getDetails(children).subscribe(child => {
-          child = {...child, isGrounded: !!+child.groundedStatus}
+          child = {...child, isGrounded: !!+child.groundedStatus};
+          // Code src:
+          // https://blog.angularindepth.com/practical-rxjs-in-the-wild-requests-with-concatmap-vs-mergemap-vs-forkjoin-11e5b2efe293
           this.children.push(child);
-        });
+          this.children.sort((a: Child, b: Child) => {
+            const aIndex = children.findIndex(_child => _child.userID === a.userID);
+            const bIndex = children.findIndex(_child => _child.userID === b.userID);
+            return aIndex - bIndex;
+          });
+        }, error => console.log(error),
+        () => this.isLoading = false);
       });
     });
   }
@@ -60,6 +70,7 @@ export class MembersComponent implements OnInit {
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
       this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
+        console.dir(_member);
         if (_member.userType) {
           this.parents[index] = { ...this.parents[index], ..._member };
         } else {
