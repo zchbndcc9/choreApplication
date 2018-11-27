@@ -33,12 +33,12 @@
         <h1>Parents</h1>
         <table class="table table-striped rounded">
           <tbody>
-            <ng-container *ngFor="let parent of parents">
+            <ng-container *ngFor="let parent of parents; let i = index">
               <tr>
                 <td>{{ parent.firstName + " " + parent.lastName }}</td>
                 <td><button
                   class="btn btn-primary"
-                  (onClick)="editMember(parent)">Edit</button></td>
+                  (click)="editMember({member: parent, index: i})">Edit</button></td>
               </tr>
             </ng-container>
           </tbody>

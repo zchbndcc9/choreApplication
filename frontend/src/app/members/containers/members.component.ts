@@ -48,7 +48,6 @@ export class MembersComponent implements OnInit {
 
     modal.result.then((newMember: Member) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
-        console.dir(_newMember);
         const type = _newMember.userType ? this.parents : this.children;
         type.push(_newMember);
       });
