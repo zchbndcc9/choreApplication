@@ -39,7 +39,7 @@ export class MembersService {
       .delete(`${this.baseUrl}/users/delete/${memberId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
-  
+
   getMember(memberId: number): Observable<Member> {
     return this.httpClient.get<Member>(`${this.baseUrl}/users/${memberId}`, this.httpOptions).pipe(
       catchError(this.handleException)

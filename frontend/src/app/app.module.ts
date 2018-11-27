@@ -34,7 +34,6 @@ import { SharedModule } from './shared/shared.module';
     GroundingAppealComponent,
     NavbarComponent,
     TaskNotificationComponent,
-    TasksDisplayComponent,
     NavbarComponent,
     MemberDeleteModalComponent
   ],

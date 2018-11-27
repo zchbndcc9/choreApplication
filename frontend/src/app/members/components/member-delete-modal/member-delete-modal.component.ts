@@ -15,8 +15,7 @@ import { Component } from '@angular/core';
         </button>
       </div>
     </div>
-  `,
-  styleUrls: ['./member-delete-modal.component.css']
+  `
 })
 
 export class MemberDeleteModalComponent {
