@@ -1,0 +1,9 @@
+<body>
+  <div class="jumbotron" id="header">
+    <div class="container">
+      <h1 id="jumbo-title">Doe Family Tasks</h1>
+      <i>Fam since October 2018</i>
+    </div>
+  </div>
+  <app-tasks-display *ngIf="isDataAvailable" [tasks]="tasks" [isParent]="isParent"></app-tasks-display>
+</body>
