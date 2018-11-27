@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(){
-    window.localStorage.setItem('Success', JSON.stringify(false));
   }
 
 }

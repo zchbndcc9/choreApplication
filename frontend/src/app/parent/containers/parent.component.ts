@@ -27,6 +27,9 @@ export class ParentComponent implements OnInit {
   tasks: Task[];
   members: Member[];
   familyInfo: any;
+  user: any;
+
+  isLoaded: boolean = false;
 
   numCompletedTasks: number = 0;
 
@@ -36,18 +39,26 @@ export class ParentComponent implements OnInit {
 
   ngOnInit() {
     this.getFamilyInfo();
+    this.getUser();
     this.getFamilyMembers();
     this.getFamilyTasks();
+    this.isLoaded = true;
   }
 
   getFamilyInfo() {
-    this.parentsService.getFamilyInfo(this.familyID).subscribe(result => {
+    this.parentsService.getFamilyInfo(JSON.parse(window.sessionStorage.getItem('familyID'))).subscribe(result => {
       this.familyInfo = result;
+    });
+  }
+
+  getUser() {
+    this.parentsService.getUser(JSON.parse(window.sessionStorage.getItem('userID'))).subscribe(result => {
+      this.user = result;
     })
   }
 
   getFamilyMembers() {
-    forkJoin([this.parentsService.getParents(this.familyID), this.parentsService.getChildren(this.familyID)]).subscribe(results => {
+    forkJoin([this.parentsService.getParents(JSON.parse(window.sessionStorage.getItem('familyID'))), this.parentsService.getChildren(JSON.parse(window.sessionStorage.getItem('familyID')))]).subscribe(results => {
       let parents = results[0];
       let children = results[1];
       this.members = parents.concat(children);
@@ -55,7 +66,7 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyTasks() {
-    this.tasksService.getUserTasks(this.parentID).subscribe(result => {
+    this.tasksService.getUserTasks(JSON.parse(window.sessionStorage.getItem('userID'))).subscribe(result => {
       this.tasks = result;
       this.countCompleteTasks();
     })

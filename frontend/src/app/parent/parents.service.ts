@@ -24,6 +24,11 @@ export class ParentsService {
       .pipe(catchError(this.handleException));
   }
 
+  getUser(userID: number): Observable<any> {
+    return this.httpClient.get<Member[]>(`${this.baseUrl}/users/${userID}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
   getParents(familyId: number): Observable<Member[]> {
     return this.httpClient.get<Member[]>(`${this.baseUrl}/getParents/${familyId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
