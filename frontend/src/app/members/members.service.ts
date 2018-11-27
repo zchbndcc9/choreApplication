@@ -20,7 +20,7 @@ export class MembersService {
   };
 
   addMember(famID: number, member: Member): Observable<Member> {
-    const req = {...member, familyID: famID, userType: member.isParent ? '1' : '0'};
+    const req = {...member, familyID: famID, userType: member.userType == 1 ? '1' : '0'};
     return this.httpClient
       .post<Member>(`${this.baseUrl}/familyMember/add`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
@@ -31,6 +31,12 @@ export class MembersService {
     return this.httpClient
       .put<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
+  }
+
+  getMember(memberId: number): Observable<Member> {
+    return this.httpClient.get<Member>(`${this.baseUrl}/users/${memberId}`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
   }
 
   toggleGround(isGrounded: boolean, childId: number): Observable<Child> {

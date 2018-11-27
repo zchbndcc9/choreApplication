@@ -48,7 +48,7 @@ export class MembersComponent implements OnInit {
     modal.result.then((newMember: Member) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
         console.dir(_newMember);
-        const type = _newMember.isParent ? this.parents : this.children;
+        const type = _newMember.userType == 1 ? this.parents : this.children;
         type.push(_newMember);
       });
     }).catch(error => {
@@ -63,8 +63,8 @@ export class MembersComponent implements OnInit {
       const editedMember = {...member, ...updates };
       this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
         console.log(_member);
-        if (_member.isParent) {
-          this.parents[index] = { ...this.parents[index], ..._member };
+        if (_member.userType == 1) {
+          // this.parents[index] = { ...this.parents[index], ..._member };
         } else {
           this.children[index] = {...this.children[index], ..._member };
         }

@@ -1,3 +1,4 @@
+import { NavbarComponent } from './../navbar/navbar.component';
 import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
 import { MemberCardlistComponent } from './components/member-cardlist/member-cardlist.component';
