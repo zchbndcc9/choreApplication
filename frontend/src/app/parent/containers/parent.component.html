@@ -39,6 +39,11 @@
           <h1>Members</h1>
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openMemberModal()"><span>Add Fam</span></button>
         </div>
+        <div *ngIf="members?.length == 0">
+          <div class="alert alert-primary" role="alert">
+            No members to display
+          </div>
+        </div>
         <table *ngIf="members?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let member of members">
@@ -61,7 +66,12 @@
           <button class="fast-animated scale plus btn btn-success add-btn" (click)="openTaskModal()" data-target="#newTaskModal"><span>New
               Task</span></button>
         </div>
-        <table class="table table-striped rounded">
+        <div *ngIf="tasks?.length == 0">
+          <div class="alert alert-primary" role="alert">
+            No tasks to display
+          </div>
+        </div>
+        <table *ngIf="tasks?.length > 0" class="table table-striped rounded">
           <tbody>
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>
