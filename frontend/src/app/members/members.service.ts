@@ -20,7 +20,7 @@ export class MembersService {
   };
 
   addMember(famID: number, member: Member): Observable<Member> {
-    const req = {...member, familyID: famID, userType: member.userType == 1 ? '1' : '0'};
+    const req = {...member, familyID: famID};
     return this.httpClient
       .post<Member>(`${this.baseUrl}/familyMember/add`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
