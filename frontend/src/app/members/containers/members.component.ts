@@ -8,7 +8,7 @@ import { MembersService } from './../members.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-members',
@@ -36,6 +36,7 @@ export class MembersComponent implements OnInit {
       this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
       this.childrenService.getChildren(this.famID).subscribe(children => {
         this.childrenService.getDetails(children).subscribe(child => {
+          child = {...child, isGrounded: !!+child.groundedStatus}
           this.children.push(child);
         });
       });
@@ -61,7 +62,6 @@ export class MembersComponent implements OnInit {
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
       this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
-        console.log(_member);
         if (_member.userType) {
           this.parents[index] = { ...this.parents[index], ..._member };
         } else {
@@ -79,16 +79,15 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
-          this.children[index].isGrounded = !this.children[index].isGrounded;
-        });
+        this.membersService.toggleGround(child.isGrounded, child.userID);
+        this.children[index] = {...child, isGrounded: !child.isGrounded};
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
-        this.children[index].isGrounded = !this.children[index].isGrounded;
-      });
+      this.membersService.toggleGround(child.isGrounded, child.userID);
+      this.children[index] = {...child, isGrounded: !child.isGrounded };
     }
+    console.log(this.children[index].isGrounded);
   }
 
   openGroundModal() {
