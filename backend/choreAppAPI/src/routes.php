@@ -130,6 +130,15 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
     $stmt->bindParam("userType",$input['userType']);
     $stmt->execute();
 
+    if($input['userType'] == FALSE){
+        $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
+        VALUES (:userID, :familyID, '', '', FALSE)";
+        $stmt3 = $this->db->prepare($cd_sql);
+        $stmt3->bindParam("userID",$userID);
+        $stmt3->bindParam("familyID",$familyID);
+        $stmt3->execute();
+    }
+
     $obj = (object) [
         'userID' => $userID,
         'familyID' => $input['familyID'],
@@ -621,16 +630,15 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-    // $lastName = 'lastName';
-    // $lastNameVal = $user->lastName;
-    // $firstName = 'firstName';
-    // $firstNameVal = $user->firstName;
+    $lastName = 'lastName';
+    $lastNameVal = $user->lastName;
+    $firstName = 'firstName';
+    $firstNameVal = $user->firstName;
 
-    // $userInfo[$lastName] = $lastNameVal;
-    // $userInfo[$firstName] = $firstNameVal;
+    $userInfo[$lastName] = $lastNameVal;
+    $userInfo[$firstName] = $firstNameVal;
 
-    // return $this->response->withJson($userInfo);
-    return json_encode(array_merge(json_decode($user, true),json_decode($userInfo, true)));
+    return $this->response->withJson($userInfo);
     
 });
 
