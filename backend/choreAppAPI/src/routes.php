@@ -602,6 +602,7 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
     $sth->bindParam("id", $args['id']);
     $sth->execute();
     $userInfo = $sth->fetchObject();
+
     return $this->response->withJson($userInfo);
 });
 
@@ -611,7 +612,8 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
     $sth->bindParam("id", $args['id']);
 
     $sth->execute();
-    $userInfo = $sth->fetchAll();
+    // $userInfo = $sth->fetchAll();
+    $userInfo = $sth->fetch(PDO::FETCH_OBJ);
 
     $stmt = $this->db->prepare("SELECT * FROM Users WHERE userID = :id");
     $stmt->bindParam("id", $args['id']);
@@ -619,15 +621,16 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-    $lastName = 'lastName';
-    $lastNameVal = $user->lastName;
-    $firstName = 'firstName';
-    $firstNameVal = $user->firstName;
+    // $lastName = 'lastName';
+    // $lastNameVal = $user->lastName;
+    // $firstName = 'firstName';
+    // $firstNameVal = $user->firstName;
 
-    $userInfo[$lastName] = $lastNameVal;
-    $userInfo[$firstName] = $firstNameVal;
+    // $userInfo[$lastName] = $lastNameVal;
+    // $userInfo[$firstName] = $firstNameVal;
 
-    return $this->response->withJson($userInfo);
+    // return $this->response->withJson($userInfo);
+    return json_encode(array_merge(json_decode($user, true),json_decode($userInfo, true)));
     
 });
 
