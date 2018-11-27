@@ -39,7 +39,7 @@ export class MemberFormComponent implements OnInit {
       firstName: [this.member.firstName || '', Validators.required],
       lastName: [this.member.lastName || '', Validators.required],
       username: [this.member.username || '', Validators.required],
-      isParent: [this.member.isParent || false]
+      userType: [this.member.userType || 0]
     });
 
     // Conditional initialization of password form
@@ -56,6 +56,11 @@ export class MemberFormComponent implements OnInit {
 
   processMemberInfo() {
     let memberObj = Object.assign({}, this.memberForm.value);
+
+    if (memberObj.userType) {
+      memberObj.userType = 1;
+    }
+
     if (!this.alreadyMember) {
       memberObj = Object.assign(memberObj, {password: this.passwordForm.controls.password.value});
     }

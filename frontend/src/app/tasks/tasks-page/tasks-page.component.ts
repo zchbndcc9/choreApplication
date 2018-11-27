@@ -13,7 +13,6 @@ export class TasksPageComponent implements OnInit {
 
   tasks: Task[];
   isDataAvailable: boolean = false;
-  isParent: boolean = false;
 
   constructor(private tasksService: TasksService,
               private activatedRoute: ActivatedRoute) { }
@@ -23,7 +22,6 @@ export class TasksPageComponent implements OnInit {
       .getUserTasks(this.activatedRoute.snapshot.params['id'])
       .subscribe((results) => {
         this.tasks = results;
-        this.isParent = true; // this will be an api call later on
         this.isDataAvailable = true;
       });
   }
