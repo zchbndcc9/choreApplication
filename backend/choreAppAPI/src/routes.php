@@ -135,7 +135,7 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
 
     if($input['userType'] == '0'){
         $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
-        VALUES (:userID, :familyID, '', '', FALSE)";
+        VALUES (:userID, :familyID, 3, '', FALSE)";
         $stmt3 = $this->db->prepare($cd_sql);
         $stmt3->bindParam("userID",$userID);
         $stmt3->bindParam("familyID",$input['familyID']);
