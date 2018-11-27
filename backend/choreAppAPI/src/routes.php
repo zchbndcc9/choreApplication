@@ -358,90 +358,95 @@ $app->delete('/infractions/delete/[{infracID}]', function ($request, $response, 
 //////////////////////////
 
 $app->put('/users/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE Users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$args['userID']);
-  $sth->bindParam("familyID",$input['familyID']);
-  $sth->bindParam("lastName",$input['lastName']);
-  $sth->bindParam("firstName",$input['firstName']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE Users set familyID=:familyID, lastName=:lastName, firstName=:firstName where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("familyID",$input['familyID']);
+    $sth->bindParam("lastName",$input['lastName']);
+    $sth->bindParam("firstName",$input['firstName']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE UserDetails set familyID=:familyID, username=:username, password=:password, userType=:userType where userID=:userID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$args['userID']);
-  $sth->bindParam("familyID",$input['familyID']);
-  $sth->bindParam("username",$input['username']);
-  $sth->bindParam("password",$input['password']);
-  $sth->bindParam("userType",$input['userType']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE UserDetails set familyID=:familyID, username=:username, password=:password, userType=:userType where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("familyID",$input['familyID']);
+    $sth->bindParam("username",$input['username']);
+    $sth->bindParam("password",$input['password']);
+    $sth->bindParam("userType",$input['userType']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
 
 $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE FamilyInfo set email=:email, address=:address, phone=:phone, registrationDate=:registrationDate where familyID=:familyID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("familyID",$args['familyID']);
-  $sth->bindParam("email",$input['email']);
-  $sth->bindParam("address",$input['address']);
-  $sth->bindParam("phone",$input['phone']);
-  $sth->bindParam("registrationDate",$input['registrationDate']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE FamilyInfo set email=:email, address=:address, phone=:phone, registrationDate=:registrationDate where familyID=:familyID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("familyID",$args['familyID']);
+    $sth->bindParam("email",$input['email']);
+    $sth->bindParam("address",$input['address']);
+    $sth->bindParam("phone",$input['phone']);
+    $sth->bindParam("registrationDate",$input['registrationDate']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
 
 $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where userID=:userID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$args['userID']);
-  $sth->bindParam("assigneeID",$input['assigneeID']);
-  $sth->bindParam("taskID",$input['taskID']);
-  $sth->bindParam("status",$input['status']);
-  $sth->bindParam("notified",$input['notified']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("assigneeID",$input['assigneeID']);
+    $sth->bindParam("taskID",$input['taskID']);
+    $sth->bindParam("status",$input['status']);
+    $sth->bindParam("notified",$input['notified']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
+
 $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE Infractions set infracID=:infracID, infracDescript=:infracDescript, notified=:notified where userID=:userID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$args['userID']);
-  $sth->bindParam("infracID",$input['infracID']);
-  $sth->bindParam("infracDescript",$input['infracDescript']);
-  $sth->bindParam("notified",$input['notified']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE Infractions set infracID=:infracID, infracDescript=:infracDescript, notified=:notified where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("infracID",$input['infracID']);
+    $sth->bindParam("infracDescript",$input['infracDescript']);
+    $sth->bindParam("notified",$input['notified']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
+
 $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE TasksDetails set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("taskID",$args['taskID']);
-  $sth->bindParam("taskRating",$input['taskRating']);
-  $sth->bindParam("taskAward",$input['taskAward']);
-  $sth->bindParam("taskTitle",$input['taskTitle']);
-  $sth->bindParam("taskDescript",$input['taskDescript']);
-  $sth->bindParam("deadline",$input['deadline']);
-  $sth->execute();
-  return $this->response->withJson($input);
+    $input=$request->getParsedBody();
+    $sql="UPDATE TasksDetails set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("taskID",$args['taskID']);
+    $sth->bindParam("taskRating",$input['taskRating']);
+    $sth->bindParam("taskAward",$input['taskAward']);
+    $sth->bindParam("taskTitle",$input['taskTitle']);
+    $sth->bindParam("taskDescript",$input['taskDescript']);
+    $sth->bindParam("deadline",$input['deadline']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
+
 $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
-  $input=$request->getParsedBody();
-  $sql="UPDATE ChildDetails set familyID=:familyID, rating=:rating, awards=:awards, groundedStatus=:groundedStatus where userID=:userID";
-  $sth=$this->db->prepare($sql);
-  $sth->bindParam("userID",$args['userID']);
-  $sth->bindParam("familyID",$input['familyID']);
-  $sth->bindParam("rating",$input['rating']);
-  $sth->bindParam("awards",$input['awards']);
-  $sth->bindParam("groundedStatus",$input['groundedStatus']);
-  $sth->execute();
+    $input=$request->getParsedBody();
+    $sql="UPDATE ChildDetails set familyID=:familyID, rating=:rating, awards=:awards, groundedStatus=:groundedStatus where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("familyID",$input['familyID']);
+    $sth->bindParam("rating",$input['rating']);
+    $sth->bindParam("awards",$input['awards']);
+    $sth->bindParam("groundedStatus",$input['groundedStatus']);
+    $sth->execute();
+    return $this->response->withJson($input);
 });
+
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
     $sql="UPDATE ChildDetails set groundedStatus=TRUE where userID=:userID";
@@ -449,6 +454,7 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
 });
+
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
     $sql="UPDATE ChildDetails set groundedStatus=FALSE where userID=:userID";
@@ -456,60 +462,55 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
 });
+
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set userType=:userType where userID=:userID";
+    $sql="UPDATE UserDetails set userType=TRUE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("userType",$input['userType']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 $app->put('/userDetails/edit/child/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE UserDetails set userType=:userType where userID=:userID";
+    $sql="UPDATE UserDetails set userType=FALSE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("userType",$input['userType']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 $app->put('/tasks/edit/known/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set notified=:notified where userID=:userID";
+    $sql="UPDATE Tasks set notified=TRUE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 $app->put('/tasks/edit/unknown/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set notified=:notified where userID=:userID";
+    $sql="UPDATE Tasks set notified=FALSE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 $app->put('/infractions/edit/known/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set notified=:notified where userID=:userID";
+    $sql="UPDATE Infractions set notified=TRUE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 $app->put('/infractions/edit/unknown/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Infractions set notified=:notified where userID=:userID";
+    $sql="UPDATE Infractions set notified=FALSE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
+
 ///////////////////////////
 //         GET          //
 //////////////////////////
@@ -562,6 +563,7 @@ $app->get('/getfamilyInfo/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/getChildren/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT UD.username, UD.userID, UD.userType, U.lastName, U.firstName, CD.groundedStatus FROM UserDetails UD inner join Users U on UD.userID = U.userID inner join ChildDetails CD on U.userID = CD.userID WHERE UD.familyID=:id AND UD.userType = 0");
@@ -570,6 +572,7 @@ $app->get('/getChildren/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchAll();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/getParents/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT UD.username, UD.userID, UD.userType, U.lastName, U.firstName FROM UserDetails UD inner join Users U on UD.userID = U.userID WHERE UD.familyID=:id AND UD.userType = 1");
@@ -578,6 +581,7 @@ $app->get('/getParents/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchAll();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/children/{id}/avg-rating', function($request, $response, $args){
 
     $sth = $this->db->prepare("select avg(TD.taskRating) From TaskDetails TD inner join Tasks T on T.taskID = TD.taskID where T.userID = :id and TD.taskRating > 0;");
@@ -586,6 +590,7 @@ $app->get('/children/{id}/avg-rating', function($request, $response, $args){
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
     $sth = $this->db->prepare("Select * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
@@ -596,6 +601,7 @@ $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/getTaskAmount/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT count(taskID) FROM Tasks WHERE userID=:id");
@@ -604,6 +610,7 @@ $app->get('/getTaskAmount/{id}', function($request, $response, $args){
     $userInfo = $sth->fetchObject();
     return $this->response->withJson($userInfo);
 });
+
 $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT count(infracID) FROM Infractions WHERE userID=:id");
@@ -637,6 +644,7 @@ $app->get('/getInfractions/{id}', function($request, $response, $args){
     return $this->response->withJson($userInfo);
 
 });
+
 $app->get('/userDetails/[{id}]', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT * FROM UserDetails WHERE userID=:id");
