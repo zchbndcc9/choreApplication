@@ -612,6 +612,21 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
 
     $sth->execute();
     $userInfo = $sth->fetchAll();
+
+    $stmt = $this->db->prepare("SELECT * FROM Users WHERE userID = :id");
+    $stmt->bindParam("id", $args['id']);
+
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+    $lastName = 'lastName';
+    $lastNameVal = $user->lastName;
+    $firstName = 'firstName';
+    $firstNameVal = $user->firstName;
+
+    $userInfo[$lastName] = $lastNameVal;
+    $userInfo[$firstName] = $firstNameVal;
+
     return $this->response->withJson($userInfo);
     
 });
