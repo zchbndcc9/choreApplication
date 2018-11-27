@@ -5,5 +5,5 @@ export class Member {
   username: string;
   firstName: string;
   lastName: string;
-  isParent: boolean;
+  userType: number;
 }

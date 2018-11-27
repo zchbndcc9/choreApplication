@@ -12,7 +12,7 @@ export class TasksDisplayComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   @Input() tasks: Task[];
-  @Input() isParent: boolean;
+  isParent: boolean = window.sessionStorage.getItem('userType') == "1";
   filteredTasks: Task[];
   filterBy: string;
 
