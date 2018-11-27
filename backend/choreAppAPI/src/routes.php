@@ -441,7 +441,6 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
   $sth->bindParam("awards",$input['awards']);
   $sth->bindParam("groundedStatus",$input['groundedStatus']);
   $sth->execute();
-  return $this->response->withJson($input);
 });
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
@@ -449,8 +448,6 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $this->response->withJson($result);
 });
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
@@ -458,8 +455,6 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $this->response->withJson($result);
 });
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
