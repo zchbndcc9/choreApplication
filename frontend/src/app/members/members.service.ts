@@ -20,7 +20,7 @@ export class MembersService {
   };
 
   addMember(famID: number, member: Member): Observable<Member> {
-    const req = {...member, familyID: famID, userType: member.isParent ? '1' : '0'};
+    const req = {...member, familyID: famID, userType: member.userType == 1 ? '1' : '0'};
     return this.httpClient
       .post<Member>(`${this.baseUrl}/familyMember/add`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
@@ -32,24 +32,13 @@ export class MembersService {
       .pipe(catchError(this.handleException));
   }
 
-<<<<<<< HEAD
-  editMember(member: Member) {
-    const type = member.isParent ? 'parents' : 'children';
-    const prevState = this.subject.value;
-    // const memberIndex = prevState[type].findIndex(mem => mem.id === member.id);
-    const newState = [
-      // ...prevState[type].slice(0, memberIndex),
-      member,
-      // ...prevState[type].slice(memberIndex + 1)
-    ];
-    console.dir(newState);
-    this.subject.next({...prevState, [type]: newState });
+  getMember(memberId: number): Observable<Member> {
+    return this.httpClient.get<Member>(`${this.baseUrl}/users/${memberId}`, this.httpOptions).pipe(
+      catchError(this.handleException)
+    );
   }
 
-  toggleGround(isGrounded: boolean, childId: number) {
-=======
   toggleGround(isGrounded: boolean, childId: number): Observable<Child> {
->>>>>>> 44f9b0f5f326dd399503477846c151b092f7cf23
     const groundType: string = isGrounded ? 'unground' : 'ground';
     return this.httpClient
       .put<Child>(`${this.baseUrl}/childDetails/edit/${groundType}/${+childId}`, this.httpOptions)
