@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
 import { Component, OnInit } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-members',
@@ -17,6 +18,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
+  faTimes = faTimes;
   parents: Member[];
   children: Child[];
   famID: number;
@@ -106,13 +108,13 @@ export class MembersComponent implements OnInit {
 
     modal.result.then(result => {
       this.membersService.deleteMember(member.userID).subscribe(_result => {
-        if (member.isParent) {
+        if (member.userType) {
           this.parents.splice(index, 1);
         } else {
           this.children.splice(index, 1);
         }
       });
-    }).catch(error => {
+    }, dismissal => {}).catch(error => {
       console.error(error);
     });
   }
