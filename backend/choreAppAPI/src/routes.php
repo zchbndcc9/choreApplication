@@ -445,19 +445,17 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
 });
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus=:groundedStatus where userID=:userID";
+    $sql="UPDATE ChildDetails set groundedStatus=TRUE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("groundedStatus",$input['groundedStatus']);
     $sth->execute();
     return $this->response->withJson($input);
 });
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE ChildDetails set groundedStatus=:groundedStatus where userID=:userID";
+    $sql="UPDATE ChildDetails set groundedStatus=FALSE where userID=:userID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
-    $sth->bindParam("groundedStatus",$input['groundedStatus']);
     $sth->execute();
     return $this->response->withJson($input);
 });
