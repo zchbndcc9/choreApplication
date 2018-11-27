@@ -50,9 +50,7 @@ export class MembersComponent implements OnInit {
         const type = _newMember.userType ? this.parents : this.children;
         type.push(_newMember);
       });
-    }).catch(error => {
-      console.error(error);
-    });
+    }, dismiss => {});
   }
 
   editMember({member, index}) {
@@ -67,7 +65,7 @@ export class MembersComponent implements OnInit {
         } else {
           this.children[index] = {...this.children[index], ..._member };
         }
-      });
+      }, dismiss => {});
     }).catch(error => {
       console.error(error);
     });
