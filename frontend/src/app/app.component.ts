@@ -15,6 +15,15 @@ export class AppComponent implements OnInit {
   ngOnInit(){
   }
 
+  shouldLoadNav(): boolean {
+    if (window.sessionStorage.getItem('userID')
+      && window.sessionStorage.getItem('familyID')
+      && window.sessionStorage.getItem('Success')) {
+        return true;
+      }
+      return false;
+  }
+
 }
 
 
