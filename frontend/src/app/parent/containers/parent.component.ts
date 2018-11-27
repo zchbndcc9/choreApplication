@@ -60,14 +60,10 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyMembers() {
-    this.parentsService.getChildren(this.familyID).subscribe(children => {
-      console.log(children);
-    });
     forkJoin([this.parentsService.getParents(this.familyID), this.parentsService.getChildren(this.familyID)]).subscribe(results => {
       let parents = results[0];
       let children = results[1];
       this.members = parents.concat(children);
-      console.log(this.members);
     });
   }
 
