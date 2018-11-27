@@ -108,9 +108,10 @@ $app->post('/family/add', function ($request, $response, $args) {
 
 $app->post('/familyMember/add', function ($request, $response, $args) {
 
-    echo $input;
 
     $input = $request->getParsedBody();
+    echo $input;
+
     $users_sql = "INSERT INTO Users (familyID, lastName, firstName)
             VALUES (:familyID, :lastName, :firstName)";
 
