@@ -130,6 +130,7 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
     $stmt->bindParam("userType",$input['userType']);
     $stmt->execute();
 
+    echo $input['userType'];
     if($input['userType'] == 0 || $input['userType'] == FALSE){
         $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
         VALUES (:userID, :familyID, '', '', FALSE)";
