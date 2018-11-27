@@ -22,6 +22,7 @@ import { TaskNotificationComponent } from './tasks/task-notification/task-notifi
 import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 
 import { MembersComponent } from './members/containers/members.component';
+import { MemberDeleteModalComponent } from './members/components/member-delete-modal/member-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MembersComponent } from './members/containers/members.component';
     NavbarComponent,
     TaskNotificationComponent,
     TasksDisplayComponent,
-    NavbarComponent
+    NavbarComponent,
+    MemberDeleteModalComponent
   ],
   imports: [
     AppRoutingModule,

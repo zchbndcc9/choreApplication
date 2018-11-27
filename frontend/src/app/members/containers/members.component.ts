@@ -1,3 +1,4 @@
+import { MemberDeleteModalComponent } from './../components/member-delete-modal/member-delete-modal.component';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
@@ -61,8 +62,7 @@ export class MembersComponent implements OnInit {
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(editedMember).subscribe((_member: Member) => {
-        console.log(_member);
+      this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
         if (_member.isParent) {
           this.parents[index] = { ...this.parents[index], ..._member };
         } else {
@@ -83,6 +83,8 @@ export class MembersComponent implements OnInit {
         this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(ground => {
           this.children[index].isGrounded = !this.children[index].isGrounded;
         });
+      }).catch(error => {
+        console.error(error);
       });
     } else {
       // Unground child
@@ -90,6 +92,22 @@ export class MembersComponent implements OnInit {
         this.children[index].isGrounded = !this.children[index].isGrounded;
       });
     }
+  }
+
+  deleteMember({member, index}) {
+    const modal = this.openDeleteModal();
+
+    modal.result.then(result => {
+      this.membersService.deleteMember(member.userID).subscribe(_result => {
+        if (member.isParent) {
+          this.parents.splice(index, 1);
+        } else {
+          this.children.splice(index, 1);
+        }
+      });
+    }).catch(error => {
+      console.error(error);
+    });
   }
 
   openGroundModal() {
@@ -102,6 +120,10 @@ export class MembersComponent implements OnInit {
     modalRef.componentInstance.alreadyMember = alreadyMember;
 
     return modalRef;
+  }
+
+  openDeleteModal() {
+    return this.modalService.open(MemberDeleteModalComponent);
   }
 
   retrieveID(index: number, member: Member) {
