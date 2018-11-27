@@ -130,7 +130,7 @@ $app->post('/familyMember/add', function ($request, $response, $args) {
     $stmt->bindParam("userType",$input['userType']);
     $stmt->execute();
 
-    if($input['userType'] == FALSE){
+    if($input['userType'] == 0 || $input['userType'] == FALSE){
         $cd_sql = "INSERT INTO ChildDetails (userID, familyID, rating, awards, groundedStatus) 
         VALUES (:userID, :familyID, '', '', FALSE)";
         $stmt3 = $this->db->prepare($cd_sql);
@@ -590,7 +590,8 @@ $app->get('/children/{id}/avg-rating', function($request, $response, $args){
 });
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("Select * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID WHERE T.userID=:id AND T.taskID=:id2;");
+    $sth = $this->db->prepare("Select * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
+        inner join Users U on T.userID = U.userID WHERE T.userID=:id AND T.taskID=:id2;");
     $sth->bindParam("id", $args['id']);
     $sth->bindParam("id2", $args['id2']);
     $sth->execute();
