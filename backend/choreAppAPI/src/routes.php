@@ -449,7 +449,8 @@ $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, 
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    return $this->response->withJson($input);
+    $result = $sth->fetchObject();
+    return $this->response->withJson($result);
 });
 $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
@@ -457,7 +458,8 @@ $app->put('/childDetails/edit/unground/[{userID}]', function($request, $response
     $sth=$this->db->prepare($sql);
     $sth->bindParam("userID",$args['userID']);
     $sth->execute();
-    return $this->response->withJson($input);
+    $result = $sth->fetchObject();
+    return $this->response->withJson($result);
 });
 $app->put('/userDetails/edit/parent/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
