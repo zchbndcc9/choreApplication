@@ -24,6 +24,7 @@
             [members]="children"
             (edit)="editMember($event)"
             (ground)="toggleGround($event)"
+            (tasks)="viewTasks($event)"
             (delete)="deleteMember($event)"
           ></app-member-cardlist>
         </ng-template>
@@ -35,7 +36,7 @@
           <tbody>
             <ng-container *ngFor="let parent of parents; let i = index">
               <tr>
-                <td>{{ parent.firstName + " " + parent.lastName }}</td>
+                <td class="h5">{{ parent.firstName + " " + parent.lastName }}</td>
                 <td><button
                   class="btn btn-primary"
                   (click)="editMember({member: parent, index: i})">Edit</button>

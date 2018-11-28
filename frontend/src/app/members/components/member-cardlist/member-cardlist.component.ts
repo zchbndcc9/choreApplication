@@ -14,6 +14,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
           [member]="member"
           (ground)="toggleGround($event, i)"
           (edit)="editMember($event, i)"
+          (tasks)="viewTasks($event)"
           (delete)="deleteMember($event, i)"
         ></app-member-card>
       </ng-container>
@@ -31,6 +32,9 @@ export class MemberCardlistComponent {
   ground = new EventEmitter<any>();
 
   @Output()
+  tasks = new EventEmitter<number>();
+
+  @Output()
   delete = new EventEmitter<any>();
 
   retrieveId(index: number, member: Member) {
@@ -45,6 +49,10 @@ export class MemberCardlistComponent {
   toggleGround(child: Child, index: number) {
     const pair: any = { child, index };
     this.ground.emit(pair);
+  }
+
+  viewTasks(memberId: number) {
+    this.tasks.emit(memberId);
   }
 
   deleteMember(member: Child, index: number) {
