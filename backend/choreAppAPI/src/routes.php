@@ -599,7 +599,7 @@ $app->get('/children/{id}/avg-rating', function($request, $response, $args){
 $app->get('/getTask/{id}/{id2}', function($request, $response, $args){
 
     $sth = $this->db->prepare("Select * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
-        inner join Users U on T.assigneeID = U.userID WHERE T.userID=:id AND T.taskID=:id2;");
+        inner join Users U on T.assigneeID = U.userID WHERE T.assigneeID=:id AND T.taskID=:id2;");
     $sth->bindParam("id", $args['id']);
     $sth->bindParam("id2", $args['id2']);
     $sth->execute();
@@ -629,7 +629,7 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 $app->get('/getTasks/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
-        inner join Users U on T.assigneeID = U.userID WHERE T.userID=:id");
+        inner join Users U on T.assigneeID = U.userID WHERE T.assigneeID=:id");
     $sth->bindParam("id", $args['id']);
 
     $sth->execute();
