@@ -66,6 +66,12 @@ export class TasksDisplayComponent implements OnInit {
     this.tasksService.editTask(task).subscribe((result) => {});
   }
 
+  rejectTask(task: Task) {
+    task.status = 'rejected';
+    task.taskRating = 0;
+    this.tasksService.editTask(task).subscribe((result) => {});
+  }
+
   deleteTask(taskID: number) {
     this.tasksService.deleteTask(taskID).subscribe((result) => {
       this.tasks = this.tasks.filter(task => task.taskID != taskID);
