@@ -63,6 +63,7 @@ export class TasksDisplayComponent implements OnInit {
 
   approveTask(task: Task) {
     task.status = 'complete';
+    console.log(task);
     this.tasksService.editTask(task).subscribe((result) => {});
   }
 }

@@ -6,3 +6,7 @@
 #deadlineWarning {
   color: darkred;
 }
+
+app-rating {
+  margin-right: 1rem;
+}
