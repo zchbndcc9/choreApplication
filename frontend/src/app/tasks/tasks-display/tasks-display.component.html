@@ -59,6 +59,8 @@
           <b>{{task?.taskDescript}}</b>
           <div></div>
           <i>Due by: {{task.deadline | date}}</i>
+          <div></div>
+          <button *ngIf="userType == 1" class="btn btn-dark btn-sm" (click)="deleteTask(task.taskID)">Delete Task</button>
         </div>
       </div>
     </div>
