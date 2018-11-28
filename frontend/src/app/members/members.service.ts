@@ -48,7 +48,7 @@ export class MembersService {
 
   toggleGround(isGrounded: boolean, childId: number) {
     const groundType: string = isGrounded ? 'unground' : 'ground';
-    this.httpClient
+    return this.httpClient
       .put<any>(`${this.baseUrl}/childDetails/edit/${groundType}/${+childId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
