@@ -639,6 +639,20 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
     
 });
 
+
+$app->get('/getFamilyTasks/{id}', function($request, $response, $args){
+
+    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
+        inner join Users U on T.assigneeID = U.userID WHERE U.familyID=:id");
+    $sth->bindParam("id", $args['id']);
+
+    $sth->execute();
+    $userInfo = $sth->fetchAll();
+
+    return $this->response->withJson($userInfo);
+    
+});
+
 $app->get('/getInfractions/{id}', function($request, $response, $args){
 
     $sth = $this->db->prepare("SELECT * FROM Infractions WHERE userID=:id");
