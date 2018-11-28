@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { MemberDeleteModalComponent } from './components/member-delete-modal/member-delete-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './../navbar/navbar.component';
@@ -17,8 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    FontAwesomeModule
   ],
   declarations: [
     MembersComponent,

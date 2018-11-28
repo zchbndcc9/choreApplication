@@ -2,7 +2,7 @@ import { MemberDeleteModalComponent } from './../components/member-delete-modal/
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChildrenService } from './../../../services/children/children.service';
 import { Child } from './../../../domain/models/child';
 import { MembersService } from './../members.service';
@@ -31,6 +31,7 @@ export class MembersComponent implements OnInit {
     protected tasksService: TasksService,
     protected route: ActivatedRoute,
     protected modalService: NgbModal,
+    protected router: Router
   ) {}
 
   ngOnInit() {
@@ -59,10 +60,15 @@ export class MembersComponent implements OnInit {
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
-    modal.result.then((newMember: Member) => {
+    modal.result.then((newMember: Member | Child) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
-        const type = _newMember.userType ? this.parents : this.children;
-        type.push(_newMember);
+
+        newMember = {..._newMember, userType: +newMember.userType};
+        if (!newMember.userType) {
+          newMember = {...newMember, tasks: 0, rating: null};
+        }
+        const type = newMember.userType ? this.parents : this.children;
+        type.push(newMember);
       });
     }, dismiss => {});
   }
@@ -102,6 +108,10 @@ export class MembersComponent implements OnInit {
       });
     }
     console.log(this.children[index].isGrounded);
+  }
+
+  viewTasks(memberId: number) {
+    this.router.navigateByUrl(`/family/${this.famID}/tasks`);
   }
 
   deleteMember({member, index}) {

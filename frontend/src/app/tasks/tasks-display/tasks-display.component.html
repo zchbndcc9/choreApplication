@@ -44,19 +44,24 @@
           <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
           <button *ngIf="task.status.toLowerCase() == 'incomplete' && userType == 1" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
           <button *ngIf="task.status.toLowerCase() == 'incomplete' && userType == 0" class="btn btn-success btn-sm float-right" (click)="submitTaskForApproval(task)">Submit for Approval</button>
-          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="btn btn-success btn-sm float-right" (click)="approveTask(task)">Approve</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="btn btn-dark btn-sm float-right" (click)="rejectTask(task)">Reject</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="btn btn-success btn-sm float-right" [disabled]="task.taskRating == 0" (click)="approveTask(task)">Approve</button>
+          <app-rating *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="float-right" [(numStars)]="task.taskRating" [editable]="true"></app-rating>
           <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 0" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
           <button *ngIf="task.status.toLowerCase() == 'rejected' && userType == 1" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
-          <button *ngIf="task.status.toLowerCase() == 'rejected' && userType == 0" class="btn btn-primary btn-sm float-right">Resubmit</button>
+          <button *ngIf="task.status.toLowerCase() == 'rejected' && userType == 0" class="btn btn-primary btn-sm float-right" (click)="submitTaskForApproval(task)">Resubmit</button>
           <button *ngIf="task.status.toLowerCase() == 'complete'" class="btn btn-primary btn-sm float-right" [disabled]="true">Complete</button>
+          <app-rating *ngIf="task.status.toLowerCase() == 'complete'" class="float-right" [numStars]="task.taskRating" [editable]="false"></app-rating>
         </h5>
       </div>
 
       <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordion">
         <div class="card-body">
           <b>{{task?.taskDescript}}</b>
-          <hr />
+          <div></div>
           <i>Due by: {{task.deadline | date}}</i>
+          <div></div>
+          <button *ngIf="userType == 1" class="btn btn-dark btn-sm" (click)="deleteTask(task.taskID)">Delete Task</button>
         </div>
       </div>
     </div>
