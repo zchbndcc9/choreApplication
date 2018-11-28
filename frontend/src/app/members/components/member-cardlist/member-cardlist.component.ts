@@ -3,32 +3,39 @@ import { Member } from '../../../../domain/models/member';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-member-cardlist',
-  styleUrls: ['./member-cardlist.component.css'],
+  selector: "app-member-cardlist",
+  styleUrls: ["./member-cardlist.component.css"],
   template: `
     <div class="card-columns">
-      <ng-container *ngFor="let member of members; let i = index; trackBy: retrieveId">
+      <ng-container
+        *ngFor="let member of members; let i = index; trackBy: retrieveId"
+      >
         <app-member-card
           [member]="member"
           (ground)="toggleGround($event, i)"
           (edit)="editMember($event, i)"
           (tasks)="viewTasks($event)"
-          (infractions)="viewInfractions($event)"></app-member-card>
+          (delete)="deleteMember($event, i)"
+        ></app-member-card>
       </ng-container>
     </div>
   `
 })
-
 export class MemberCardlistComponent {
-
   @Input()
   members: Child[];
 
   @Output()
   edit = new EventEmitter<any>();
+
+  @Output()
   ground = new EventEmitter<any>();
+
+  @Output()
   tasks = new EventEmitter<number>();
-  infractions = new EventEmitter<number>();
+
+  @Output()
+  delete = new EventEmitter<any>();
 
   retrieveId(index: number, member: Member) {
     return member.userID;
@@ -48,7 +55,8 @@ export class MemberCardlistComponent {
     this.tasks.emit(memberId);
   }
 
-  viewInfractions(memberId: number) {
-    this.infractions.emit(memberId);
+  deleteMember(member: Child, index: number) {
+    const pair: any = { member, index };
+    this.delete.emit(pair);
   }
 }

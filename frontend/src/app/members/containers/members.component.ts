@@ -1,3 +1,4 @@
+import { MemberDeleteModalComponent } from './../components/member-delete-modal/member-delete-modal.component';
 import { ParentGroundModalComponent } from './../../parent/components/parent-ground-modal/parent-ground-modal.component';
 import { ParentsService } from './../../parent/parents.service';
 import { TasksService } from './../../../services/tasks/tasks.service';
@@ -9,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MemberFormComponent } from '../components/member-form/member-form.component';
 import { Member } from '../../../domain/models/member';
 import { Component, OnInit } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-members',
@@ -16,6 +18,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
+  faTimes = faTimes;
   parents: Member[];
   children: Child[];
   famID: number;
@@ -39,7 +42,7 @@ export class MembersComponent implements OnInit {
       this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
       this.childrenService.getChildren(this.famID).subscribe(children => {
         this.childrenService.getDetails(children).subscribe(child => {
-          child = {...child, isGrounded: !!+child.groundedStatus};
+          child = {...child, isGrounded: !!+child.groundedStatus, userType: +child.userType};
           // Code src:
           // https://blog.angularindepth.com/practical-rxjs-in-the-wild-requests-with-concatmap-vs-mergemap-vs-forkjoin-11e5b2efe293
           this.children.push(child);
@@ -66,18 +69,18 @@ export class MembersComponent implements OnInit {
   }
 
   editMember({member, index}) {
+    console.dir(member, index);
     const modal = this.openMemberModal(member, true);
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
-        console.dir(_member);
-        if (_member.userType) {
-          this.parents[index] = { ...this.parents[index], ..._member };
+      this.membersService.editMember(this.famID, editedMember).subscribe(() => {
+        if (editedMember.userType) {
+          this.parents[index] = editedMember;
         } else {
-          this.children[index] = {...this.children[index], ..._member };
+          this.children[index] = editedMember;
         }
-      }, dismiss => {});
+      });
     }).catch(error => {
       console.error(error);
     });
@@ -89,24 +92,37 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.userID);
-        this.children[index] = {...child, isGrounded: !child.isGrounded};
+        this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(() => {
+          this.children[index] = {...child, isGrounded: !child.isGrounded};
+        });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.userID);
-      this.children[index] = {...child, isGrounded: !child.isGrounded };
+      this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(() => {
+        this.children[index] = {...child, isGrounded: !child.isGrounded };
+      });
     }
     console.log(this.children[index].isGrounded);
   }
 
-
-  viewInfractions(memberId: number) {
-    this.router.navigateByUrl(`children/${memberId}/infractions`);
-  }
-
   viewTasks(memberId: number) {
     this.router.navigateByUrl(`children/${memberId}/tasks`);
+  }
+
+  deleteMember({member, index}) {
+    const modal = this.openDeleteModal();
+
+    modal.result.then(result => {
+      this.membersService.deleteMember(member.userID).subscribe(() => {
+        if (member.userType) {
+          this.parents.splice(index, 1);
+        } else {
+          this.children.splice(index, 1);
+        }
+      });
+    }, dismissal => {}).catch(error => {
+      console.error(error);
+    });
   }
 
   openGroundModal() {
@@ -119,6 +135,10 @@ export class MembersComponent implements OnInit {
     modalRef.componentInstance.alreadyMember = alreadyMember;
 
     return modalRef;
+  }
+
+  openDeleteModal() {
+    return this.modalService.open(MemberDeleteModalComponent);
   }
 
   retrieveID(index: number, member: Member) {

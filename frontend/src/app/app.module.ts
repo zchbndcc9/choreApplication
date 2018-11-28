@@ -1,3 +1,4 @@
+import { TasksDisplayComponent } from './tasks/tasks-display/tasks-display.component';
 import { TasksModule } from './tasks/tasks.module';
 import { ParentsModule } from './parent/parents.module';
 import { MembersModule } from './members/members.module';
@@ -19,8 +20,8 @@ import { NewaccountComponent } from './newaccount/newaccount.component';
 import { ChildComponent } from './child/child.component';
 import { GroundingAppealComponent } from './grounding-appeal/grounding-appeal.component';
 import { TaskNotificationComponent } from './tasks/task-notification/task-notification.component';
-
 import { MembersComponent } from './members/containers/members.component';
+import { MemberDeleteModalComponent } from './members/components/member-delete-modal/member-delete-modal.component';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -33,7 +34,8 @@ import { SharedModule } from './shared/shared.module';
     GroundingAppealComponent,
     NavbarComponent,
     TaskNotificationComponent,
-    NavbarComponent
+    NavbarComponent,
+    MemberDeleteModalComponent
   ],
   imports: [
     AppRoutingModule,

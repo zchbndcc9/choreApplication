@@ -1,3 +1,4 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Child } from 'src/domain/models/child';
 import { Member } from 'src/domain/models/member';
 import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
@@ -9,8 +10,11 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
   template: `
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h3>{{ member.firstName + " " + member.lastName }}</h3>
-        <div *ngIf="member.isGrounded" class="badge badge-warning p-2">Grounded</div>
+        <span>
+          <h3>{{ member.firstName + " " + member.lastName }}</h3>
+          <div *ngIf="member.isGrounded" class="badge badge-warning p-2">Grounded</div>
+        </span>
+        <button (click)="deleteMember()"><fa-icon [icon]="faTimes"></fa-icon></button>
       </div>
       <div class="card-body">
         <div class="d-flex justify-content-around">
@@ -37,14 +41,21 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
     </div>`
 })
 export class MemberCardComponent {
+  faTimes = faTimes;
   @Input()
   member: Child;
 
   @Output()
   edit = new EventEmitter<Child>();
+
+  @Output()
   ground = new EventEmitter<Child>();
+
+  @Output()
   tasks = new EventEmitter<number>();
-  infractions = new EventEmitter<number>();
+
+  @Output()
+  delete = new EventEmitter<Child>();
 
   editMember() {
     this.edit.emit(this.member);
@@ -58,7 +69,7 @@ export class MemberCardComponent {
     this.tasks.emit(this.member.userID);
   }
 
-  viewInfractions() {
-    this.infractions.emit(this.member.userID);
+  deleteMember() {
+    this.delete.emit(this.member);
   }
 }
