@@ -41,7 +41,7 @@ export class MembersComponent implements OnInit {
       this.parentsService.getParents(this.famID).subscribe(_parents => this.parents = _parents );
       this.childrenService.getChildren(this.famID).subscribe(children => {
         this.childrenService.getDetails(children).subscribe(child => {
-          child = {...child, isGrounded: !!+child.groundedStatus};
+          child = {...child, isGrounded: !!+child.groundedStatus, userType: +child.userType};
           // Code src:
           // https://blog.angularindepth.com/practical-rxjs-in-the-wild-requests-with-concatmap-vs-mergemap-vs-forkjoin-11e5b2efe293
           this.children.push(child);
@@ -91,13 +91,15 @@ export class MembersComponent implements OnInit {
       const modal = this.openGroundModal();
       // Submits request if parent confirms
       modal.result.then(result => {
-        this.membersService.toggleGround(child.isGrounded, child.userID);
-        this.children[index] = {...child, isGrounded: !child.isGrounded};
+        this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(() => {
+          this.children[index] = {...child, isGrounded: !child.isGrounded};
+        });
       });
     } else {
       // Unground child
-      this.membersService.toggleGround(child.isGrounded, child.userID);
-      this.children[index] = {...child, isGrounded: !child.isGrounded };
+      this.membersService.toggleGround(child.isGrounded, child.userID).subscribe(() => {
+        this.children[index] = {...child, isGrounded: !child.isGrounded };
+      });
     }
     console.log(this.children[index].isGrounded);
   }
@@ -106,7 +108,7 @@ export class MembersComponent implements OnInit {
     const modal = this.openDeleteModal();
 
     modal.result.then(result => {
-      this.membersService.deleteMember(member.userID).subscribe(_result => {
+      this.membersService.deleteMember(member.userID).subscribe(() => {
         if (member.userType) {
           this.parents.splice(index, 1);
         } else {
