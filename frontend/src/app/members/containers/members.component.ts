@@ -60,10 +60,15 @@ export class MembersComponent implements OnInit {
   addMember() {
     const modal = this.openMemberModal(new Member(), false);
 
-    modal.result.then((newMember: Member) => {
+    modal.result.then((newMember: Member | Child) => {
       this.membersService.addMember(this.famID, newMember).subscribe(_newMember => {
-        const type = _newMember.userType ? this.parents : this.children;
-        type.push(_newMember);
+
+        newMember = {..._newMember, userType: +newMember.userType};
+        if (!newMember.userType) {
+          newMember = {...newMember, tasks: 0, rating: null};
+        }
+        const type = newMember.userType ? this.parents : this.children;
+        type.push(newMember);
       });
     }, dismiss => {});
   }
