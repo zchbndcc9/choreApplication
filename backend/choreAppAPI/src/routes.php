@@ -368,6 +368,18 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
     $sth->execute();
 });
 
+$app->put('/member/edit/[{userID}]', function($request, $response, $args){
+    $input=$request->getParsedBody();
+    $sql="UPDATE Users set lastName=:lastName, firstName=:firstName where userID=:userID;
+        UPDATE UserDetails set username=:username where userID=:userID";
+    $sth=$this->db->prepare($sql);
+    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("lastName",$input['lastName']);
+    $sth->bindParam("firstName",$input['firstName']);
+    $sth->bindParam("username",$input['username']);
+    $sth->execute();
+});
+
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
     $sql="UPDATE UserDetails set familyID=:familyID, username=:username, password=:password, userType=:userType where userID=:userID";
