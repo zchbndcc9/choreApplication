@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h1>{{this.alreadyMember ? "Edit" : "Create"}} Fam Member</h1>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()"></button>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="memberForm" class="container">
