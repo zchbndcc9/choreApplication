@@ -404,11 +404,11 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
     $sth->execute();
 });
 
-$app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
+$app->put('/tasks/edit/[{taskID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where userID=:userID";
+    $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where taskID=:taskID";
     $sth=$this->db->prepare($sql);
-    $sth->bindParam("userID",$args['userID']);
+    $sth->bindParam("taskID",$args['taskID']);
     $sth->bindParam("assigneeID",$input['assigneeID']);
     $sth->bindParam("taskID",$input['taskID']);
     $sth->bindParam("status",$input['status']);
