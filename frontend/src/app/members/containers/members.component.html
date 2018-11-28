@@ -24,6 +24,7 @@
             [members]="children"
             (edit)="editMember($event)"
             (ground)="toggleGround($event)"
+            (delete)="deleteMember($event)"
           ></app-member-cardlist>
         </ng-template>
       </div>
@@ -37,7 +38,10 @@
                 <td>{{ parent.firstName + " " + parent.lastName }}</td>
                 <td><button
                   class="btn btn-primary"
-                  (click)="editMember({member: parent, index: i})">Edit</button></td>
+                  (click)="editMember({member: parent, index: i})">Edit</button>
+                <button (click)="deleteMember({member: parent, index: i})">
+                  <fa-icon [icon]="faTimes"></fa-icon>
+                </button></td>
               </tr>
             </ng-container>
           </tbody>

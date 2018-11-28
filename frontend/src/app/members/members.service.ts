@@ -27,9 +27,16 @@ export class MembersService {
   }
 
   editMember(famID: number, member: Member): Observable<Member | Child> {
-    const req = {...member, familyID: famID};
+    const req = {...member, familyID: famID };
+
     return this.httpClient
       .put<Member>(`${ this.baseUrl }/member/edit/${member.userID}`, req, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  deleteMember(memberId: Member): Observable<any> {
+    return this.httpClient
+      .delete(`${this.baseUrl}/users/delete/${memberId}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
