@@ -48,9 +48,6 @@
               <td>{{ member.firstName }} {{ member.lastName }}</td>
               <td *ngIf="member.userType == 1">Parent</td>
               <td *ngIf="member.userType == 0">Child</td>
-              <td *ngIf="member.userType == 0">
-                <button class="btn btn-sm btn-warning" [routerLink]="['/child', member.userID]">Go To Child Page</button>
-              </td>
             </tr>
           </tbody>
         </table>
