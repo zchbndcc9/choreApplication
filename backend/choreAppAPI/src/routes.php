@@ -407,7 +407,7 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
 $app->put('/tasks/edit/[{taskID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
     $sql="UPDATE Tasks set status=:status where taskID=:taskID;
-        UPDATE TasksDetails set taskRating=:taskRating where taskID=:taskID";
+        UPDATE TaskDetails set taskRating=:taskRating where taskID=:taskID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("taskID",$args['taskID']);
     $sth->bindParam("taskRating",$input['taskRating']);
@@ -428,7 +428,7 @@ $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
 
 $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE TasksDetails set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
+    $sql="UPDATE TaskDetails set taskRating=:taskRating, taskAward=:taskAward, taskTitle=:taskTitle, taskDescript=:taskDescript, deadline=:deadline where taskID=:taskID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("taskID",$args['taskID']);
     $sth->bindParam("taskRating",$input['taskRating']);
