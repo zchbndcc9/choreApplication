@@ -1,3 +1,4 @@
+import { EditFamilyComponent } from './edit-family/edit-family.component';
 import { AuthGuardService } from './../services/auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { NewaccountComponent } from './newaccount/newaccount.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'family/:id/members', component: MembersComponent, canActivate: [AuthGuardService]  },
   { path: 'family/:id/tasks', component: TasksPageComponent, canActivate: [AuthGuardService]  },
-  { path: 'child/:id', component: ChildComponent, canActivate: [AuthGuardService]  }
+  { path: 'child/:id', component: ChildComponent, canActivate: [AuthGuardService]  },
+  { path: 'editFamily/:id', component: EditFamilyComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
