@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   familyID: string;
   userType: string;
 
+
   constructor(
     private _router: Router
   ) { }
@@ -21,11 +22,18 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
   }
-  // if child the only page that should apear is fam.ly
 
   logout() {
     window.sessionStorage.clear();
     this._router.navigateByUrl('/login');
+  }
+
+  // if child the only page that should apear is fam.ly
+  getUserType() {
+    if (JSON.parse(window.sessionStorage.getItem('userType'))==0) {
+      return true;
+    }
+    return false;
   }
 
 }
