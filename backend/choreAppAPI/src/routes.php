@@ -366,7 +366,6 @@ $app->put('/users/edit/[{userID}]', function($request, $response, $args){
     $sth->bindParam("lastName",$input['lastName']);
     $sth->bindParam("firstName",$input['firstName']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
@@ -379,7 +378,6 @@ $app->put('/userDetails/edit/[{userID}]', function($request, $response, $args){
     $sth->bindParam("password",$input['password']);
     $sth->bindParam("userType",$input['userType']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
@@ -392,7 +390,6 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
     $sth->bindParam("phone",$input['phone']);
     $sth->bindParam("registrationDate",$input['registrationDate']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
@@ -405,7 +402,6 @@ $app->put('/tasks/edit/[{userID}]', function($request, $response, $args){
     $sth->bindParam("status",$input['status']);
     $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
@@ -417,7 +413,6 @@ $app->put('/infractions/edit/[{userID}]', function($request, $response, $args){
     $sth->bindParam("infracDescript",$input['infracDescript']);
     $sth->bindParam("notified",$input['notified']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
@@ -431,7 +426,6 @@ $app->put('/taskDetails/edit/[{taskID}]', function($request, $response, $args){
     $sth->bindParam("taskDescript",$input['taskDescript']);
     $sth->bindParam("deadline",$input['deadline']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
@@ -444,7 +438,6 @@ $app->put('/childDetails/edit/[{userID}]', function($request, $response, $args){
     $sth->bindParam("awards",$input['awards']);
     $sth->bindParam("groundedStatus",$input['groundedStatus']);
     $sth->execute();
-    return $this->response->withJson($input);
 });
 
 $app->put('/childDetails/edit/ground/[{userID}]', function($request, $response, $args){
