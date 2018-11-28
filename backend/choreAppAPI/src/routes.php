@@ -628,7 +628,9 @@ $app->get('/getInfractionsAmount/{id}', function($request, $response, $args){
 
 $app->get('/getTasks/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
+    $sth = $this->db->prepare("SELECT T.userID, T.assigneeID, T.taskID, T.status, T.notified, TD.taskRating,
+        TD.taskAward, TD.taskTitle, TD.taskDescript,TD.deadline, U.familyID, U.lastName, U.firstName
+        FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
         inner join Users U on T.assigneeID = U.userID WHERE T.assigneeID=:id");
     $sth->bindParam("id", $args['id']);
 
@@ -642,7 +644,9 @@ $app->get('/getTasks/{id}', function($request, $response, $args){
 
 $app->get('/getFamilyTasks/{id}', function($request, $response, $args){
 
-    $sth = $this->db->prepare("SELECT * FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
+    $sth = $this->db->prepare("SELECT T.userID, T.assigneeID, T.taskID, T.status, T.notified, TD.taskRating,
+        TD.taskAward, TD.taskTitle, TD.taskDescript,TD.deadline, U.familyID, U.lastName, U.firstName
+         FROM Tasks T inner join TaskDetails TD on T.taskID = TD.taskID 
         inner join Users U on T.assigneeID = U.userID WHERE U.familyID=:id");
     $sth->bindParam("id", $args['id']);
 
