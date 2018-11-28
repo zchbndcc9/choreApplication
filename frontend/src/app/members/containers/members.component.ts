@@ -111,7 +111,7 @@ export class MembersComponent implements OnInit {
   }
 
   viewTasks(memberId: number) {
-    this.router.navigateByUrl(`children/${memberId}/tasks`);
+    this.router.navigateByUrl(`/family/${this.famID}/tasks`);
   }
 
   deleteMember({member, index}) {

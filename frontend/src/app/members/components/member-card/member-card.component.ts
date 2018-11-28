@@ -18,9 +18,9 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
       </div>
       <div class="card-body">
         <div class="d-flex justify-content-around">
-          <div class="d-flex flex-column align-items-center">
+          <div class="d-flex flex-column align-items-center" (click)="viewTasks()">
             <div class="h4">Tasks</div>
-            <a class="h6" (click)="viewTasks()">{{ member.tasks }}</a>
+            <div class="h6">{{ member.tasks }}</div>
           </div>
         </div>
         <div class="d-flex flex-column align-items-center">
