@@ -22,8 +22,8 @@ export class ParentComponent implements OnInit {
   faPlus = faPlus;
   faWindowClose = faWindowClose;
 
-  familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
-  userID = JSON.parse(window.sessionStorage.getItem('userID'));
+  familyID = +JSON.parse(window.sessionStorage.getItem('familyID'));
+  userID = +JSON.parse(window.sessionStorage.getItem('userID'));
 
   tasks: Task[];
   members: Member[];
@@ -68,7 +68,7 @@ export class ParentComponent implements OnInit {
   }
 
   getFamilyTasks() {
-    this.tasksService.getUserTasks(this.userID).subscribe(result => {
+    this.tasksService.getFamilyTasks(this.familyID).subscribe(result => {
       this.tasks = result;
       this.countCompleteTasks();
     })
@@ -85,8 +85,6 @@ export class ParentComponent implements OnInit {
     modalRef.componentInstance.alreadyMember = false;
 
     modalRef.result.then((member: Member) => {
-      console.log(member);
-
       this.membersService.addMember(this.familyID, member).subscribe(result => {
         this.getFamilyMembers();
       })
@@ -97,7 +95,7 @@ export class ParentComponent implements OnInit {
 
   openTaskModal(event: string = 'create') {
     let children = this.members.filter(member => {
-      return member.userType === 0;
+      return member.userType == 0;
     });
 
     const modalRef = this.modalService.open(NewTaskFormComponent);
@@ -105,7 +103,7 @@ export class ParentComponent implements OnInit {
     modalRef.componentInstance.children = children;
 
     modalRef.result.then((task: Task) => {
-      task.userID = JSON.parse(window.sessionStorage.getItem('userID'));
+      task.userID = this.userID;
 
       task.status = "incomplete";
       task.taskRating = 0;

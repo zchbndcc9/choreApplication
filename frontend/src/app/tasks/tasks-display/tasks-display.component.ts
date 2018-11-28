@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, SimpleChange } from '@angular/core';
 import { Task } from '../../../domain/models';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { TasksService } from 'src/services/tasks/tasks.service';
@@ -12,7 +12,9 @@ export class TasksDisplayComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   @Input() tasks: Task[];
-  isParent: boolean = window.sessionStorage.getItem('userType') == "1";
+
+  userType = +JSON.parse(window.sessionStorage.getItem('userType'));
+
   filteredTasks: Task[];
   filterBy: string;
 
@@ -20,15 +22,18 @@ export class TasksDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.filterBy = 'all';
-    this.filterTasks();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.filterBy = 'all';
+    if (this.tasks) {
+      this.filterTasks();
+      console.log(this.tasks);
+    }
   }
 
   filterTasks() {
-    if (!this.tasks) {
-      this.tasks = [];
-      this.filteredTasks = [];
-    }
-    else if (this.filterBy === 'all') {
+    if (this.filterBy === 'all') {
       this.filteredTasks = this.tasks;
     } else if (this.filterBy === 'overdue') {
       this.filteredTasks = this.tasks.filter(task => !this.isWithinDeadline(task.deadline));
@@ -51,11 +56,13 @@ export class TasksDisplayComponent implements OnInit {
     return new Date(deadline) > new Date();
   }
 
+  submitTaskForApproval(task: Task) {
+    task.status = 'pending';
+    this.tasksService.editTask(task).subscribe((result) => {});
+  }
+
   approveTask(task: Task) {
     task.status = 'complete';
-    this.tasksService.editTask(task).subscribe((result) => {
-      console.log(result);
-      console.log('task changed');
-    });
+    this.tasksService.editTask(task).subscribe((result) => {});
   }
 }

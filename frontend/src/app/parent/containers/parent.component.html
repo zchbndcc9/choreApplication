@@ -48,9 +48,6 @@
               <td>{{ member.firstName }} {{ member.lastName }}</td>
               <td *ngIf="member.userType == 1">Parent</td>
               <td *ngIf="member.userType == 0">Child</td>
-              <td *ngIf="member.userType == 0">
-                <button class="btn btn-sm btn-warning" [routerLink]="['/child', member.userID]">Go To Child Page</button>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -74,7 +71,7 @@
             <tr *ngIf="tasks?.length == 0"><td>No Tasks To Display</td></tr>
             <tr *ngFor="let task of tasks" [ngSwitch]="task.status.toLowerCase()">
               <td>{{ task.taskTitle }}</td>
-              <td>{{ task.assigneeID }}</td>
+              <td>{{ task.firstName }}</td>
               <td *ngSwitchCase="'incomplete'" align="center"><span class="badge badge-primary">{{
                   task.status.toLowerCase() }}</span></td>
               <td *ngSwitchCase="'complete'" align="center"><span class="badge badge-success">{{

@@ -18,8 +18,10 @@ export class TasksPageComponent implements OnInit {
   familyInfo: any;
   user: any;
 
-  familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
-  userID = JSON.parse(window.sessionStorage.getItem('userID'));
+  familyID = +JSON.parse(window.sessionStorage.getItem('familyID'));
+  userID = +JSON.parse(window.sessionStorage.getItem('userID'));
+
+  userType = +JSON.parse(window.sessionStorage.getItem('userType'));
 
   constructor(private tasksService: TasksService,
               private parentsService: ParentsService) { }
@@ -27,17 +29,26 @@ export class TasksPageComponent implements OnInit {
   ngOnInit() {
     this.getFamilyInfo();
     this.getUser();
-    this.getUserTasks();
+    this.getTasks();
   }
 
-  getUserTasks() {
-    this.tasksService
-      .getUserTasks(this.familyID)
+  getTasks() {
+    if (this.userType == 1) {
+      this.tasksService
+      .getFamilyTasks(this.familyID)
       .subscribe((results) => {
-        console.log(results);
         this.tasks = results;
         this.isDataAvailable = true;
       });
+    }
+    else {
+      this.tasksService
+      .getUserTasks(this.userID)
+      .subscribe((results) => {
+        this.tasks = results;
+        this.isDataAvailable = true;
+      });
+    }
   }
 
   getFamilyInfo() {

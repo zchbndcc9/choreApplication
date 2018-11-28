@@ -23,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     TasksDisplayComponent
   ],
   exports: [
+    TasksPageComponent,
     TasksDisplayComponent,
     NewTaskFormComponent
   ],

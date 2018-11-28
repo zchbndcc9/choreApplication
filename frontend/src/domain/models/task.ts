@@ -9,4 +9,6 @@ export class Task {
   taskTitle?: string;
   taskDescript?: string;
   deadline?: Date;
+  firstName?: string;
+  lastName?: string;
 }

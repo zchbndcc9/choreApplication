@@ -26,11 +26,11 @@ export class TasksService {
       .pipe(catchError(this.handleException));
   }
 
-  // createTaskDetails(taskDetails: any): Observable<any> {
-  //   return this.httpClient
-  //     .post<any>(this.endpoint + "/taskDetails/add", taskDetails, this.httpOptions)
-  //     .pipe(catchError(this.handleException));
-  // }
+  getFamilyTasks(familyID: number): Observable<Task[]> {
+    return this.httpClient
+      .get<Task[]>(`${this.endpoint}/getFamilyTasks/${familyID}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
 
   getUserTasks(userID: number): Observable<Task[]> {
     return this.httpClient
@@ -44,35 +44,17 @@ export class TasksService {
       .pipe(catchError(this.handleException));
   }
 
-  // getTaskDetails(taskID: number): Observable<any> {
-  //   return this.httpClient
-  //     .get<any>(`${this.endpoint}/taskDetails/${taskID}`, this.httpOptions)
-  //     .pipe(catchError(this.handleException));
-  // }
-
   editTask(task: Task): Observable<Task> {
     return this.httpClient
       .put<Task>(`${this.endpoint}/tasks/edit/${task.taskID}`, task, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
-  // editTaskDetails(taskID: number, taskDetails: any): Observable<any> {
-  //   return this.httpClient
-  //     .put<any>(`${this.endpoint}/taskDetails/edit/${taskID}`, taskDetails, this.httpOptions)
-  //     .pipe(catchError(this.handleException));
-  // }
-
   deleteTask(taskID: number): Observable<any> {
     return this.httpClient
       .delete<any>(`${this.endpoint}/tasks/delete/${taskID}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
-
-  // deleteTaskDetails(taskID: number): Observable<any> {
-  //   return this.httpClient
-  //     .delete<any>(`${this.endpoint}/taskDetails/delete/${taskID}`, this.httpOptions)
-  //     .pipe(catchError(this.handleException));
-  // }
 
   protected handleException(exception: any) {
     var message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
