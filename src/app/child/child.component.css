@@ -1,0 +1,19 @@
+#jumbotron-container {
+  margin: auto;
+}
+
+#jumbo-title {
+  font-size: 50px;
+}
+
+.info {
+  width: 25em;
+}
+
+.info .line {
+  box-sizing: border-box;
+  margin: 0.5em auto 1em auto;
+  width: 50%;
+  border-top: 1px solid #f6f7f8;
+}
+

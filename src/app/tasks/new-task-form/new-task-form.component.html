@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <h1>Create New Task</h1>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="taskForm" class="container">
+    <div class="form-row">
+      <div class="col form-group">
+        <input type="text" formControlName="title" class="form-control" (blur)="getAllValidationErrors()"/>
+        <label class="form-label-placeholder" for="title">Title</label>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="col form-group">
+        <input type="date" formControlName="deadline" class="form-control" (blur)="getAllValidationErrors()"/>
+        <label class="form-label-placeholder" for="deadline"><span class="text-muted">Deadline</span></label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <textarea
+          type="text"
+          class="form-control"
+          formControlName="description"
+          rows="3"
+          (blur)="getAllValidationErrors()"
+        ></textarea>
+        <label
+          class="form-label-placeholder"
+          for="description"
+          rows="3"
+          id="descriptionLabel"
+          >Description</label
+        >
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="text" formControlName="award" class="form-control" (blur)="getAllValidationErrors()"/>
+        <label class="form-label-placeholder" for="award">Reward</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="assignedTo"><span class="text-muted">Assign Task To...</span></label>
+        <select class="form-control" formControlName="assignedTo" id="assignedTo" (blur)="getAllValidationErrors()">
+          <option selected="true" value="">Choose a child</option>
+          <option *ngFor="let child of children" value="{{child.userID}}">{{ child.firstName + ' ' + child.lastName }}</option>
+        </select>
+      </div>
+    </div>
+    <app-validation-messages [errors]="errors"></app-validation-messages>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    class="btn btn-primary"
+    [disabled]="!taskForm.valid"
+    (click)="processTask()"
+    type="submit"
+  >
+    Submit
+  </button>
+</div>
