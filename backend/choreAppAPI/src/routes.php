@@ -406,13 +406,12 @@ $app->put('/familyInfo/edit/[{familyID}]', function($request, $response, $args){
 
 $app->put('/tasks/edit/[{taskID}]', function($request, $response, $args){
     $input=$request->getParsedBody();
-    $sql="UPDATE Tasks set assigneeID=:assigneeID, taskID=:taskID, status=:status, notified=:notified where taskID=:taskID";
+    $sql="UPDATE Tasks set status=:status where taskID=:taskID;
+        UPDATE TasksDetails set taskRating=:taskRating where taskID=:taskID";
     $sth=$this->db->prepare($sql);
     $sth->bindParam("taskID",$args['taskID']);
-    $sth->bindParam("assigneeID",$input['assigneeID']);
-    $sth->bindParam("taskID",$input['taskID']);
+    $sth->bindParam("taskRating",$input['taskRating']);
     $sth->bindParam("status",$input['status']);
-    $sth->bindParam("notified",$input['notified']);
     $sth->execute();
 });
 
