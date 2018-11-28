@@ -33,6 +33,11 @@ export class LoginService {
     pipe(catchError(this.handleException));
   }
 
+  getUserDetails(userID: number): Observable<any> {
+    return this.httpClient.get<Member[]>(`${this.endpoint}/userDetails/${userID}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     alert(message);

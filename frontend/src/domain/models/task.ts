@@ -1,11 +1,14 @@
 export class Task {
-  id: number;
-  title: string;
-  description: string;
-  deadline: Date;
-  notified: boolean;
-  assignedBy: string;
-  rating?: number;
-  award: string;
-  status: string;
+  userID?: number;
+  assigneeID?: number;
+  taskID?: number;
+  status?: string;
+  notified?: number;
+  taskRating?: number;
+  taskAward?: string;
+  taskTitle?: string;
+  taskDescript?: string;
+  deadline?: Date;
+  firstName?: string;
+  lastName?: string;
 }

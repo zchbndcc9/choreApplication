@@ -44,10 +44,13 @@ export class NewaccountComponent implements OnInit {
   createAccount() {
     this.newAccountService.createAccount(this.firstName, this.lastName, this.address1, this.address2, this.city, this.state, this.zip, this.email, this.password2).subscribe(result => {
       if (result.Success == "true") {
-        this.loginService.login(this.email, this.password2).subscribe(result => {
-          if (result.Success == "true") {
-            //authenticate
-            this.router.navigateByUrl('/family');
+        this.loginService.login(this.email, this.password2).subscribe(newResult => {
+          if (newResult.Success == "true") {
+            window.sessionStorage.setItem('userID', JSON.stringify(result.userID));
+            window.sessionStorage.setItem('familyID', JSON.stringify(result.familyID));
+            window.sessionStorage.setItem('Success', JSON.stringify(true));
+            window.sessionStorage.setItem('userType', JSON.stringify(1));
+            this.router.navigateByUrl(`/family/${result.familyID}`);
           }
           else {
             alert("There was an error logging in");

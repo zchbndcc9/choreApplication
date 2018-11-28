@@ -1,0 +1,9 @@
+<body>
+  <div class="jumbotron" id="header">
+    <div class="container">
+      <h1 id="jumbo-title">{{ user?.lastName }} Family Tasks</h1>
+      <i>Fam since {{ familyInfo?.registrationDate | date }}</i>
+    </div>
+  </div>
+  <app-tasks-display *ngIf="isDataAvailable" [tasks]="tasks"></app-tasks-display>
+</body>

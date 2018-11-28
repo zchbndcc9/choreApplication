@@ -1,107 +1,71 @@
 <div class="container" id="accordion">
-
   <div class="row">
     <div class="col-sm-12">
-
-      <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Filter Tasks
-        </button>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">All</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Rejected</a>
-          <a class="dropdown-item" href="#">Pending Approval</a>
-          <a class="dropdown-item" href="#">Incomplete</a>
-        </div>
-      </div> -->
-
-      <div class="btn-group btn-group-toggle" ngbRadioGroup id="filterBy" name="filterBy" [(ngModel)]="filterBy" ngDefaultControl
+      <div class="btn-group btn-group-toggle" ngbRadioGroup id="filterBy" name="filterBy" [(ngModel)]="filterBy"
         (ngModelChange)="filterTasks()">
         <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="all"> All
         </label>
         <label ngbButtonLabel class="btn filterBtn">
-          <input ngbButton type="radio" value="rejected"> Rejected
+          <input ngbButton type="radio" value="incomplete"> Incomplete
         </label>
         <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="pending"> Pending Approval
         </label>
         <label ngbButtonLabel class="btn filterBtn">
-          <input ngbButton type="radio" value="incomplete"> Incomplete
+          <input ngbButton type="radio" value="rejected"> Rejected
+        </label>
+        <label ngbButtonLabel class="btn filterBtn">
+          <input ngbButton type="radio" value="complete"> Complete
         </label>
         <label ngbButtonLabel class="btn filterBtn">
           <input ngbButton type="radio" value="overdue"> Overdue
         </label>
       </div>
-
-      <!-- <form class="form-group row">
-          <label for="filterBy" class="col-sm-2 col-form-label">Filter Tasks</label>
-          <div class="col-sm-4">
-            <select class="form-control" id="filterBy" name="filterBy" [(ngModel)]="filterBy" (ngModelChange)="filterTasks()">
-              <option value="all" selected="selected">All</option>
-              <option value="rejected">Rejected</option>
-              <option value="pending">Pending Approval</option>
-              <option value="incomplete">Incomplete</option>
-            </select>
-          </div>
-      </form> -->
     </div>
   </div>
 
   <hr>
 
-  <div *ngFor="let task of filteredTasks; let i = index;" class="card">
-    <div class="card-header" id="heading">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="true"
-          attr.aria-controls="collapse{{i}}">
-          {{task.title}}
-        </button>
-        <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
-        <button *ngIf="task.status == 'incomplete'" class="btn btn-success btn-sm float-right">Submit for Approval</button>
-        <button *ngIf="task.status == 'incomplete'" class="btn btn-dark btn-sm float-right">Add Note</button>
-        <button *ngIf="task.status == 'rejected'" class="btn btn-primary btn-sm float-right">Resubmit</button>
-        <button *ngIf="task.status == 'pending'" class="btn btn-light btn-sm float-right" [disabled]="true">Pending
-          Approval</button>
-      </h5>
+  <div *ngIf="filteredTasks?.length == 0">
+    <div class="alert alert-primary" role="alert">
+      No tasks to display
     </div>
+  </div>
 
-    <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordion">
-      <div class="card-body">
-        <b>{{task.description}}</b>
-        <hr />
-        <i>Assigned by: {{task.assignedBy}}</i>
-        <div></div>
-        <i>Due by: {{task.deadline | date}}</i>
+  <div *ngIf="filteredTasks?.length > 0">
+    <div *ngFor="let task of filteredTasks; let i = index;" class="card">
+      <div class="card-header" id="heading">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="true"
+            attr.aria-controls="collapse{{i}}">
+            {{task?.taskTitle}}
+          </button>
+          <fa-icon *ngIf="!isWithinDeadline(task.deadline)" id="deadlineWarning" [icon]="faExclamationTriangle" size="mde"></fa-icon>
+          <button *ngIf="task.status.toLowerCase() == 'incomplete' && userType == 1" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
+          <button *ngIf="task.status.toLowerCase() == 'incomplete' && userType == 0" class="btn btn-success btn-sm float-right" (click)="submitTaskForApproval(task)">Submit for Approval</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="btn btn-dark btn-sm float-right" (click)="rejectTask(task)">Reject</button>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="btn btn-success btn-sm float-right" [disabled]="task.taskRating == 0" (click)="approveTask(task)">Approve</button>
+          <app-rating *ngIf="task.status.toLowerCase() == 'pending' && userType == 1" class="float-right" [(numStars)]="task.taskRating" [editable]="true"></app-rating>
+          <button *ngIf="task.status.toLowerCase() == 'pending' && userType == 0" class="btn btn-light btn-sm float-right" [disabled]="true">Pending Approval</button>
+          <button *ngIf="task.status.toLowerCase() == 'rejected' && userType == 1" class="btn btn-light btn-sm float-right" [disabled]="true">Waiting for Child</button>
+          <button *ngIf="task.status.toLowerCase() == 'rejected' && userType == 0" class="btn btn-primary btn-sm float-right" (click)="submitTaskForApproval(task)">Resubmit</button>
+          <button *ngIf="task.status.toLowerCase() == 'complete'" class="btn btn-primary btn-sm float-right" [disabled]="true">Complete</button>
+          <app-rating *ngIf="task.status.toLowerCase() == 'complete'" class="float-right" [numStars]="task.taskRating" [editable]="false"></app-rating>
+        </h5>
+      </div>
+
+      <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordion">
+        <div class="card-body">
+          <b>{{task?.taskDescript}}</b>
+          <div></div>
+          <i>Due by: {{task.deadline | date}}</i>
+          <div></div>
+          <button *ngIf="userType == 1" class="btn btn-dark btn-sm" (click)="deleteTask(task.taskID)">Delete Task</button>
+        </div>
       </div>
     </div>
   </div>
 
   <hr>
-
-  <div class="row justify-content-center">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
 </div>

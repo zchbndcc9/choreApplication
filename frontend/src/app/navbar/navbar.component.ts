@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { faCog, faBell } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +11,29 @@ export class NavbarComponent implements OnInit {
   faCog = faCog;
   faBell = faBell;
 
-  constructor() { }
+  familyID: string;
+  userType: string;
+
+
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit() {
+    this.familyID = JSON.parse(window.sessionStorage.getItem('familyID'));
+  }
+
+  logout() {
+    window.sessionStorage.clear();
+    this._router.navigateByUrl('/login');
+  }
+
+  // if child the only page that should apear is fam.ly
+  getUserType() {
+    if (JSON.parse(window.sessionStorage.getItem('userType'))==0) {
+      return true;
+    }
+    return false;
   }
 
 }

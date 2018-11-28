@@ -1,37 +1,31 @@
 <div>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <h1 class="display-4">Amanda Oh</h1>
-          <h5 class="display-8">Child</h5>
-          <p class="lead">
-            Parents: Josh Oh and Rebecca Oh
-          </p>
+  <div class="jumbotron" id="header">
+    <div class="container" id="jumbotron-container">
+      <div class="row justify-content-around align-items-center">
+        <div>
+          <h1 id="jumbo-title">{{ child?.firstName }} {{ child?.lastName }}</h1>
+          <i>{{ child?.lastName }} Family</i>
         </div>
-        <div class="col-sm-6">
-          <div id="child-rating">
-            <h4 class="display-6">
-              Rating
-              <fa-icon [icon]="faStar" size="lg"></fa-icon>
-            <fa-icon [icon]="faStar" size="lg"></fa-icon>
-            <fa-icon [icon]="faStar" size="lg"></fa-icon>
-            <fa-icon [icon]="faStar" size="lg"></fa-icon>
-            <fa-icon [icon]="faStarHalfAlt" size="lg"></fa-icon>
+        <div class="info d-flex flex-column">
+          <h2 class="align-self-center mb-1">Information</h2>
+          <div class="line"></div>
+          <div class="row justify-content-around">
+            <span><strong>Rating</strong></span>
+            <span><strong>Status</strong></span>
+          </div>
+          <div class="row justify-content-around">
+            <h4 id="child-rating"><app-rating [numStars]="child?.rating" [editable]="false"></app-rating></h4>
+            <h4 id="child-status">
+              <span *ngIf="!child?.isGrounded" class="badge badge-success">Not Grounded</span>
+              <span *ngIf="child?.isGrounded" class="badge badge-danger">Grounded</span>
             </h4>
           </div>
-          <div id="child-status">
-            <h4 class="display-6">
-              Status
-              <span *ngIf="!isGrounded"class="badge badge-success">Not Grounded</span>
-              <span *ngIf="isGrounded" class="badge badge-danger">Grounded</span>
-            </h4>
-            <button *ngIf="isGrounded" class="btn btn-light" (click)="openGroundingAppealModal()">Appeal Grounding</button>
-          </div>
+          <!-- <button *ngIf="child?.isGrounded" class="btn btn-light" (click)="openGroundingAppealModal()">Appeal
+              Grounding</button> -->
         </div>
       </div>
     </div>
   </div>
 
-    <app-tasks-display [tasks]="tasks"></app-tasks-display>
+  <app-tasks-display [tasks]="child?.tasks"></app-tasks-display>
 </div>

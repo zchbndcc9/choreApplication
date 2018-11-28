@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h1>{{this.alreadyMember ? "Edit" : "Create"}} Fam Member</h1>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()"></button>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="memberForm" class="container">
@@ -20,7 +20,7 @@
     <div class="form-row form-group">
       <ng-container *ngIf="!alreadyMember">
         <div class="switch col">
-          <input type="checkbox" formControlName="isParent" class="toggle-switch" id="parent-switch" checked="true">
+          <input type="checkbox" formControlName="userType" class="toggle-switch" id="parent-switch" checked="true">
           <label for="parent-switch"></label>
         </div>
       </ng-container>

@@ -1,8 +1,9 @@
 export class Member {
-  id?: number;
+  userID?: number;
+  familyID?: number;
   password?: string;
   username: string;
   firstName: string;
   lastName: string;
-  isParent: boolean;
+  userType: number;
 }

@@ -14,23 +14,35 @@
     <div class="row">
       <div class="col-9" id="children-section">
         <h1>Children</h1>
-        <app-member-cardlist
-          [members]="children$ | async"
-          (edit)="editMember($event)"
-          (ground)="groundMember($event)"
-        ></app-member-cardlist>
+        <ng-container *ngIf="children.length === 0 && isLoading === false; else cardList">
+          <div class="container">
+            <div class="alert alert-primary">No Children yet. Add your kids!</div>
+          </div>
+        </ng-container>
+        <ng-template #cardList>
+          <app-member-cardlist
+            [members]="children"
+            (edit)="editMember($event)"
+            (ground)="toggleGround($event)"
+            (tasks)="viewTasks($event)"
+            (delete)="deleteMember($event)"
+          ></app-member-cardlist>
+        </ng-template>
       </div>
       <div clas="vl"></div>
       <div class="col-3" id="parent-section">
         <h1>Parents</h1>
         <table class="table table-striped rounded">
           <tbody>
-            <ng-container *ngFor="let parent of parents$ | async">
+            <ng-container *ngFor="let parent of parents; let i = index">
               <tr>
-                <td>{{ parent.firstName + " " + parent.lastName }}</td>
+                <td class="h5">{{ parent.firstName + " " + parent.lastName }}</td>
                 <td><button
                   class="btn btn-primary"
-                  (edit)="editMember($event)">Edit</button></td>
+                  (click)="editMember({member: parent, index: i})">Edit</button>
+                <button (click)="deleteMember({member: parent, index: i})">
+                  <fa-icon [icon]="faTimes"></fa-icon>
+                </button></td>
               </tr>
             </ng-container>
           </tbody>

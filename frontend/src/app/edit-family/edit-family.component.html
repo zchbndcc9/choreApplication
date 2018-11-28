@@ -1,0 +1,21 @@
+<body *ngIf="lastName">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <h2 id="title">{{lastName}} Family</h2>
+        <div class="card text-center" id="newAccountCard">
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="inputAddress">Current Address</label>
+                <input type="text" [(ngModel)]="address" class="form-control" id="inputAddress" name="address1" placeholder="11 Ocean Avenue" required>
+              </div>
+            </form>
+            <button class="btn btn-success btn-block" (click)="saveChanges()" [disabled]="!address">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </body>
+

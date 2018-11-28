@@ -1,3 +1,4 @@
+import { ParentsService } from './../parent/parents.service';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../services/login/login.service';
 import { RouterModule, Routes, Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     protected loginService: LoginService,
-    protected router: Router
+    protected router: Router,
+    protected parentsService: ParentsService
   ) { }
 
   ngOnInit() {
@@ -34,8 +36,21 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.currentUser.username, this.currentUser.password).subscribe(result => {
       if (result.Success == "true") {
         this.loginSuccess = true;
-        //authenticate
-        this.router.navigateByUrl('/family');
+        window.sessionStorage.setItem('userID', JSON.stringify(result.userID));
+        window.sessionStorage.setItem('familyID', JSON.stringify(result.familyID));
+        window.sessionStorage.setItem('Success', JSON.stringify(true));
+        this.loginService.getUserDetails(result.userID).subscribe(newResult => {
+          window.sessionStorage.setItem('userType', JSON.stringify(newResult.userType));
+          if (JSON.parse(newResult.userType)==1) {
+            this.router.navigateByUrl(`/family/${result.familyID}`);
+          }
+          else if (JSON.parse(newResult.userType)==0) {
+            this.router.navigateByUrl(`/child/${result.userID}`);
+          }
+          else {
+            this.loginSuccess = false;
+          }
+        });
       }
       else {
         this.loginSuccess = false;

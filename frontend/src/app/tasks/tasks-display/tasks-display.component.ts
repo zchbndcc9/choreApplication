@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Task } from 'src/app/models/Task';
+import { Component, OnInit, Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { Task } from '../../../domain/models';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { TasksService } from 'src/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-tasks-display',
@@ -11,14 +12,24 @@ export class TasksDisplayComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   @Input() tasks: Task[];
+
+  userType = +JSON.parse(window.sessionStorage.getItem('userType'));
+
   filteredTasks: Task[];
   filterBy: string;
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
     this.filterBy = 'all';
-    this.filterTasks();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.filterBy = 'all';
+    if (this.tasks) {
+      this.filterTasks();
+      console.log(this.tasks);
+    }
   }
 
   filterTasks() {
@@ -27,14 +38,14 @@ export class TasksDisplayComponent implements OnInit {
     } else if (this.filterBy === 'overdue') {
       this.filteredTasks = this.tasks.filter(task => !this.isWithinDeadline(task.deadline));
     } else {
-      this.filteredTasks = this.tasks.filter(task => task.status === this.filterBy);
+      this.filteredTasks = this.tasks.filter(task => task.status.toLowerCase() === this.filterBy);
     }
 
     this.filteredTasks = this.filteredTasks.sort((t1, t2) => {
-      if (t1.title < t2.title) {
+      if (t1.taskTitle < t2.taskTitle) {
         return -1;
       }
-      if (t1.title > t2.title) {
+      if (t1.taskTitle > t2.taskTitle) {
         return 1;
       }
       return 0;
@@ -42,6 +53,29 @@ export class TasksDisplayComponent implements OnInit {
   }
 
   isWithinDeadline(deadline) {
-    return deadline > new Date();
+    return new Date(deadline) > new Date();
+  }
+
+  submitTaskForApproval(task: Task) {
+    task.status = 'pending';
+    this.tasksService.editTask(task).subscribe((result) => {});
+  }
+
+  approveTask(task: Task) {
+    task.status = 'complete';
+    this.tasksService.editTask(task).subscribe((result) => {});
+  }
+
+  rejectTask(task: Task) {
+    task.status = 'rejected';
+    task.taskRating = 0;
+    this.tasksService.editTask(task).subscribe((result) => {});
+  }
+
+  deleteTask(taskID: number) {
+    this.tasksService.deleteTask(taskID).subscribe((result) => {
+      this.tasks = this.tasks.filter(task => task.taskID != taskID);
+      this.filterTasks();
+    });
   }
 }
