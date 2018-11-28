@@ -17,6 +17,19 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
         <button (click)="deleteMember()"><fa-icon [icon]="faTimes"></fa-icon></button>
       </div>
       <div class="card-body">
+        <div class="d-flex justify-content-around">
+          <div class="d-flex flex-column align-items-center" (click)="viewTasks()">
+            <div class="h4">Tasks</div>
+            <div class="h6">{{ member.tasks }}</div>
+          </div>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <div>{{member.rating}}</div>
+        </div>
+        <div *ngIf="member.rating === null">
+          <h5>No Ratings</h5>
+        </div>
+        <app-rating [numStars]="member.rating"></app-rating>
       </div>
       <div class="card-footer d-flex justify-content-around">
         <button class="btn btn-primary" (click)="editMember()">Edit</button>
@@ -39,6 +52,9 @@ export class MemberCardComponent {
   ground = new EventEmitter<Child>();
 
   @Output()
+  tasks = new EventEmitter<number>();
+
+  @Output()
   delete = new EventEmitter<Child>();
 
   editMember() {
@@ -47,6 +63,10 @@ export class MemberCardComponent {
 
   toggleGround() {
     this.ground.emit(this.member);
+  }
+
+  viewTasks() {
+    this.tasks.emit(this.member.userID);
   }
 
   deleteMember() {

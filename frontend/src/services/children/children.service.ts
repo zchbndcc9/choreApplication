@@ -36,7 +36,11 @@ export class ChildrenService {
         return child;
       }),
       mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/getInfractionsAmount/${child.userID}`, this.httpOptions), (child, infractions) => {
-        child.infractions = infractions['count(infractionID)'];
+        child.infractions = infractions['count(infracID)'];
+        return child;
+      }),
+      mergeMap(child => this.httpClient.get<any>(`${this.baseUrl}/children/${child.userID}/avg-rating`, this.httpOptions), (child, rating) => {
+        child.rating = rating['avg(TD.taskRating)'];
         return child;
       }),
       catchError(this.handleException)
