@@ -29,7 +29,7 @@ export class MembersService {
   editMember(famID: number, member: Member): Observable<Member | Child> {
     const req = {...member, familyID: famID};
     return this.httpClient
-      .put<Member>(`${ this.baseUrl }/users/edit/${member.userID}`, req, this.httpOptions)
+      .put<Member>(`${ this.baseUrl }/member/edit/${member.userID}`, req, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

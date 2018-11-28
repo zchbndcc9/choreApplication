@@ -69,14 +69,13 @@ export class MembersComponent implements OnInit {
 
     modal.result.then(updates => {
       const editedMember = {...member, ...updates };
-      this.membersService.editMember(this.famID, editedMember).subscribe((_member: Member) => {
-        console.dir(_member);
-        if (_member.userType) {
-          this.parents[index] = { ...this.parents[index], ..._member };
+      this.membersService.editMember(this.famID, editedMember).subscribe(() => {
+        if (editedMember.userType) {
+          this.parents[index] = editedMember;
         } else {
-          this.children[index] = {...this.children[index], ..._member };
+          this.children[index] = editedMember;
         }
-      }, dismiss => {});
+      });
     }).catch(error => {
       console.error(error);
     });

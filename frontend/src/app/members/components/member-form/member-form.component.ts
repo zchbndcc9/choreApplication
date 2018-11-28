@@ -57,9 +57,7 @@ export class MemberFormComponent implements OnInit {
   processMemberInfo() {
     let memberObj = Object.assign({}, this.memberForm.value);
 
-    if (memberObj.userType) {
-      memberObj.userType = 1;
-    }
+    memberObj.userType = +memberObj.userType;
 
     if (!this.alreadyMember) {
       memberObj = Object.assign(memberObj, {password: this.passwordForm.controls.password.value});
