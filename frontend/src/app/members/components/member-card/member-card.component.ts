@@ -20,9 +20,12 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
           </div>
         </div>
         <div class="d-flex flex-column align-items-center">
-          <div class="h4">Infractions</div>
-          <a class="h6" (click)="viewInfractions()">{{ member.infractions }}</a>
+          <div>{{member.rating}}</div>
         </div>
+        <div *ngIf="member.rating === null">
+          <h5>No Ratings</h5>
+        </div>
+        <app-rating [numStars]="member.rating"></app-rating>
       </div>
       <div class="card-footer d-flex justify-content-around">
         <button class="btn btn-primary" (click)="editMember()">Edit</button>

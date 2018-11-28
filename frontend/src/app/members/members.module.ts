@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NavbarComponent } from './../navbar/navbar.component';
 import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   declarations: [
     MembersComponent,
