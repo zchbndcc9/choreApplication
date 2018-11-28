@@ -1,3 +1,5 @@
+import { MemberDeleteModalComponent } from './components/member-delete-modal/member-delete-modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './../navbar/navbar.component';
 import { MemberFormComponent } from './../members/components/member-form/member-form.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
@@ -15,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     HttpClientModule
   ],
   declarations: [
@@ -33,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   entryComponents: [
     MemberFormComponent,
-    ParentGroundModalComponent
+    ParentGroundModalComponent,
+    MemberDeleteModalComponent
   ]
 })
 export class MembersModule { }
