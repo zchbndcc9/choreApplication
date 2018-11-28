@@ -107,7 +107,6 @@ export class MembersComponent implements OnInit {
         this.children[index] = {...child, isGrounded: !child.isGrounded };
       });
     }
-    console.log(this.children[index].isGrounded);
   }
 
   viewTasks(memberId: number) {

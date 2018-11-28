@@ -18,18 +18,20 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
       </div>
       <div class="card-body">
         <div class="d-flex justify-content-around">
-          <div class="d-flex flex-column align-items-center" (click)="viewTasks()">
+          <div class="d-flex flex-column align-items-center">
+            <div class="h4">Rating</div>
+            <div id="rating-container">
+              <div *ngIf="member.rating === null" id="rating-overlay">
+                <h5>None</h5>
+              </div>
+              <app-rating [numStars]="member.rating" id="rating"></app-rating>
+            </div>
+          </div>
+           <div class="d-flex flex-column align-items-center" (click)="viewTasks()">
             <div class="h4">Tasks</div>
             <div class="h6">{{ member.tasks }}</div>
           </div>
         </div>
-        <div class="d-flex flex-column align-items-center">
-          <div>{{member.rating}}</div>
-        </div>
-        <div *ngIf="member.rating === null">
-          <h5>No Ratings</h5>
-        </div>
-        <app-rating [numStars]="member.rating"></app-rating>
       </div>
       <div class="card-footer d-flex justify-content-around">
         <button class="btn btn-primary" (click)="editMember()">Edit</button>

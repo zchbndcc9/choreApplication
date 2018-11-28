@@ -1,0 +1,12 @@
+#rating-container {
+  position: relative;
+}
+
+#rating-container #rating {
+  width: 100%;
+}
+
+#rating-container #rating-overlay {
+  position: absolute;
+  width: inherit;
+}
