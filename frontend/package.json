@@ -32,7 +32,12 @@
     "path": "^0.12.7",
     "popper.js": "^1.14.4",
     "rxjs": "~6.2.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "typescript": "~2.9.2"
+  },
+  "engines": {
+    "node": "9.4.0",
+    "npm": "6.4.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0",
